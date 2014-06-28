@@ -1,4 +1,4 @@
-package android.shoma2da.hatenablog.com.bakusokutimer;
+package com.hatenablog.shoma2da.android.bakusokutimer;
 
 import android.app.Activity;
 import android.os.Bundle;
