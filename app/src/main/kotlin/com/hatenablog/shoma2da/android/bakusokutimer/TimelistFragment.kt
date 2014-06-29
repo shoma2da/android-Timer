@@ -24,7 +24,7 @@ public class TimelistFragment : Fragment() {
         }
 
         //TODO: 仮の値挿入
-        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
+        val adapter = ArrayAdapter<String>(context, R.layout.column_timelist)
         for (integer in 1..100) {
             adapter.add("${integer}:00")
         }
