@@ -23,10 +23,11 @@ public class TimelistFragment : Fragment() {
             return view
         }
 
-        //TODO: 仮の値挿入
         val adapter = ArrayAdapter<String>(context, R.layout.column_timelist)
-        for (integer in 1..100) {
-            adapter.add("${integer}:00")
+
+        //とりあえず固定でデータ挿入
+        for (integer in 1..90) {
+            adapter.add("${java.lang.String.format("%02d", integer)}:00")
         }
 
         val list = view.findViewById(R.id.list) as ListView
