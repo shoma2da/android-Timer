@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.shoma2da.hatenablog.com.bakusokutimer" >
+    package="com.hatenablog.shoma2da.android.bakusokutimer" >
 
     <application
         android:allowBackup="true"
