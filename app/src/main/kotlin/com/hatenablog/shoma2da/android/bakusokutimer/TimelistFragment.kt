@@ -11,6 +11,7 @@ import android.app.Activity
 import android.widget.TextView
 import android.util.Log
 import android.content.Intent
+import com.hatenablog.shoma2da.android.bakusokutimer.model.Time
 
 /**
  * Created by shoma2da on 2014/06/29.
@@ -37,8 +38,8 @@ public class TimelistFragment : Fragment() {
         list.setAdapter(adapter)
         list.setOnItemClickListener({parent, view, position, id ->
             val clazz:Class<CountdownActivity> = javaClass<CountdownActivity>()
-
             val intent = Intent(context, clazz)
+            intent.putExtra(CountdownActivity.TIME_PARAM_NAME, Time())
             view.getContext()?.startActivity(intent)
         })
 
