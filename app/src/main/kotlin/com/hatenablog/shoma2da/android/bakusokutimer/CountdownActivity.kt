@@ -17,6 +17,8 @@ public class CountdownActivity : Activity() {
 
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
+        setContentView(R.layout.activity_countdown)
+
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as Time
         Log.d("bakusoku", "time is ${time}")
     }
