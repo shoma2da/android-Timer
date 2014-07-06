@@ -37,10 +37,16 @@ public class TimelistFragment : Fragment() {
         val list = view.findViewById(R.id.list) as ListView
         list.setAdapter(adapter)
         list.setOnItemClickListener({parent, view, position, id ->
-            val clazz:Class<CountdownActivity> = javaClass<CountdownActivity>()
-            val intent = Intent(context, clazz)
-            intent.putExtra(CountdownActivity.TIME_PARAM_NAME, Time())
-            view.getContext()?.startActivity(intent)
+            val text = (view as TextView).getText()
+
+            if (text != null) {
+                val time = Time.createFromString(text.toString())
+
+                val clazz:Class<CountdownActivity> = javaClass<CountdownActivity>()
+                val intent = Intent(context, clazz)
+                intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
+                view.getContext()?.startActivity(intent)
+            }
         })
 
         return view
