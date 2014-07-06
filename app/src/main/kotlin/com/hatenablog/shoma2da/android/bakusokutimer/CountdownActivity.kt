@@ -3,7 +3,7 @@ package com.hatenablog.shoma2da.android.bakusokutimer
 import android.app.Activity
 import android.os.Bundle
 import com.hatenablog.shoma2da.android.bakusokutimer.model.Time
-import android.util.Log
+import android.widget.TextView
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -20,7 +20,7 @@ public class CountdownActivity : Activity() {
         setContentView(R.layout.activity_countdown)
 
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as Time
-        Log.d("bakusoku", "time is ${time}")
+        (findViewById(R.id.timeText) as TextView).setText(time.toString())
     }
 
 
