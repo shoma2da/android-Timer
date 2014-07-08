@@ -13,6 +13,7 @@ class AlarmActivity : Activity() {
 
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
+        setContentView(R.layout.activity_alarm)
     }
 
 }
