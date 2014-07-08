@@ -21,6 +21,8 @@ public class CountdownActivity : Activity() {
 
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as Time
         (findViewById(R.id.timeText) as TextView).setText(time.toString())
+
+        time.setAlarm(this)
     }
 
 
