@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CountdownActivity"/>
+        <activity android:name=".AlarmActivity" android:launchMode="singleTop" />
     </application>
 
 </manifest>
