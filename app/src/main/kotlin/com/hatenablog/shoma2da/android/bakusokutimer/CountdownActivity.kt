@@ -19,10 +19,10 @@ public class CountdownActivity : Activity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
 
-        val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as Time
-        (findViewById(R.id.timeText) as TextView).setText(time.toString())
+        val timeText = findViewById(R.id.timeText) as TextView
 
-        time.setAlarm(this)
+        val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as Time
+        timeText.setText(time.toString())
     }
 
 
