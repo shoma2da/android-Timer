@@ -11,7 +11,7 @@ import android.app.Activity
 import android.widget.TextView
 import android.util.Log
 import android.content.Intent
-import com.hatenablog.shoma2da.android.bakusokutimer.model.Time
+import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
 
 /**
  * Created by shoma2da on 2014/06/29.
@@ -40,7 +40,7 @@ public class TimelistFragment : Fragment() {
             val text = (view as TextView).getText()
 
             if (text != null) {
-                val time = Time.createFromString(text.toString())
+                val time = RemainTime.createFromString(text.toString())
 
                 val clazz:Class<CountdownActivity> = javaClass<CountdownActivity>()
                 val intent = Intent(context, clazz)
