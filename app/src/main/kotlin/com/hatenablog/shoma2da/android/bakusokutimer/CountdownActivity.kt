@@ -28,11 +28,11 @@ public class CountdownActivity : Activity() {
             timeText.setText(time.toString())
             when (time.isEmpty()) {
                 true -> {}//nothing
-                false -> time.countdown {time -> countdownToZero(time) }
+                false -> time.countdown { countdownToZero(it) }
             }
         }
 
-        time.countdown{ time -> countdownToZero(time) }
+        time.countdown{ countdownToZero(it) }
     }
 
 }
