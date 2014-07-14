@@ -24,7 +24,15 @@ public class CountdownActivity : Activity() {
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
         timeText.setText(time.toString())
 
-        time.countdown { time -> timeText.setText(time.toString()) }
+        fun countdownToZero(time:RemainTime) {
+            timeText.setText(time.toString())
+            when (time.isEmpty()) {
+                true -> {}//nothing
+                false -> time.countdown {time -> countdownToZero(time) }
+            }
+        }
+
+        time.countdown{ time -> countdownToZero(time) }
     }
 
 }
