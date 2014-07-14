@@ -23,7 +23,8 @@ public class CountdownActivity : Activity() {
 
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
         timeText.setText(time.toString())
-    }
 
+        time.countdown { time -> timeText.setText(time.toString()) }
+    }
 
 }
