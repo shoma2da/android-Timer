@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
 import android.widget.TextView
+import android.content.Intent
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -24,14 +25,21 @@ public class CountdownActivity : Activity() {
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
         timeText.setText(time.toString())
 
+        //サービスを起動する
+        val intent = Intent(this, javaClass<CowntdownService>())
+        intent.putExtra(CowntdownService.TIME_PARAM_NAME, time)
+        startService(intent)
+
+        //カウントダウン
         fun countdownToZero(time:RemainTime) {
             timeText.setText(time.toString())
             when (time.isEmpty()) {
                 true -> {}//nothing
-                false -> time.countdown { countdownToZero(it) }
+                false -> {
+                    time.countdown { countdownToZero(it) }
+                }
             }
         }
-
         time.countdown{ countdownToZero(it) }
     }
 

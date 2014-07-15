@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CountdownActivity"/>
+        <service android:name=".CowntdownService" />
     </application>
 
 </manifest>
