@@ -2,7 +2,7 @@ package com.hatenablog.shoma2da.android.bakusokutimer
 
 import android.app.Activity
 import android.os.Bundle
-import com.hatenablog.shoma2da.android.bakusokutimer.model.Time
+import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
 import android.widget.TextView
 
 /**
@@ -19,11 +19,20 @@ public class CountdownActivity : Activity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
 
-        val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as Time
-        (findViewById(R.id.timeText) as TextView).setText(time.toString())
+        val timeText = findViewById(R.id.timeText) as TextView
 
-        time.setAlarm(this)
+        val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
+        timeText.setText(time.toString())
+
+        fun countdownToZero(time:RemainTime) {
+            timeText.setText(time.toString())
+            when (time.isEmpty()) {
+                true -> {}//nothing
+                false -> time.countdown { countdownToZero(it) }
+            }
+        }
+
+        time.countdown{ countdownToZero(it) }
     }
-
 
 }
