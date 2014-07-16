@@ -16,17 +16,33 @@ import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
 class CowntdownService : Service() {
 
     class object {
+        val ACTION_PARAM_NAME = "action_param"
         val TIME_PARAM_NAME = "time_param"
-        val STOP_PARAM_NAME = "stop_param"
     }
 
-    private var count = 0
+    enum class Action {
+        START; STOP; PAUSE;
+    }
 
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent:Intent, flags:Int, startId:Int):Int {
-        Log.d("shomatsu", "start service" + count++)
+        val action = intent.getSerializableExtra(ACTION_PARAM_NAME) as Action?
+        if (action == null || action is Action == false) {
+            throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME:Cowntdown.Action}を渡す必要があります")
+        }
 
+        when (action) {
+            Action.START -> {
+                val time = intent.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
+                startCowntdown(time)
+            }
+        }
+
+        return super.onStartCommand(intent, flags, startId)
+    }
+
+    private fun startCowntdown(time:RemainTime) {
         //通知表示（foreground）
         val pendingIntent = PendingIntent.getActivity(this, 0, Intent(this, javaClass<CountdownActivity>()), 0)
         val notification = Notification.Builder(this).
@@ -40,7 +56,6 @@ class CowntdownService : Service() {
         startForeground(1, notification)
 
         //カウントダウン
-        val time = intent.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
         fun countdownToZero(time:RemainTime) {
             when (time.isEmpty()) {
                 true -> {
@@ -53,8 +68,6 @@ class CowntdownService : Service() {
             }
         }
         time.countdown{ countdownToZero(it) }
-
-        return super.onStartCommand(intent, flags, startId)
     }
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
 import android.widget.TextView
 import android.content.Intent
+import java.io.Serializable
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -28,6 +29,7 @@ public class CountdownActivity : Activity() {
         //サービスを起動する
         val intent = Intent(this, javaClass<CowntdownService>())
         intent.putExtra(CowntdownService.TIME_PARAM_NAME, time)
+        intent.putExtra(CowntdownService.ACTION_PARAM_NAME, CowntdownService.Action.START as Serializable)
         startService(intent)
 
         //カウントダウン
