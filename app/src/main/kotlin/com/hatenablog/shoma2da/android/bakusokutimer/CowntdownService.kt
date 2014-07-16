@@ -18,6 +18,8 @@ class CowntdownService : Service() {
     class object {
         val ACTION_PARAM_NAME = "action_param"
         val TIME_PARAM_NAME = "time_param"
+
+        private val NOTIFICATION_ID = 1
     }
 
     enum class Action {
@@ -53,7 +55,7 @@ class CowntdownService : Service() {
                 setContentText("あと○○分です").
                 setWhen(System.currentTimeMillis()).
                 setContentIntent(pendingIntent).build()
-        startForeground(1, notification)
+        startForeground(NOTIFICATION_ID, notification)
 
         //カウントダウン
         fun countdownToZero(time:RemainTime) {
