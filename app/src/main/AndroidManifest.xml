@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".CountdownActivity"
             android:launchMode="singleTask"/>
-        <service android:name=".CowntdownService" />
+        <service android:name=".CountdownService" />
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@ public class CountdownActivity : Activity() {
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = getIntent()?.getAction()
         Log.d("shomatsu", "action is ${action}")
-        if (action == CowntdownService.ACTION_FINISH_COWNTDOWN) {
+        if (action == CountdownService.ACTION_FINISH_COUNTDOWN) {
             Log.d("shomatsu", "FINISH_COUNTDOWN")
             onNewIntent(getIntent())
             return@onCreate
@@ -46,18 +46,18 @@ public class CountdownActivity : Activity() {
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val time = intent.getSerializableExtra(CowntdownService.TIME_PARAM_NAME) as RemainTime
+                val time = intent.getSerializableExtra(CountdownService.TIME_PARAM_NAME) as RemainTime
                 mTimeText?.setText(time.toString())
             }
         }
         val filter = IntentFilter()
-        filter.addAction(CowntdownService.ACTION_UPDATE_REMAINTIME)
+        filter.addAction(CountdownService.ACTION_UPDATE_REMAINTIME)
         registerReceiver(mReceiver, filter)
 
         //サービスを起動する
-        val intent = Intent(this, javaClass<CowntdownService>())
-        intent.putExtra(CowntdownService.TIME_PARAM_NAME, time)
-        intent.putExtra(CowntdownService.ACTION_PARAM_NAME, CowntdownService.Action.START as Serializable)
+        val intent = Intent(this, javaClass<CountdownService>())
+        intent.putExtra(CountdownService.TIME_PARAM_NAME, time)
+        intent.putExtra(CountdownService.ACTION_PARAM_NAME, CountdownService.Action.START as Serializable)
         startService(intent)
     }
 
@@ -65,7 +65,7 @@ public class CountdownActivity : Activity() {
         super.onNewIntent(intent)
 
         when (intent?.getAction()) {
-            CowntdownService.ACTION_FINISH_COWNTDOWN -> {
+            CountdownService.ACTION_FINISH_COUNTDOWN -> {
                 mTimeText?.setText(RemainTime(0, 0).toString())
                 Toast.makeText(this, "終了！", Toast.LENGTH_SHORT).show()
             }

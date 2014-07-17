@@ -13,14 +13,14 @@ import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
  * Created by shoma2da on 2014/07/15.
  */
 
-class CowntdownService : Service() {
+class CountdownService : Service() {
 
     class object {
         val ACTION_PARAM_NAME = "action_param"
         val TIME_PARAM_NAME = "time_param"
 
         val ACTION_UPDATE_REMAINTIME = "update_remaintime"
-        val ACTION_FINISH_COWNTDOWN = "finish_countdown"
+        val ACTION_FINISH_COUNTDOWN = "finish_countdown"
 
         private val NOTIFICATION_ID = 1
     }
@@ -66,7 +66,7 @@ class CowntdownService : Service() {
                 true -> {
                     //Activityを起動する
                     val intent = Intent(this, javaClass<CountdownActivity>())
-                    intent.setAction(ACTION_FINISH_COWNTDOWN);
+                    intent.setAction(ACTION_FINISH_COUNTDOWN);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
 
