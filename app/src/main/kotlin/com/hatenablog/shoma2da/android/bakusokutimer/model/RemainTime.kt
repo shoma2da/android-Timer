@@ -22,7 +22,7 @@ class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
 
     fun countdown(onTimeChanged:(RemainTime) -> Unit) {
         val handler = Handler()
-        Timer().schedule(10) {
+        Timer().schedule(1000) {
             handler.post { onTimeChanged(minus()) }
         }
     }

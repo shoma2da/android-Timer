@@ -8,6 +8,8 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.graphics.BitmapFactory
 import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
+import android.content.Context
+import android.app.NotificationManager
 
 /**
  * Created by shoma2da on 2014/07/15.
@@ -24,6 +26,8 @@ class CountdownService : Service() {
 
         private val NOTIFICATION_ID = 1
     }
+
+    private var mNotificationBuilder:Notification.Builder? = null
 
     enum class Action {
         START; STOP; PAUSE;
@@ -50,15 +54,15 @@ class CountdownService : Service() {
     private fun startCowntdown(time:RemainTime) {
         //通知表示（foreground）
         val pendingIntent = PendingIntent.getActivity(this, 0, Intent(this, javaClass<CountdownActivity>()), 0)
-        val notification = Notification.Builder(this).
+        mNotificationBuilder = Notification.Builder(this).
                 setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
                 setSmallIcon(R.drawable.ic_launcher).
                 setTicker("タイマーをセットしました").
-                setContentTitle("タイマーが終了するまで").
-                setContentText("あと○○分です").
+                setContentTitle(getResources()?.getString(R.string.app_name)).
+                setContentText("タイマーが終了するまで${time}").
                 setWhen(System.currentTimeMillis()).
-                setContentIntent(pendingIntent).build()
-        startForeground(NOTIFICATION_ID, notification)
+                setContentIntent(pendingIntent)
+        startForeground(NOTIFICATION_ID, mNotificationBuilder?.build())
 
         //カウントダウン
         fun countdownToZero(time:RemainTime) {
@@ -78,6 +82,11 @@ class CountdownService : Service() {
                     val intent = Intent(ACTION_UPDATE_REMAINTIME)
                     intent.putExtra(TIME_PARAM_NAME, time)
                     sendBroadcast(intent)
+
+                    //通知を書き換える
+                    mNotificationBuilder?.setContentText("タイマーが終了するまで${time}")
+                    val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    manager.notify(NOTIFICATION_ID, mNotificationBuilder!!.build())
 
                     time.countdown { countdownToZero(it) }
                 }
