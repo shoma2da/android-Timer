@@ -19,6 +19,8 @@ class CowntdownService : Service() {
         val ACTION_PARAM_NAME = "action_param"
         val TIME_PARAM_NAME = "time_param"
 
+        val ACTION_UPDATE_REMAINTIME = "update_remaintime"
+
         private val NOTIFICATION_ID = 1
     }
 
@@ -65,6 +67,12 @@ class CowntdownService : Service() {
                     stopSelf()
                 }
                 false -> {
+                    //情報をアプリ内全体に送信する
+                    val intent = Intent(ACTION_UPDATE_REMAINTIME)
+                    intent.putExtra(TIME_PARAM_NAME, time)
+                    sendBroadcast(intent)
+                    Log.d("shomatsu", "send : ${time}")
+
                     time.countdown { countdownToZero(it) }
                 }
             }
