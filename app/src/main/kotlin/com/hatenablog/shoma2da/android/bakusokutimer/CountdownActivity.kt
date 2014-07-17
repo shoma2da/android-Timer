@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.content.Context
 import android.widget.Toast
+import android.util.Log
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -27,10 +28,19 @@ public class CountdownActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
+        mTimeText = findViewById(R.id.timeText) as TextView
+
+        //カウントダウン処理だったら初期設定を全て飛ばす
+        val action = getIntent()?.getAction()
+        Log.d("shomatsu", "action is ${action}")
+        if (action == CowntdownService.ACTION_FINISH_COWNTDOWN) {
+            Log.d("shomatsu", "FINISH_COUNTDOWN")
+            onNewIntent(getIntent())
+            return@onCreate
+        }
 
         //初期表示設定
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
-        mTimeText = findViewById(R.id.timeText) as TextView
         mTimeText?.setText(time.toString())
 
         //Receiverの設定
