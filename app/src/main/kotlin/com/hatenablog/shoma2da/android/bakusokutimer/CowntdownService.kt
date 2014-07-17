@@ -20,6 +20,7 @@ class CowntdownService : Service() {
         val TIME_PARAM_NAME = "time_param"
 
         val ACTION_UPDATE_REMAINTIME = "update_remaintime"
+        val ACTION_FINISH_COWNTDOWN = "finish_countdown"
 
         private val NOTIFICATION_ID = 1
     }
@@ -63,6 +64,12 @@ class CowntdownService : Service() {
         fun countdownToZero(time:RemainTime) {
             when (time.isEmpty()) {
                 true -> {
+                    //Activityを起動する
+                    val intent = Intent(this, javaClass<CountdownActivity>())
+                    intent.setAction(ACTION_FINISH_COWNTDOWN);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+
                     stopForeground(true)
                     stopSelf()
                 }
@@ -71,7 +78,6 @@ class CowntdownService : Service() {
                     val intent = Intent(ACTION_UPDATE_REMAINTIME)
                     intent.putExtra(TIME_PARAM_NAME, time)
                     sendBroadcast(intent)
-                    Log.d("shomatsu", "send : ${time}")
 
                     time.countdown { countdownToZero(it) }
                 }

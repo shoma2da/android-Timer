@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CountdownActivity"/>
+        <activity android:name=".CountdownActivity"
+            android:launchMode="singleTask"/>
         <service android:name=".CowntdownService" />
     </application>
 

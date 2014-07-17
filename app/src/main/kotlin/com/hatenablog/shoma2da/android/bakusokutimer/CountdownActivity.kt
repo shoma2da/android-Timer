@@ -9,6 +9,7 @@ import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.content.Context
+import android.widget.Toast
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -20,6 +21,7 @@ public class CountdownActivity : Activity() {
         val TIME_PARAM_NAME = "time_param"
     }
 
+    private var mTimeText:TextView? = null
     private var mReceiver:BroadcastReceiver? = null
 
     override fun onCreate(savedInstance : Bundle?) {
@@ -28,14 +30,14 @@ public class CountdownActivity : Activity() {
 
         //初期表示設定
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
-        val timeText = findViewById(R.id.timeText) as TextView
-        timeText.setText(time.toString())
+        mTimeText = findViewById(R.id.timeText) as TextView
+        mTimeText?.setText(time.toString())
 
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 val time = intent.getSerializableExtra(CowntdownService.TIME_PARAM_NAME) as RemainTime
-                timeText.setText(time.toString())
+                mTimeText?.setText(time.toString())
             }
         }
         val filter = IntentFilter()
@@ -49,12 +51,26 @@ public class CountdownActivity : Activity() {
         startService(intent)
     }
 
+    protected override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        when (intent?.getAction()) {
+            CowntdownService.ACTION_FINISH_COWNTDOWN -> {
+                mTimeText?.setText(RemainTime(0, 0).toString())
+                Toast.makeText(this, "終了！", Toast.LENGTH_SHORT).show()
+            }
+            else -> {} //nothing
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (mReceiver != null) {
             unregisterReceiver(mReceiver as BroadcastReceiver)
-            mReceiver = null
         }
+
+        mReceiver = null
+        mTimeText = null
     }
 
 }
