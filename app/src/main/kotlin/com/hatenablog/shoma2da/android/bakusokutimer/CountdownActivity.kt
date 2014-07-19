@@ -46,6 +46,14 @@ public class CountdownActivity : Activity() {
             intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
             startService(intent)
         })
+        findViewById(R.id.cancelButton)?.setOnClickListener({ view ->
+            //サービスを停止
+            val intent = Intent(this, javaClass<CountdownService>())
+            intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
+            startService(intent)
+
+            finish()
+        })
 
         //初期表示設定
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
