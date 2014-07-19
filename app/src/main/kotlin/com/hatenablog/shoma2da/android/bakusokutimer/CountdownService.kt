@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.IBinder
 import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
 import com.hatenablog.shoma2da.android.bakusokutimer.viewmodel.CountdownNotification
+import java.io.Serializable
 
 /**
  * Created by shoma2da on 2014/07/15.
@@ -14,16 +15,22 @@ class CountdownService : Service() {
     class object {
         val PARAM_NAME_ACTION = "action_param"
         val PARAM_NAME_TIME = "time_param"
+        val PARAM_NAME_STATUS = "status_param"
 
         val ACTION_UPDATE_REMAINTIME = "update_remaintime"
         val ACTION_FINISH_COUNTDOWN = "finish_countdown"
+        val ACTION_BROADCAST_STATUS = "broadcast_status"
     }
 
     private var mNotification = CountdownNotification(this)
-    private var mIsStopped = false
+    private var mCurrentStatus = Status.UNKNOWN
+    private var mCurrentTime = RemainTime(0, 0)
 
     enum class Action {
-        START; STOP;
+        START; STOP; CONFIRM_STATUS;
+    }
+    enum class Status {
+        START; STOP; UNKNOWN;
     }
 
     override fun onBind(intent: Intent): IBinder? = null
@@ -36,13 +43,21 @@ class CountdownService : Service() {
 
         when (action) {
             Action.START -> {
+                mCurrentStatus = Status.START
                 val time = intent.getSerializableExtra(PARAM_NAME_TIME) as RemainTime
                 startCowntdown(time)
             }
             Action.STOP -> {
-                mIsStopped = true
+                mCurrentStatus = Status.STOP
                 mNotification.cancel()
                 stopSelf()
+            }
+            Action.CONFIRM_STATUS -> {
+                //情報をアプリ内全体に送信する
+                val intent = Intent(ACTION_BROADCAST_STATUS)
+                intent.putExtra(PARAM_NAME_STATUS, mCurrentStatus as Serializable)
+                intent.putExtra(PARAM_NAME_TIME, mCurrentTime as Serializable)
+                sendBroadcast(intent)
             }
         }
 
@@ -55,7 +70,9 @@ class CountdownService : Service() {
 
         //カウントダウン
         fun countdownToZero(time:RemainTime) {
-            if (mIsStopped) { return @countdownToZero }
+            mCurrentTime = time
+
+            if (mCurrentStatus == Status.STOP) { return @countdownToZero }
 
             when (time.isEmpty()) {
                 true -> {
