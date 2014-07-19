@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.View.OnClickListener
 import android.view.View
 import android.widget.Button
+import android.app.AlertDialog
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -124,7 +125,13 @@ public class CountdownActivity : Activity() {
         when (intent?.getAction()) {
             CountdownService.ACTION_FINISH_COUNTDOWN -> {
                 mTimeText?.setText(RemainTime(0, 0).toString())
-                Toast.makeText(this, "終了！", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(this).
+                        setTitle("タイマー終了しました").
+                        setPositiveButton("OK", { dialog, which ->
+                            dialog.dismiss()
+                            finish()
+                        }).
+                        create().show()
             }
             else -> {} //nothing
         }
