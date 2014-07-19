@@ -28,24 +28,27 @@ public class CountdownActivity : Activity() {
                 return @onClick
             }
 
+            val pauseText = context.getString(R.string.pause)
+            val restartText = context.getString(R.string.restart)
+
             val button = view as Button
             when(button.getText()) {
-                "一時停止" -> {
+                pauseText -> {
                     //サービスを停止
                     val intent = Intent(context, javaClass<CountdownService>())
                     intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
                     context.startService(intent)
 
-                    button.setText("スタート")
+                    button.setText(restartText)
                 }
-                "スタート" -> {
+                restartText -> {
                     //サービスを再開
                     val intent = Intent(context, javaClass<CountdownService>())
                     intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
                     intent.putExtra(CountdownService.PARAM_NAME_TIME, timeText.getTag() as Serializable)
                     context.startService(intent)
 
-                    button.setText("一時停止")
+                    button.setText(pauseText)
                 }
             }
         }
