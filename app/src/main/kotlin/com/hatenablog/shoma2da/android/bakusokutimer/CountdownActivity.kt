@@ -14,6 +14,8 @@ import android.util.Log
 import android.view.View.OnClickListener
 import android.view.View
 import android.widget.Button
+import android.app.AlertDialog
+import android.os.Vibrator
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -123,8 +125,19 @@ public class CountdownActivity : Activity() {
 
         when (intent?.getAction()) {
             CountdownService.ACTION_FINISH_COUNTDOWN -> {
+                //バイブレーション開始
+                val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                vibrator.vibrate(longArray(1000L, 1000L), 0)
+
                 mTimeText?.setText(RemainTime(0, 0).toString())
-                Toast.makeText(this, "終了！", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(this).
+                        setTitle("タイマー終了しました").
+                        setPositiveButton("OK", { dialog, which ->
+                            vibrator.cancel()
+                            dialog.dismiss()
+                            finish()
+                        }).
+                        create().show()
             }
             else -> {} //nothing
         }
