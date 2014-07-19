@@ -46,7 +46,7 @@ public class CountdownActivity : Activity() {
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val time = intent.getSerializableExtra(CountdownService.TIME_PARAM_NAME) as RemainTime
+                val time = intent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
                 mTimeText?.setText(time.toString())
             }
         }
@@ -56,8 +56,8 @@ public class CountdownActivity : Activity() {
 
         //サービスを起動する
         val intent = Intent(this, javaClass<CountdownService>())
-        intent.putExtra(CountdownService.TIME_PARAM_NAME, time)
-        intent.putExtra(CountdownService.ACTION_PARAM_NAME, CountdownService.Action.START as Serializable)
+        intent.putExtra(CountdownService.PARAM_NAME_TIME, time)
+        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
         startService(intent)
     }
 
