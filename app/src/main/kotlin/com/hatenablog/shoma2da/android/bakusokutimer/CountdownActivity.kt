@@ -134,6 +134,11 @@ public class CountdownActivity : Activity() {
                         setPositiveButton("OK", { dialog, which ->
                             vibrator.cancel()
                             dialog.dismiss()
+
+                            //リストページに戻る
+                            val intent = Intent(this, javaClass<MainActivity>())
+                            startActivity(intent)
+
                             finish()
                         }).
                         create().show()
