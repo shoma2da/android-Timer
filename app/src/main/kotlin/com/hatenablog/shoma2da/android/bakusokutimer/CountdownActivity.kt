@@ -87,6 +87,9 @@ public class CountdownActivity : Activity() {
             intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
             startService(intent)
 
+            //リストページに戻る
+            startActivity(Intent(this, javaClass<MainActivity>()))
+
             finish()
         })
 
@@ -134,6 +137,10 @@ public class CountdownActivity : Activity() {
                         setPositiveButton("OK", { dialog, which ->
                             vibrator.cancel()
                             dialog.dismiss()
+
+                            //リストページに戻る
+                            startActivity(Intent(this, javaClass<MainActivity>()))
+
                             finish()
                         }).
                         create().show()
