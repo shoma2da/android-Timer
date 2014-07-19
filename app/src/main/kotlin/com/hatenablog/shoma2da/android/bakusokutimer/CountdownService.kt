@@ -3,18 +3,12 @@ package com.hatenablog.shoma2da.android.bakusokutimer
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
-import android.app.Notification
-import android.app.PendingIntent
-import android.graphics.BitmapFactory
 import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
-import android.content.Context
-import android.app.NotificationManager
+import com.hatenablog.shoma2da.android.bakusokutimer.viewmodel.CountdownNotification
 
 /**
  * Created by shoma2da on 2014/07/15.
  */
-
 class CountdownService : Service() {
 
     class object {
@@ -23,11 +17,9 @@ class CountdownService : Service() {
 
         val ACTION_UPDATE_REMAINTIME = "update_remaintime"
         val ACTION_FINISH_COUNTDOWN = "finish_countdown"
-
-        private val NOTIFICATION_ID = 1
     }
 
-    private var mNotificationBuilder:Notification.Builder? = null
+    private var mNotification = CountdownNotification(this)
 
     enum class Action {
         START; STOP; PAUSE;
@@ -53,16 +45,7 @@ class CountdownService : Service() {
 
     private fun startCowntdown(time:RemainTime) {
         //通知表示（foreground）
-        val pendingIntent = PendingIntent.getActivity(this, 0, Intent(this, javaClass<CountdownActivity>()), 0)
-        mNotificationBuilder = Notification.Builder(this).
-                setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
-                setSmallIcon(R.drawable.ic_launcher).
-                setTicker("タイマーをセットしました").
-                setContentTitle(getResources()?.getString(R.string.app_name)).
-                setContentText("タイマーが終了するまで${time}").
-                setWhen(System.currentTimeMillis()).
-                setContentIntent(pendingIntent)
-        startForeground(NOTIFICATION_ID, mNotificationBuilder?.build())
+        mNotification.notify(time)
 
         //カウントダウン
         fun countdownToZero(time:RemainTime) {
@@ -74,7 +57,7 @@ class CountdownService : Service() {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
 
-                    stopForeground(true)
+                    mNotification.cancel()
                     stopSelf()
                 }
                 false -> {
@@ -84,9 +67,7 @@ class CountdownService : Service() {
                     sendBroadcast(intent)
 
                     //通知を書き換える
-                    mNotificationBuilder?.setContentText("タイマーが終了するまで${time}")
-                    val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                    manager.notify(NOTIFICATION_ID, mNotificationBuilder!!.build())
+                    mNotification.update(time)
 
                     time.countdown { countdownToZero(it) }
                 }
