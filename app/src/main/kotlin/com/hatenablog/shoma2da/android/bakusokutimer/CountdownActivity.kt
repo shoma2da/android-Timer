@@ -133,6 +133,7 @@ public class CountdownActivity : Activity() {
 
                 mTimeText?.setText(RemainTime(0, 0).toString())
                 AlertDialog.Builder(this).
+                        setCancelable(false).
                         setTitle("タイマー終了しました").
                         setPositiveButton("OK", { dialog, which ->
                             vibrator.cancel()
