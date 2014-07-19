@@ -11,12 +11,45 @@ import android.content.IntentFilter
 import android.content.Context
 import android.widget.Toast
 import android.util.Log
+import android.view.View.OnClickListener
+import android.view.View
+import android.widget.Button
 
 /**
  * Created by shoma2da on 2014/06/30.
  */
 
 public class CountdownActivity : Activity() {
+
+    class OnPauseButtonClickListener(val timeText:TextView) : OnClickListener {
+        override fun onClick(view : View) {
+            val context = view.getContext()
+            if (context == null) {
+                return @onClick
+            }
+
+            val button = view as Button
+            when(button.getText()) {
+                "一時停止" -> {
+                    //サービスを停止
+                    val intent = Intent(context, javaClass<CountdownService>())
+                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
+                    context.startService(intent)
+
+                    button.setText("スタート")
+                }
+                "スタート" -> {
+                    //サービスを再開
+                    val intent = Intent(context, javaClass<CountdownService>())
+                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
+                    intent.putExtra(CountdownService.PARAM_NAME_TIME, timeText.getTag() as Serializable)
+                    context.startService(intent)
+
+                    button.setText("一時停止")
+                }
+            }
+        }
+    }
 
     class object {
         val TIME_PARAM_NAME = "time_param"
@@ -40,12 +73,9 @@ public class CountdownActivity : Activity() {
         }
 
         //ボタンの動作設定
-        findViewById(R.id.pauseButton)?.setOnClickListener({ view ->
-            //サービスを停止
-            val intent = Intent(this, javaClass<CountdownService>())
-            intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
-            startService(intent)
-        })
+        if (mTimeText != null) {
+            findViewById(R.id.pauseButton)?.setOnClickListener(CountdownActivity.OnPauseButtonClickListener(mTimeText as TextView))
+        }
         findViewById(R.id.cancelButton)?.setOnClickListener({ view ->
             //サービスを停止
             val intent = Intent(this, javaClass<CountdownService>())
@@ -64,6 +94,7 @@ public class CountdownActivity : Activity() {
             override fun onReceive(context: Context, intent: Intent) {
                 val time = intent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
                 mTimeText?.setText(time.toString())
+                mTimeText?.setTag(time)
             }
         }
         val filter = IntentFilter()
