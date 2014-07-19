@@ -56,6 +56,7 @@ public class CountdownActivity : Activity() {
 
     class object {
         val TIME_PARAM_NAME = "time_param"
+        val START_COUNTDOWN_PARAM_NAME = "countdown_param"
     }
 
     private var mTimeText:TextView? = null
@@ -103,6 +104,12 @@ public class CountdownActivity : Activity() {
         val filter = IntentFilter()
         filter.addAction(CountdownService.ACTION_UPDATE_REMAINTIME)
         registerReceiver(mReceiver, filter)
+
+        //パラメータでカウントダウンを始めるか判断する
+        val startCountdown = getIntent()?.getBooleanExtra(START_COUNTDOWN_PARAM_NAME, true)
+        if (startCountdown == false) {
+            return @onCreate
+        }
 
         //サービスを起動する
         val intent = Intent(this, javaClass<CountdownService>())
