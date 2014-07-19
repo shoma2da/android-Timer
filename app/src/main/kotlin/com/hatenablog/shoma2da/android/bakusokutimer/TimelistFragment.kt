@@ -53,6 +53,8 @@ public class TimelistFragment : Fragment() {
                 val intent = Intent(context, clazz)
                 intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
                 view.getContext()?.startActivity(intent)
+
+                mActivity?.finish()
             }
         })
 
@@ -84,6 +86,8 @@ public class TimelistFragment : Fragment() {
                         intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
                         intent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
                         context.startActivity(intent)
+
+                        mActivity?.finish()
                     }
                     else -> {} //nothing
                 }
