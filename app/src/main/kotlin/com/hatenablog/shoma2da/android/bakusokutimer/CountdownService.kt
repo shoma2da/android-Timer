@@ -12,8 +12,8 @@ import com.hatenablog.shoma2da.android.bakusokutimer.viewmodel.CountdownNotifica
 class CountdownService : Service() {
 
     class object {
-        val ACTION_PARAM_NAME = "action_param"
-        val TIME_PARAM_NAME = "time_param"
+        val PARAM_NAME_ACTION = "action_param"
+        val PARAM_NAME_TIME = "time_param"
 
         val ACTION_UPDATE_REMAINTIME = "update_remaintime"
         val ACTION_FINISH_COUNTDOWN = "finish_countdown"
@@ -28,14 +28,14 @@ class CountdownService : Service() {
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent:Intent, flags:Int, startId:Int):Int {
-        val action = intent.getSerializableExtra(ACTION_PARAM_NAME) as Action?
+        val action = intent.getSerializableExtra(PARAM_NAME_ACTION) as Action?
         if (action == null || action is Action == false) {
             throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME:Cowntdown.Action}を渡す必要があります")
         }
 
         when (action) {
             Action.START -> {
-                val time = intent.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
+                val time = intent.getSerializableExtra(PARAM_NAME_TIME) as RemainTime
                 startCowntdown(time)
             }
         }
@@ -63,7 +63,7 @@ class CountdownService : Service() {
                 false -> {
                     //情報をアプリ内全体に送信する
                     val intent = Intent(ACTION_UPDATE_REMAINTIME)
-                    intent.putExtra(TIME_PARAM_NAME, time)
+                    intent.putExtra(PARAM_NAME_TIME, time)
                     sendBroadcast(intent)
 
                     //通知を書き換える
