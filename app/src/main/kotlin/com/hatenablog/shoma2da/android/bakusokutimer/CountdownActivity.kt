@@ -16,6 +16,8 @@ import android.view.View
 import android.widget.Button
 import android.app.AlertDialog
 import android.os.Vibrator
+import android.os.PowerManager
+import android.view.WindowManager
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -130,6 +132,13 @@ public class CountdownActivity : Activity() {
                 //バイブレーション開始
                 val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 vibrator.vibrate(longArray(1000L, 1000L), 0)
+
+                //画面を点灯する
+                val window = getWindow()
+                window?.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
                 mTimeText?.setText(RemainTime(0, 0).toString())
                 AlertDialog.Builder(this).
