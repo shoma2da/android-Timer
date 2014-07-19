@@ -71,7 +71,6 @@ public class CountdownActivity : Activity() {
 
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = getIntent()?.getAction()
-        Log.d("shomatsu", "action is ${action}")
         if (action == CountdownService.ACTION_FINISH_COUNTDOWN) {
             Log.d("shomatsu", "FINISH_COUNTDOWN")
             onNewIntent(getIntent())
