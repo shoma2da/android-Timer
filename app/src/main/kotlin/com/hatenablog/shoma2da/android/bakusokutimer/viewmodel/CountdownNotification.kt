@@ -24,7 +24,10 @@ class CountdownNotification(val service:Service) {
     private var mNotificationBuilder:Notification.Builder? = null
 
     fun notify(time: RemainTime) {
-        val pendingIntent = PendingIntent.getActivity(service, 0, Intent(service, javaClass<CountdownActivity>()), 0)
+        val intent = Intent(service, javaClass<CountdownActivity>())
+        intent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
+        intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
+        val pendingIntent = PendingIntent.getActivity(service, 0, intent, 0)
         mNotificationBuilder = Notification.Builder(service).
                 setLargeIcon(BitmapFactory.decodeResource(service.getResources(), R.drawable.ic_launcher)).
                 setSmallIcon(R.drawable.ic_launcher).
