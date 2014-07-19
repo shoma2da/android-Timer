@@ -2,7 +2,10 @@
 <resources>
 
     <string name="app_name">BakusokuTimer</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="restart">スタート</string>
+    <string name="pause">一時停止</string>
+    <string name="stop">キャンセル</string>
 
 </resources>

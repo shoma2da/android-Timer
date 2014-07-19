@@ -24,15 +24,17 @@
         android:layout_centerHorizontal="true"
         >
         <Button
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="キャンセル"
+            android:text="@string/stop"
             android:textSize="25sp"
             />
         <Button
+            android:id="@+id/pauseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="一時停止"
+            android:text="@string/pause"
             android:textSize="25sp"
             />
     </LinearLayout>

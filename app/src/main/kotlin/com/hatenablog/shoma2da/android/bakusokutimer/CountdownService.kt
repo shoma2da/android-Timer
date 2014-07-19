@@ -20,9 +20,10 @@ class CountdownService : Service() {
     }
 
     private var mNotification = CountdownNotification(this)
+    private var mIsStopped = false
 
     enum class Action {
-        START; STOP; PAUSE;
+        START; STOP;
     }
 
     override fun onBind(intent: Intent): IBinder? = null
@@ -38,6 +39,11 @@ class CountdownService : Service() {
                 val time = intent.getSerializableExtra(PARAM_NAME_TIME) as RemainTime
                 startCowntdown(time)
             }
+            Action.STOP -> {
+                mIsStopped = true
+                mNotification.cancel()
+                stopSelf()
+            }
         }
 
         return super.onStartCommand(intent, flags, startId)
@@ -49,6 +55,8 @@ class CountdownService : Service() {
 
         //カウントダウン
         fun countdownToZero(time:RemainTime) {
+            if (mIsStopped) { return @countdownToZero }
+
             when (time.isEmpty()) {
                 true -> {
                     //Activityを起動する
@@ -61,6 +69,7 @@ class CountdownService : Service() {
                     stopSelf()
                 }
                 false -> {
+
                     //情報をアプリ内全体に送信する
                     val intent = Intent(ACTION_UPDATE_REMAINTIME)
                     intent.putExtra(PARAM_NAME_TIME, time)
