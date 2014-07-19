@@ -87,6 +87,9 @@ public class CountdownActivity : Activity() {
             intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
             startService(intent)
 
+            //リストページに戻る
+            startActivity(Intent(this, javaClass<MainActivity>()))
+
             finish()
         })
 
@@ -136,8 +139,7 @@ public class CountdownActivity : Activity() {
                             dialog.dismiss()
 
                             //リストページに戻る
-                            val intent = Intent(this, javaClass<MainActivity>())
-                            startActivity(intent)
+                            startActivity(Intent(this, javaClass<MainActivity>()))
 
                             finish()
                         }).
