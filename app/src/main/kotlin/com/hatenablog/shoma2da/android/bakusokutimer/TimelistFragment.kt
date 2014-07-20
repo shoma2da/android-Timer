@@ -37,7 +37,8 @@ public class TimelistFragment : Fragment() {
         //とりあえず固定でデータ挿入
         val adapter = ArrayAdapter<String>(context, R.layout.column_timelist)
         for (integer in 1..90) {
-            adapter.add("${java.lang.String.format("%02d", integer)}:00")
+            val remainTime = RemainTime(integer, 0)
+            adapter.add(remainTime.toString())
         }
 
         //リストの初期設定
