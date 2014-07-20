@@ -13,11 +13,6 @@ class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
 
     class object {
         private val serialVersionUID = 0L
-
-        public fun createFromString(string:String) : RemainTime {
-            val numbers = string.split(':').map{ it.toInt() }
-            return RemainTime(numbers[0], numbers[1])
-        }
     }
 
     fun countdown(onTimeChanged:(RemainTime) -> Unit) {
@@ -39,6 +34,15 @@ class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
 
     fun isEmpty() = (minutes == 0 && seconds == 0)
 
-    override fun toString() : String = "${java.lang.String.format("%02d", minutes)}:${java.lang.String.format("%02d", seconds)}"
+    override fun toString() : String {
+        val hours = minutes / 60
+        val minutes = minutes % 60
+        when (hours) {
+            0 ->    return                                           "${java.lang.String.format("%02d", minutes)}:${java.lang.String.format("%02d", seconds)}"
+            else -> return "${java.lang.String.format("%02d", hours)}:${java.lang.String.format("%02d", minutes)}:${java.lang.String.format("%02d", seconds)}"
+        }
+
+
+    }
 
 }
