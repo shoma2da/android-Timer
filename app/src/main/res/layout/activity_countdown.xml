@@ -14,6 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dip"
         android:layout_marginBottom="40dip"
+        android:fontFamily="sans-serif-light"
         />
 
     <LinearLayout
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="@string/stop"
             android:textSize="25sp"
+            android:fontFamily="sans-serif-light"
             />
         <Button
             android:id="@+id/pauseButton"
@@ -36,6 +38,7 @@
             android:layout_height="wrap_content"
             android:text="@string/pause"
             android:textSize="25sp"
+            android:fontFamily="sans-serif-light"
             />
     </LinearLayout>
 
