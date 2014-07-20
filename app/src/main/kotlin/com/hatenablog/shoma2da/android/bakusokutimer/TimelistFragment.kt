@@ -35,6 +35,7 @@ public class TimelistFragment : Fragment() {
         }
 
         //とりあえず固定でデータ挿入
+        var remainTimes = Array<RemainTime>(90, { RemainTime(it + 1, 0) }) //残り時間オブジェクトを無理やり用意
         val adapter = ArrayAdapter<String>(context, R.layout.column_timelist)
         for (integer in 1..90) {
             val remainTime = RemainTime(integer, 0)
@@ -48,7 +49,7 @@ public class TimelistFragment : Fragment() {
             val text = (view as TextView).getText()
 
             if (text != null) {
-                val time = RemainTime.createFromString(text.toString())
+                val time = remainTimes.get(position)
 
                 val clazz:Class<CountdownActivity> = javaClass<CountdownActivity>()
                 val intent = Intent(context, clazz)
