@@ -7,5 +7,6 @@
     android:gravity="center"
     android:textSize="50sp"
     android:layout_margin="10dip"
+    android:fontFamily="sans-serif-light"
     />
 
