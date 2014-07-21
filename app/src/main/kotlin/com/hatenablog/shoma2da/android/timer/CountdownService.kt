@@ -1,10 +1,10 @@
-package com.hatenablog.shoma2da.android.bakusokutimer
+package com.hatenablog.shoma2da.android.timer
 
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
-import com.hatenablog.shoma2da.android.bakusokutimer.viewmodel.CountdownNotification
+import com.hatenablog.shoma2da.android.timer.model.RemainTime
+import com.hatenablog.shoma2da.android.timer.viewmodel.CountdownNotification
 import java.io.Serializable
 
 /**

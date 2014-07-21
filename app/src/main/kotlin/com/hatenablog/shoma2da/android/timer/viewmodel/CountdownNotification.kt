@@ -1,10 +1,10 @@
-package com.hatenablog.shoma2da.android.bakusokutimer.viewmodel
+package com.hatenablog.shoma2da.android.timer.viewmodel
 
 import android.app.Notification
 import android.graphics.BitmapFactory
-import com.hatenablog.shoma2da.android.bakusokutimer.R
-import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
-import com.hatenablog.shoma2da.android.bakusokutimer.CountdownActivity
+import com.hatenablog.shoma2da.android.timer.R
+import com.hatenablog.shoma2da.android.timer.model.RemainTime
+import com.hatenablog.shoma2da.android.timer.CountdownActivity
 import android.content.Intent
 import android.app.PendingIntent
 import android.app.Service
