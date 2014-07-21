@@ -9,15 +9,13 @@ import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.content.Context
-import android.widget.Toast
 import android.util.Log
 import android.view.View.OnClickListener
 import android.view.View
-import android.widget.Button
 import android.app.AlertDialog
 import android.os.Vibrator
-import android.os.PowerManager
 import android.view.WindowManager
+import android.widget.Button
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -44,6 +42,7 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     button.setText(restartText)
+                    button.setBackgroundResource(R.drawable.round_button_green)
                 }
                 restartText -> {
                     //サービスを再開
@@ -53,6 +52,7 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     button.setText(pauseText)
+                    button.setBackgroundResource(R.drawable.round_button_blue)
                 }
             }
         }
@@ -98,6 +98,7 @@ public class CountdownActivity : Activity() {
         //初期表示設定
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
         mTimeText?.setText(time.toString())
+        mTimeText?.setTag(time)
 
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {

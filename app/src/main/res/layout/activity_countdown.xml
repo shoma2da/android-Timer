@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,8 +9,8 @@
         android:id="@+id/timeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12:00"
-        android:textSize="70sp"
+        android:text="01:12:00"
+        android:textSize="80sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dip"
         android:layout_marginBottom="40dip"
@@ -26,19 +26,24 @@
         >
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dip"
+            android:layout_height="150dip"
+            android:textColor="@android:color/white"
             android:text="@string/stop"
             android:textSize="25sp"
-            android:fontFamily="sans-serif-light"
+            android:background="@drawable/round_button_red"
             />
+        <View
+            android:layout_width="10dip"
+            android:layout_height="0dip" />
         <Button
             android:id="@+id/pauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dip"
+            android:layout_height="150dip"
+            android:textColor="@android:color/white"
             android:text="@string/pause"
             android:textSize="25sp"
-            android:fontFamily="sans-serif-light"
+            android:background="@drawable/round_button_blue"
             />
     </LinearLayout>
 
