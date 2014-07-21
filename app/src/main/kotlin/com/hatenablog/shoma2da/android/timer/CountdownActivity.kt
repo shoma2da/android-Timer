@@ -101,6 +101,7 @@ public class CountdownActivity : Activity() {
         //初期表示設定
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
         mTimeText?.setText(time.toString())
+        mTimeText?.setTag(time)
 
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
