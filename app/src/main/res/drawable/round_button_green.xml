@@ -4,6 +4,5 @@
     android:layout_height="wrap_content"
     android:shape="oval"
     >
-    <solid android:color="#9F2200"/>
-    <stroke android:width="2sp" android:color="#fff" />
+    <solid android:color="#2ecc71"/>
 </shape>

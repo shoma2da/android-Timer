@@ -31,7 +31,7 @@
             android:textColor="@android:color/white"
             android:text="@string/stop"
             android:textSize="25sp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button_red"
             />
         <View
             android:layout_width="10dip"
@@ -43,7 +43,7 @@
             android:textColor="@android:color/white"
             android:text="@string/pause"
             android:textSize="25sp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button_blue"
             />
     </LinearLayout>
 

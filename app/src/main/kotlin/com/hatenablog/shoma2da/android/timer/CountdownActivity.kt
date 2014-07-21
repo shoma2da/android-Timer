@@ -42,6 +42,7 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     button.setText(restartText)
+                    button.setBackgroundResource(R.drawable.round_button_green)
                 }
                 restartText -> {
                     //サービスを再開
@@ -51,6 +52,7 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     button.setText(pauseText)
+                    button.setBackgroundResource(R.drawable.round_button_blue)
                 }
             }
         }
