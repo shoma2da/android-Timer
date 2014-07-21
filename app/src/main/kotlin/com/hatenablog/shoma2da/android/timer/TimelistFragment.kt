@@ -1,4 +1,4 @@
-package com.hatenablog.shoma2da.android.bakusokutimer
+package com.hatenablog.shoma2da.android.timer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import android.app.Activity
 import android.widget.TextView
 import android.util.Log
 import android.content.Intent
-import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
+import com.hatenablog.shoma2da.android.timer.model.RemainTime
 import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.Context

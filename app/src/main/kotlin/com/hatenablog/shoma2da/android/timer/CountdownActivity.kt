@@ -1,8 +1,8 @@
-package com.hatenablog.shoma2da.android.bakusokutimer
+package com.hatenablog.shoma2da.android.timer
 
 import android.app.Activity
 import android.os.Bundle
-import com.hatenablog.shoma2da.android.bakusokutimer.model.RemainTime
+import com.hatenablog.shoma2da.android.timer.model.RemainTime
 import android.widget.TextView
 import android.content.Intent
 import java.io.Serializable

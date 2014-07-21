@@ -1,4 +1,4 @@
-package com.hatenablog.shoma2da.android.bakusokutimer.model
+package com.hatenablog.shoma2da.android.timer.model
 
 import java.io.Serializable
 import android.os.Handler

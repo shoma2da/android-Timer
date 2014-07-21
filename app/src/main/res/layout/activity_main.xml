@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/timelist"
-        android:name="com.hatenablog.shoma2da.android.bakusokutimer.TimelistFragment"
+        android:name="com.hatenablog.shoma2da.android.timer.TimelistFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
