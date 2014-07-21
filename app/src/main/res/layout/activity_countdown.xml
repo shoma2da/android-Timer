@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -24,21 +25,28 @@
         android:layout_below="@id/timeText"
         android:layout_centerHorizontal="true"
         >
-        <Button
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/stop"
             android:textSize="25sp"
             android:fontFamily="sans-serif-light"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="danger"
             />
-        <Button
+        <View
+            android:layout_width="10dip"
+            android:layout_height="0dip" />
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/pauseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pause"
             android:textSize="25sp"
             android:fontFamily="sans-serif-light"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="info"
             />
     </LinearLayout>
 

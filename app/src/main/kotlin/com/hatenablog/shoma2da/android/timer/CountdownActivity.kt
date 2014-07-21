@@ -9,15 +9,13 @@ import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.content.Context
-import android.widget.Toast
 import android.util.Log
 import android.view.View.OnClickListener
 import android.view.View
-import android.widget.Button
 import android.app.AlertDialog
 import android.os.Vibrator
-import android.os.PowerManager
 import android.view.WindowManager
+import com.beardedhen.androidbootstrap.BootstrapButton
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -26,6 +24,7 @@ import android.view.WindowManager
 public class CountdownActivity : Activity() {
 
     class OnPauseButtonClickListener(val timeText:TextView) : OnClickListener {
+        private var mPauseButtonText = ""
         override fun onClick(view : View) {
             val context = view.getContext()
             if (context == null) {
@@ -35,17 +34,19 @@ public class CountdownActivity : Activity() {
             val pauseText = context.getString(R.string.pause)
             val restartText = context.getString(R.string.restart)
 
-            val button = view as Button
-            when(button.getText()) {
-                pauseText -> {
+            val button = view as BootstrapButton
+            when {
+                (mPauseButtonText == "") || (mPauseButtonText == pauseText) -> {
                     //サービスを停止
                     val intent = Intent(context, javaClass<CountdownService>())
                     intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
                     context.startService(intent)
 
                     button.setText(restartText)
+                    button.setBootstrapType("success")
+                    mPauseButtonText = restartText
                 }
-                restartText -> {
+                mPauseButtonText == restartText -> {
                     //サービスを再開
                     val intent = Intent(context, javaClass<CountdownService>())
                     intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
@@ -53,6 +54,8 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     button.setText(pauseText)
+                    button.setBootstrapType("info")
+                    mPauseButtonText = pauseText
                 }
             }
         }
