@@ -52,7 +52,7 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     button.setText(pauseText)
-                    button.setBackgroundResource(R.drawable.round_button_blue)
+                    button.setBackgroundResource(R.drawable.round_button_yellow)
                 }
             }
         }
