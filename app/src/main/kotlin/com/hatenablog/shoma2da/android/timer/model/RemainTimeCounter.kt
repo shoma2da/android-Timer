@@ -1,8 +1,6 @@
 package com.hatenablog.shoma2da.android.timer.model
 
 import kotlin.concurrent.timer
-import android.util.Log
-import java.util.Timer
 
 /**
  * Created by shoma2da on 2014/07/22.

@@ -1,12 +1,6 @@
 package com.hatenablog.shoma2da.android.timer.model
 
 import java.io.Serializable
-import android.os.Handler
-import kotlin.concurrent.schedule
-import java.util.Timer
-import java.util.TimerTask
-import kotlin.concurrent.timer
-import android.util.Log
 
 /**
  * Created by shoma2da on 2014/06/30.
