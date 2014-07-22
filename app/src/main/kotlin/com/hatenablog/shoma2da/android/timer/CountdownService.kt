@@ -6,6 +6,7 @@ import android.os.IBinder
 import com.hatenablog.shoma2da.android.timer.model.RemainTime
 import com.hatenablog.shoma2da.android.timer.viewmodel.CountdownNotification
 import java.io.Serializable
+import com.hatenablog.shoma2da.android.timer.model.RemainTimeCounter
 
 /**
  * Created by shoma2da on 2014/07/15.
@@ -72,14 +73,18 @@ class CountdownService : Service() {
         //通知表示（foreground）
         mNotification.notify(time)
 
-        //カウントダウン
-        fun countdownToZero(time:RemainTime) {
-            mCurrentTime = time
+        //カウントダウンを開始
+        RemainTimeCounter(time).countdown(
+                onTimeChanged = { time ->
+                    //情報をアプリ内全体に送信する
+                    val intent = Intent(ACTION_UPDATE_REMAINTIME)
+                    intent.putExtra(PARAM_NAME_TIME, time)
+                    sendBroadcast(intent)
 
-            if (mCurrentStatus == Status.STOP) { return @countdownToZero }
-
-            when (time.isEmpty()) {
-                true -> {
+                    //通知を書き換える
+                    mNotification.update(time)
+                },
+                onFinish = {
                     //Activityを起動する
                     val intent = Intent(this, javaClass<CountdownActivity>())
                     intent.setAction(ACTION_FINISH_COUNTDOWN);
@@ -88,22 +93,13 @@ class CountdownService : Service() {
 
                     mNotification.cancel()
                     stopSelf()
-                }
-                false -> {
-
-                    //情報をアプリ内全体に送信する
-                    val intent = Intent(ACTION_UPDATE_REMAINTIME)
-                    intent.putExtra(PARAM_NAME_TIME, time)
-                    sendBroadcast(intent)
-
-                    //通知を書き換える
-                    mNotification.update(time)
-
-                    time.countdown { countdownToZero(it) }
-                }
-            }
-        }
-        time.countdown{ countdownToZero(it) }
+                },
+                continueCondition = { mCurrentStatus != Status.STOP },
+                onCancel = {
+                    //カウントダウンしているサービスを停止する
+                    mNotification.cancel()
+                    stopSelf()
+                })
     }
 
 }
