@@ -7,6 +7,8 @@ import com.hatenablog.shoma2da.android.timer.model.RemainTime
 import com.hatenablog.shoma2da.android.timer.viewmodel.CountdownNotification
 import java.io.Serializable
 import com.hatenablog.shoma2da.android.timer.model.RemainTimeCounter
+import android.content.Context
+import android.os.PowerManager
 
 /**
  * Created by shoma2da on 2014/07/15.
@@ -73,6 +75,11 @@ class CountdownService : Service() {
         //通知表示（foreground）
         mNotification.notify(time)
 
+        //CPUが止まらないようにする
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        val lock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Tag")
+        lock.acquire()
+
         //カウントダウンを開始
         RemainTimeCounter(time).countdown(
                 onTimeChanged = { time ->
@@ -91,12 +98,19 @@ class CountdownService : Service() {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
 
+                    //CPUロックを解除
+                    lock.release()
+
+                    //サービス停止
                     mNotification.cancel()
                     stopSelf()
                 },
                 continueCondition = { mCurrentStatus != Status.STOP },
                 onCancel = {
-                    //カウントダウンしているサービスを停止する
+                    //CPUロックを解除
+                    lock.release()
+
+                    //サービス停止する
                     mNotification.cancel()
                     stopSelf()
                 })
