@@ -4,6 +4,9 @@ import java.io.Serializable
 import android.os.Handler
 import kotlin.concurrent.schedule
 import java.util.Timer
+import java.util.TimerTask
+import kotlin.concurrent.timer
+import android.util.Log
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -13,13 +16,6 @@ class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
 
     class object {
         private val serialVersionUID = 0L
-    }
-
-    fun countdown(onTimeChanged:(RemainTime) -> Unit) {
-        val handler = Handler()
-        Timer().schedule(1000) {
-            handler.post { onTimeChanged(minus()) }
-        }
     }
 
     fun minus(): RemainTime {
