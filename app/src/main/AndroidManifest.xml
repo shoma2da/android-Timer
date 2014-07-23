@@ -21,7 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CountdownActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize"
+            />
         <service android:name=".CountdownService" />
     </application>
 
