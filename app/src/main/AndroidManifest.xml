@@ -24,7 +24,13 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|screenSize"
             />
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity"
+            android:parentActivityName=".MainActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <service android:name=".CountdownService" />
     </application>
 
