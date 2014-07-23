@@ -16,6 +16,7 @@ import android.app.AlertDialog
 import android.os.Vibrator
 import android.view.WindowManager
 import android.widget.Button
+import android.content.res.Configuration
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -69,7 +70,6 @@ public class CountdownActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
-        mTimeText = findViewById(R.id.timeText) as TextView
 
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = getIntent()?.getAction()
@@ -79,26 +79,11 @@ public class CountdownActivity : Activity() {
             return@onCreate
         }
 
-        //ボタンの動作設定
-        if (mTimeText != null) {
-            findViewById(R.id.pauseButton)?.setOnClickListener(CountdownActivity.OnPauseButtonClickListener(mTimeText as TextView))
-        }
-        findViewById(R.id.cancelButton)?.setOnClickListener({ view ->
-            //サービスを停止
-            val intent = Intent(this, javaClass<CountdownService>())
-            intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
-            startService(intent)
-
-            //リストページに戻る
-            startActivity(Intent(this, javaClass<MainActivity>()))
-
-            finish()
-        })
-
-        //初期表示設定
+        //パラメータを受け取る
         val time = getIntent()?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
-        mTimeText?.setText(time.toString())
-        mTimeText?.setTag(time)
+
+        //表示の初期設定
+        setupViews(time)
 
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
@@ -123,6 +108,29 @@ public class CountdownActivity : Activity() {
         intent.putExtra(CountdownService.PARAM_NAME_TIME, time)
         intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
         startService(intent)
+    }
+
+    private fun setupViews(time:RemainTime) {
+        //ボタンの動作設定
+        mTimeText = findViewById(R.id.timeText) as TextView
+        if (mTimeText != null) {
+            findViewById(R.id.pauseButton)?.setOnClickListener(CountdownActivity.OnPauseButtonClickListener(mTimeText as TextView))
+        }
+        findViewById(R.id.cancelButton)?.setOnClickListener({ view ->
+            //サービスを停止
+            val intent = Intent(this, javaClass<CountdownService>())
+            intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
+            startService(intent)
+
+            //リストページに戻る
+            startActivity(Intent(this, javaClass<MainActivity>()))
+
+            finish()
+        })
+
+        //初期表示設定
+        mTimeText?.setText(time.toString())
+        mTimeText?.setTag(time)
     }
 
     protected override fun onNewIntent(intent: Intent?) {
@@ -157,6 +165,28 @@ public class CountdownActivity : Activity() {
                         create().show()
             }
             else -> {} //nothing
+        }
+    }
+
+    override fun onConfigurationChanged(configuration:Configuration) {
+        //一時停止ボタンを回転後の表示変更用に取っておく
+        val pauseButton = findViewById(R.id.pauseButton) as Button?
+
+        //表示の更新
+        super.onConfigurationChanged(configuration)
+        setContentView(R.layout.activity_countdown)
+
+        //動作状況、残り時間を反映した表示の初期設定
+        if (mTimeText != null) {
+            setupViews(mTimeText!!.getTag() as RemainTime) //直前までの残り時間を設定する
+        }
+
+        //一時停止ボタンの表示を変更
+        val restartText = getString(R.string.restart)
+        if (restartText.equals(pauseButton?.getText())) {
+            val button = findViewById(R.id.pauseButton) as Button?
+            button?.setText(restartText)
+            button?.setBackgroundResource(R.drawable.round_button_green)
         }
     }
 
