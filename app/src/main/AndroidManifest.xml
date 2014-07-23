@@ -24,6 +24,7 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|screenSize"
             />
+        <activity android:name=".SettingActivity" />
         <service android:name=".CountdownService" />
     </application>
 
