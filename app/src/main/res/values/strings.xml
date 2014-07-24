@@ -4,8 +4,12 @@
     <string name="app_name">瞬間タイマー</string>
     <string name="action_settings">Settings</string>
 
+    <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Cancel</string>
+
+    <!-- 設定画面 -->
+    <string name="version">バージョン</string>
 
 </resources>
