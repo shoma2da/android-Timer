@@ -12,7 +12,6 @@ import android.util.Log
 class BootCompletedReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent:Intent) {
-        Log.d("shomatsu", "onReceive")
         context.startService(Intent(context, javaClass<NotificationLauncherService>()))
     }
 
