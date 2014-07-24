@@ -32,6 +32,12 @@
                 android:value=".MainActivity" />
         </activity>
         <service android:name=".CountdownService" />
+        <service android:name=".NotificationLauncherService">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.PACKAGE_CHANGED"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
