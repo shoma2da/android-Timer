@@ -16,6 +16,7 @@ class NotificationLauncherService : Service() {
 
     override fun onStartCommand(intent:Intent , flags:Int , startId:Int):Int {
         val intent = Intent(this, javaClass<MainActivity>())
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
         val notificationBuilder = Notification.Builder(this).
                 setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
