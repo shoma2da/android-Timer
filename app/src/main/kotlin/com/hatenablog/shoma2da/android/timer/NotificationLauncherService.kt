@@ -6,6 +6,8 @@ import android.os.IBinder
 import android.graphics.BitmapFactory
 import android.app.Notification
 import android.app.PendingIntent
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 
 /**
  * Created by shoma2da on 2014/07/24.
@@ -15,6 +17,14 @@ class NotificationLauncherService : Service() {
     override fun onBind(p0: Intent): IBinder? = null
 
     override fun onStartCommand(intent:Intent , flags:Int , startId:Int):Int {
+        //現在の設定を読み取って、通知バーを使わない設定だったらすぐに終わる
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val notificationLaunerEnabled = preferences?.getBoolean("notification_launcher", false) as Boolean
+        if (preferences == null || notificationLaunerEnabled == false) {
+            stopSelf(startId)
+            return@onStartCommand super.onStartCommand(intent, flags, startId)
+        }
+
         val intent = Intent(this, javaClass<MainActivity>())
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
