@@ -11,5 +11,7 @@
 
     <!-- 設定画面 -->
     <string name="version">バージョン</string>
+    <string name="notification_launcher_title">通知ランチャー</string>
+    <string name="notification_launcher_summary">通知をタップしてアプリを素早く起動できます</string>
 
 </resources>

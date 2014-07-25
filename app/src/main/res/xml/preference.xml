@@ -3,4 +3,8 @@
     <Preference
         android:key="version"
         android:title="@string/version" />
+    <CheckBoxPreference
+        android:key="notification_launcher"
+        android:title="@string/notification_launcher_title"
+        android:summary="@string/notification_launcher_summary" />
 </PreferenceScreen>
