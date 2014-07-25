@@ -13,9 +13,6 @@ class SettingActivity : PreferenceActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_setting)
 
-        //ランチャー停止
-        stopService(Intent(this, javaClass<NotificationLauncherService>()))
-
         getActionBar()?.setDisplayHomeAsUpEnabled(true)
     }
 
