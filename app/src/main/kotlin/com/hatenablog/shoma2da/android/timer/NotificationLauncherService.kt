@@ -6,7 +6,6 @@ import android.os.IBinder
 import android.graphics.BitmapFactory
 import android.app.Notification
 import android.app.PendingIntent
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 /**
@@ -25,8 +24,8 @@ class NotificationLauncherService : Service() {
             return@onStartCommand super.onStartCommand(intent, flags, startId)
         }
 
-        val intent = Intent(this, javaClass<MainActivity>())
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        val intent = Intent(Intent.ACTION_MAIN);
+        intent.setClassName(getPackageName()!!, javaClass<MainActivity>().toString())
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
         val notificationBuilder = Notification.Builder(this).
                 setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
