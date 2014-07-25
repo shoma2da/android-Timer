@@ -19,7 +19,7 @@ class NotificationLauncherService : Service() {
     override fun onStartCommand(intent:Intent , flags:Int , startId:Int):Int {
         //現在の設定を読み取って、通知バーを使わない設定だったらすぐに終わる
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val notificationLaunerEnabled = preferences?.getBoolean("notification_launcher", false) as Boolean
+        val notificationLaunerEnabled = preferences?.getBoolean(getString(R.string.notification_launcher_id), false) as Boolean
         if (preferences == null || notificationLaunerEnabled == false) {
             stopSelf(startId)
             return@onStartCommand super.onStartCommand(intent, flags, startId)
