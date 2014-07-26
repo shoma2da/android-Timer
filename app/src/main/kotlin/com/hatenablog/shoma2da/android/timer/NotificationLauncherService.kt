@@ -24,13 +24,20 @@ class NotificationLauncherService : Service() {
             return@onStartCommand super.onStartCommand(intent, flags, startId)
         }
 
-        val intent = Intent(Intent.ACTION_MAIN);
-        intent.setClassName(getPackageName()!!, javaClass<MainActivity>().toString())
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        //通知バータップ時のIntentを準備
+        val packageManager = getPackageManager()
+        val launchIntent = packageManager?.getLaunchIntentForPackage(getPackageName())
+        launchIntent?.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+        if (launchIntent == null) {
+            return@onStartCommand super.onStartCommand(intent, flags, startId)
+        }
+
+        //通知バーを設定
+        val pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0)
         val notificationBuilder = Notification.Builder(this).
                 setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
                 setSmallIcon(R.drawable.ic_launcher).
-                setTicker("ランチャー").
+                setTicker(null).
                 setContentTitle(getResources()?.getString(R.string.app_name)).
                 setContentText("らんちゃー").
                 setWhen(System.currentTimeMillis()).
