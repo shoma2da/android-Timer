@@ -9,14 +9,12 @@ import android.widget.ListView
 import android.widget.ArrayAdapter
 import android.app.Activity
 import android.widget.TextView
-import android.util.Log
 import android.content.Intent
 import com.hatenablog.shoma2da.android.timer.model.RemainTime
 import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
-import com.google.android.gms.analytics.HitBuilders
 
 /**
  * Created by shoma2da on 2014/06/29.
