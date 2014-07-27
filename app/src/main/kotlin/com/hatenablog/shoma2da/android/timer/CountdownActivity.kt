@@ -17,6 +17,7 @@ import android.os.Vibrator
 import android.view.WindowManager
 import android.widget.Button
 import android.content.res.Configuration
+import com.google.android.gms.analytics.HitBuilders
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -70,6 +71,11 @@ public class CountdownActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
+
+        //Analytics
+        val tracker = (getApplication() as TimerApplication?)?.getTracker()
+        tracker?.setScreenName("CountdounActivity")
+        tracker?.send(HitBuilders.ScreenViewBuilder().build());
 
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = getIntent()?.getAction()
