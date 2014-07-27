@@ -1,6 +1,5 @@
 package com.hatenablog.shoma2da.android.timer
 
-import android.app.Activity
 import android.os.Bundle
 import android.preference.PreferenceActivity
 

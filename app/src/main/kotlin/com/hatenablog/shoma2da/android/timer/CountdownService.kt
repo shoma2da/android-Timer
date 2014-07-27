@@ -50,11 +50,17 @@ class CountdownService : Service() {
 
         when (action) {
             Action.START -> {
+                //通知バーランチャーを一時的に消す
+                stopService(Intent(this, javaClass<NotificationLauncherService>()))
+
                 mCurrentStatus = Status.START
                 val time = intent.getSerializableExtra(PARAM_NAME_TIME) as RemainTime
                 startCowntdown(time)
             }
             Action.STOP -> {
+                //通知バーランチャーを表示する
+                startService(Intent(this, javaClass<NotificationLauncherService>()))
+
                 mCurrentStatus = Status.STOP
                 mNotification.cancel()
                 stopSelf()

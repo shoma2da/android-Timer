@@ -15,6 +15,9 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_main)
+
+        //ランチャー起動
+        startService(Intent(this, javaClass<NotificationLauncherService>()))
     }
 
     override fun onCreateOptionsMenu(menu:Menu?):Boolean {
