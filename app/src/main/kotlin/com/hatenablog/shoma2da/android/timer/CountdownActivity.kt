@@ -17,6 +17,7 @@ import android.os.Vibrator
 import android.view.WindowManager
 import android.widget.Button
 import android.content.res.Configuration
+import com.google.android.gms.analytics.HitBuilders
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -31,6 +32,8 @@ public class CountdownActivity : Activity() {
                 return @onClick
             }
 
+            val tracker = (context.getApplicationContext() as TimerApplication?)?.getTracker()
+
             val pauseText = context.getString(R.string.pause)
             val restartText = context.getString(R.string.restart)
 
@@ -41,6 +44,12 @@ public class CountdownActivity : Activity() {
                     val intent = Intent(context, javaClass<CountdownService>())
                     intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
                     context.startService(intent)
+
+                    //Analytics
+                    tracker?.send(HitBuilders.EventBuilder()
+                            .setCategory("timer")
+                            ?.setAction("pause")
+                            ?.build())
 
                     button.setText(restartText)
                     button.setBackgroundResource(R.drawable.round_button_green)
@@ -54,6 +63,12 @@ public class CountdownActivity : Activity() {
 
                     button.setText(pauseText)
                     button.setBackgroundResource(R.drawable.round_button_yellow)
+
+                    //Analytics
+                    tracker?.send(HitBuilders.EventBuilder()
+                            .setCategory("timer")
+                            ?.setAction("restart")
+                            ?.build())
                 }
             }
         }
@@ -70,6 +85,11 @@ public class CountdownActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
+
+        //Analytics
+        val tracker = (getApplication() as TimerApplication?)?.getTracker()
+        tracker?.setScreenName("CountdounActivity")
+        tracker?.send(HitBuilders.ScreenViewBuilder().build());
 
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = getIntent()?.getAction()
@@ -108,6 +128,13 @@ public class CountdownActivity : Activity() {
         intent.putExtra(CountdownService.PARAM_NAME_TIME, time)
         intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
         startService(intent)
+
+        //Analytics
+        tracker?.send(HitBuilders.EventBuilder()
+                .setCategory("timer")
+                ?.setAction("start")
+                ?.setLabel(time.toString())
+                ?.build())
     }
 
     private fun setupViews(time:RemainTime) {
@@ -125,6 +152,14 @@ public class CountdownActivity : Activity() {
             //リストページに戻る
             startActivity(Intent(this, javaClass<MainActivity>()))
 
+            //Analytics
+            val tracker = (getApplication() as TimerApplication?)?.getTracker()
+            tracker?.send(HitBuilders.EventBuilder()
+                    .setCategory("timer")
+                    ?.setAction("cancel")
+                    ?.setLabel(time.toString())
+                    ?.build())
+
             finish()
         })
 
@@ -141,6 +176,13 @@ public class CountdownActivity : Activity() {
                 //バイブレーション開始
                 val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 vibrator.vibrate(longArray(1000L, 1000L), 0)
+
+                //Analytics
+                val tracker = (getApplication() as TimerApplication?)?.getTracker()
+                tracker?.send(HitBuilders.EventBuilder()
+                        .setCategory("timer")
+                        ?.setAction("finish")
+                        ?.build())
 
                 //画面を点灯する
                 val window = getWindow()

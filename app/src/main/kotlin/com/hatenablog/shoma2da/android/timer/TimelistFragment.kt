@@ -9,7 +9,6 @@ import android.widget.ListView
 import android.widget.ArrayAdapter
 import android.app.Activity
 import android.widget.TextView
-import android.util.Log
 import android.content.Intent
 import com.hatenablog.shoma2da.android.timer.model.RemainTime
 import java.io.Serializable
