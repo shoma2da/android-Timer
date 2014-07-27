@@ -33,6 +33,12 @@ class SettingFragment : PreferenceFragment() {
             }
             true
         }
+
+        //要望メニューの動作設定
+        findPreference("request")?.setOnPreferenceClickListener { preference ->
+            activity.startActivity(Intent(activity, javaClass<RequestActivity>()))
+            true
+        }
     }
 
 }
