@@ -16,6 +16,7 @@ import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
+import com.google.android.gms.analytics.HitBuilders
 
 /**
  * Created by shoma2da on 2014/06/29.
