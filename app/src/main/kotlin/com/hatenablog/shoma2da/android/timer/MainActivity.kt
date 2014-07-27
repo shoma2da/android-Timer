@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.content.Intent
 import com.google.android.gms.analytics.HitBuilders
+import com.crashlytics.android.Crashlytics
 
 /**
  * Created by shoma2da on 2014/06/28.
@@ -16,6 +17,11 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_main)
+
+        //Crashlytics
+        if (BuildConfig.DEBUG == false) {
+            Crashlytics.start(this);
+        }
 
         //Analytics
         val tracker = (getApplication() as TimerApplication?)?.getTracker()
