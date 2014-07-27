@@ -11,4 +11,10 @@
     <Preference
         android:key="request"
         android:title="@string/request" />
+    <Preference
+        android:key="developer"
+        android:title="@string/developer" />
+    <Preference
+        android:key="google_play"
+        android:title="@string/google_play" />
 </PreferenceScreen>
