@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/editText"
-        android:hint="@string/request_hint"
+    >
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="10"
-        android:inputType="textMultiLine"
-        android:gravity="top|left"
-        />
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/editText"
+            android:hint="@string/request_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="10"
+            android:inputType="textMultiLine"
+            android:gravity="top|left"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/request_send"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/request_cancel"
+            />
+
+    </LinearLayout>
+</ScrollView>
