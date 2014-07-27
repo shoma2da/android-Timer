@@ -22,18 +22,13 @@ class SettingFragment : PreferenceFragment() {
         findPreference("version")?.setSummary(versionName)
 
         //通知バーランチャーの動作設定
-        findPreference("notification_launcher")?.setOnPreferenceChangeListener { (preference, any) ->
-            when(any) {
-                true -> {
-                    if (activity != null) {
-                        activity.startService(Intent(activity, javaClass<NotificationLauncherService>()))
-                    }
-                }
-                false -> {
-                    if (activity != null) {
-                        activity.stopService(Intent(activity, javaClass<NotificationLauncherService>()))
-                    }
-                }
+        if (activity == null) {
+            return@onCreate
+        }
+        findPreference("notification_launcher")?.setOnPreferenceChangeListener { (preference, checkedValue) ->
+            when(checkedValue) {
+                true -> activity.startService(Intent(activity, javaClass<NotificationLauncherService>()))
+                false -> activity.stopService(Intent(activity, javaClass<NotificationLauncherService>()))
                 else -> {} //nothing
             }
             true
