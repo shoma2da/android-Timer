@@ -34,6 +34,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".RequestActivity" />
+
         <service android:name=".CountdownService" />
         <service android:name=".NotificationLauncherService" />
 
