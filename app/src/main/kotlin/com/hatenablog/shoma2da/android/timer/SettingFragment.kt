@@ -2,8 +2,8 @@ package com.hatenablog.shoma2da.android.timer
 
 import android.preference.PreferenceFragment
 import android.os.Bundle
-import android.preference.CheckBoxPreference
 import android.content.Intent
+import android.net.Uri
 
 /**
  * Created by shoma2da on 2014/07/24.
@@ -37,6 +37,22 @@ class SettingFragment : PreferenceFragment() {
         //要望メニューの動作設定
         findPreference("request")?.setOnPreferenceClickListener { preference ->
             activity.startActivity(Intent(activity, javaClass<RequestActivity>()))
+            true
+        }
+
+        //開発者メニューの動作設定
+        findPreference("developer")?.setOnPreferenceClickListener { preference ->
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setData(Uri.parse("https://twitter.com/intent/user?screen_name=shoma2da"))
+            activity.startActivity(intent)
+            true
+        }
+
+        //Google Playの動作設定
+        findPreference("google_play")?.setOnPreferenceClickListener { preference ->
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setData(Uri.parse("market://details?id=${activity.getPackageName()}"))
+            activity.startActivity(intent)
             true
         }
     }
