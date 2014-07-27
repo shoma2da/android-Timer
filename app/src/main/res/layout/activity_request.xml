@@ -9,7 +9,10 @@
         android:id="@+id/editText"
         android:hint="@string/request_hint"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="wrap_content"
+        android:lines="10"
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
         />
 
 </LinearLayout>
