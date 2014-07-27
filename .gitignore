@@ -61,3 +61,5 @@ Icon
 .idea/
 
 
+#Crashlytics
+app/crashlytics.properties
