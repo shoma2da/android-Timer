@@ -8,4 +8,7 @@
         android:key="@string/notification_launcher_id"
         android:title="@string/notification_launcher_title"
         android:summary="@string/notification_launcher_summary" />
+    <Preference
+        android:key="request"
+        android:title="@string/request" />
 </PreferenceScreen>

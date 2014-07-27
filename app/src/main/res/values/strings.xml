@@ -14,5 +14,6 @@
     <string name="notification_launcher_id">notification_launcher</string>
     <string name="notification_launcher_title">通知ランチャー</string>
     <string name="notification_launcher_summary">通知をタップしてアプリを素早く起動できます</string>
+    <string name="request">要望・感想・質問を送る</string>
 
 </resources>
