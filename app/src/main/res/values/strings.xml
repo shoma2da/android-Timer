@@ -18,6 +18,8 @@
 
     <!-- 要望画面 -->
     <string name="request_hint">お気軽に要望・感想・質問をお書きください</string>
+    <string name="request_empty">何も書かれていません</string>
+    <string name="request_thanks">ありがとうございます！</string>
     <string name="request_send">送信</string>
     <string name="request_cancel">キャンセル</string>
 

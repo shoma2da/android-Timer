@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/requestText"
             android:hint="@string/request_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,12 +19,14 @@
             />
 
         <Button
+            android:id="@+id/sendButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/request_send"
             />
 
         <Button
+            android:id="@+id/cancelButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/request_cancel"
