@@ -15,6 +15,8 @@ import java.io.Serializable
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
+import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
+import com.google.android.gms.ads.AdView
 
 /**
  * Created by shoma2da on 2014/06/29.
@@ -58,6 +60,9 @@ public class TimelistFragment : Fragment() {
                 mActivity?.finish()
             }
         })
+
+        //広告設定
+        AdViewWrapper(view.findViewById(R.id.adView) as AdView).loadAd()
 
         return view
     }
