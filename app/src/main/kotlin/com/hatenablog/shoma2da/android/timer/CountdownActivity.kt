@@ -18,6 +18,8 @@ import android.view.WindowManager
 import android.widget.Button
 import android.content.res.Configuration
 import com.google.android.gms.analytics.HitBuilders
+import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
+import com.google.android.gms.ads.AdView
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -166,6 +168,9 @@ public class CountdownActivity : Activity() {
         //初期表示設定
         mTimeText?.setText(time.toString())
         mTimeText?.setTag(time)
+
+        //広告設定
+        AdViewWrapper(findViewById(R.id.adView) as AdView).loadAd()
     }
 
     protected override fun onNewIntent(intent: Intent?) {
