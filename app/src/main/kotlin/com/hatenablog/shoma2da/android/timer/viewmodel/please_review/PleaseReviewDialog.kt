@@ -10,6 +10,8 @@ import android.net.Uri
 import android.widget.Toast
 import com.hatenablog.shoma2da.android.timer.RequestActivity
 import android.preference.PreferenceManager
+import com.hatenablog.shoma2da.android.timer.TimerApplication
+import com.google.android.gms.analytics.HitBuilders
 
 /**
  * Created by shoma2da on 2014/07/29.
@@ -18,6 +20,13 @@ class PleaseReviewDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState:Bundle?):Dialog {
         val activity = getActivity()!!
+
+        //Analytics準備
+        val tracker = (activity.getApplication() as TimerApplication?)?.getTracker()
+        tracker?.send(HitBuilders.EventBuilder()
+                .setCategory("please_review")
+                ?.setAction("show")
+                ?.build())
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(activity)
         val condition = PleaseReviewCondition.create(preferences)
@@ -37,11 +46,25 @@ class PleaseReviewDialog : DialogFragment() {
                     //レビューお願いはもう表示しない
                     condition?.setNeverShow()
 
+                    //Analytics
+                    tracker?.send(HitBuilders.EventBuilder()
+                            .setCategory("please_review")
+                            ?.setAction("tap")
+                            ?.setLabel("good")
+                            ?.build())
+
                     dialog.dismiss()
                 })
                 .setNeutralButton("まだわからない", { dialog, which ->
                     //レビューお願いをリセット
                     condition?.resetCount()
+
+                    //Analytics
+                    tracker?.send(HitBuilders.EventBuilder()
+                            .setCategory("please_review")
+                            ?.setAction("tap")
+                            ?.setLabel("not_now")
+                            ?.build())
 
                     dialog.dismiss()
                 })
@@ -54,6 +77,13 @@ class PleaseReviewDialog : DialogFragment() {
 
                     //レビューお願いはもう表示しない
                     condition?.setNeverShow()
+
+                    //Analytics
+                    tracker?.send(HitBuilders.EventBuilder()
+                            .setCategory("please_review")
+                            ?.setAction("tap")
+                            ?.setLabel("bad")
+                            ?.build())
 
                     dialog.dismiss()
                 })
