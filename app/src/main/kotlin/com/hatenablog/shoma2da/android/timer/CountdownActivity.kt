@@ -20,6 +20,8 @@ import android.content.res.Configuration
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
 import com.google.android.gms.ads.AdView
+import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
+import android.preference.PreferenceManager
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -210,6 +212,11 @@ public class CountdownActivity : Activity() {
                             finish()
                         }).
                         create().show()
+
+                //レビューお願い用のイベントカウント
+                val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                val condition = PleaseReviewCondition.create(preferences)
+                condition?.addCount()
             }
             else -> {} //nothing
         }

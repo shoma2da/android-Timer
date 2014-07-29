@@ -10,13 +10,20 @@ class PleaseReviewCondition(val preferences:SharedPreferences) {
     class object {
         val COUNT_KEY = "count"
         val NEVER_SHOW_KEY = "never_show"
+
+        fun create(preferences:SharedPreferences?):PleaseReviewCondition? {
+            if (preferences == null) {
+                return null
+            }
+            return PleaseReviewCondition(preferences)
+        }
     }
 
     fun isTiming():Boolean {
         val neverShow = preferences.getBoolean(NEVER_SHOW_KEY, false)
         return when(neverShow) {
             true -> false
-            false -> preferences.getInt(COUNT_KEY, 0) <= 3
+            false -> 3 <= preferences.getInt(COUNT_KEY, 0)
             else -> false
         }
     }

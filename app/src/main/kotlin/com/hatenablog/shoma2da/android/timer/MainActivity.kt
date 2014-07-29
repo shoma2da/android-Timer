@@ -7,6 +7,9 @@ import android.view.MenuItem
 import android.content.Intent
 import com.google.android.gms.analytics.HitBuilders
 import com.crashlytics.android.Crashlytics
+import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewDialog
+import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
+import android.preference.PreferenceManager
 
 /**
  * Created by shoma2da on 2014/06/28.
@@ -30,6 +33,13 @@ class MainActivity : Activity() {
 
         //ランチャー起動
         startService(Intent(this, javaClass<NotificationLauncherService>()))
+
+        //レビューお願いを表示
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val condition = PleaseReviewCondition.create(preferences)
+        if (condition != null && condition.isTiming()) {
+            PleaseReviewDialog().show(getFragmentManager(), "please_review")
+        }
     }
 
     override fun onCreateOptionsMenu(menu:Menu?):Boolean {
