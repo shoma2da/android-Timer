@@ -22,6 +22,7 @@ import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
 import android.preference.PreferenceManager
+import android.view.KeyEvent
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -148,23 +149,32 @@ public class CountdownActivity : Activity() {
             findViewById(R.id.pauseButton)?.setOnClickListener(CountdownActivity.OnPauseButtonClickListener(mTimeText as TextView))
         }
         findViewById(R.id.cancelButton)?.setOnClickListener({ view ->
-            //サービスを停止
-            val intent = Intent(this, javaClass<CountdownService>())
-            intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
-            startService(intent)
+            //ダイアログを表示
+            AlertDialog.Builder(this)
+                    .setMessage("タイマーを停止しますか？")
+                    .setPositiveButton("はい", { dialog, which ->
+                        //サービスを停止
+                        val intent = Intent(this, javaClass<CountdownService>())
+                        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
+                        startService(intent)
 
-            //リストページに戻る
-            startActivity(Intent(this, javaClass<MainActivity>()))
+                        //リストページに戻る
+                        startActivity(Intent(this, javaClass<MainActivity>()))
 
-            //Analytics
-            val tracker = (getApplication() as TimerApplication?)?.getTracker()
-            tracker?.send(HitBuilders.EventBuilder()
-                    .setCategory("timer")
-                    ?.setAction("cancel")
-                    ?.setLabel(time.toString())
-                    ?.build())
+                        //Analytics
+                        val tracker = (getApplication() as TimerApplication?)?.getTracker()
+                        tracker?.send(HitBuilders.EventBuilder()
+                                .setCategory("timer")
+                                ?.setAction("cancel")
+                                ?.setLabel(time.toString())
+                                ?.build())
 
-            finish()
+                        finish()
+                    })
+                    .setNegativeButton("いいえ", { dialog, whici ->
+                        dialog.dismiss()
+                    })
+                    .create().show()
         })
 
         //初期表示設定
@@ -252,6 +262,14 @@ public class CountdownActivity : Activity() {
 
         mReceiver = null
         mTimeText = null
+    }
+
+    override fun onKeyDown(keyCode:Int, event:KeyEvent):Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            findViewById(R.id.cancelButton)?.performClick()
+            return@onKeyDown true
+        }
+        return false
     }
 
 }
