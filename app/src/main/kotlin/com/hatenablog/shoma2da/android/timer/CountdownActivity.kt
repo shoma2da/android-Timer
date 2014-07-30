@@ -22,6 +22,7 @@ import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
 import android.preference.PreferenceManager
+import android.view.KeyEvent
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -261,6 +262,14 @@ public class CountdownActivity : Activity() {
 
         mReceiver = null
         mTimeText = null
+    }
+
+    override fun onKeyDown(keyCode:Int, event:KeyEvent):Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            findViewById(R.id.cancelButton)?.performClick()
+            return@onKeyDown true
+        }
+        return false
     }
 
 }
