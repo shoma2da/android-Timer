@@ -104,6 +104,26 @@
        y1="-14182.237"
        x2="-5150.6602"
        y2="-15046.464" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4671"
+       id="linearGradient4903"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(2.891061,-2.8438274)"
+       x1="-4377.8335"
+       y1="-14182.237"
+       x2="-5150.6602"
+       y2="-15046.464" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4671"
+       id="linearGradient4930"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(2.891061,-2.8438274)"
+       x1="-4377.8335"
+       y1="-14182.237"
+       x2="-5150.6602"
+       y2="-15046.464" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -113,7 +133,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.38946116"
-     inkscape:cx="-5154.145"
+     inkscape:cx="-5501.699"
      inkscape:cy="15092.066"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -133,7 +153,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -344,26 +364,32 @@
       </g>
     </g>
     <rect
-       style="fill:#03352e;fill-opacity:1;stroke:#000000;stroke-width:0.69999999;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#03352e;fill-opacity:0;stroke:none"
        id="rect4847"
-       width="1023.3"
-       height="1023.3"
-       x="-5910.731"
-       y="-14688.709"
+       width="1024"
+       height="1024"
+       x="-5911.0811"
+       y="-14689.06"
        rx="150"
-       ry="0" />
+       ry="0"
+       inkscape:export-filename="/Users/shoma2da/Desktop/test.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <g
        id="g4849"
-       transform="matrix(1.0315831,0,0,1.0315831,-437.35209,874.76131)">
+       transform="matrix(1.2084374,0,0,1.2084374,400.79377,3475.9334)"
+       inkscape:export-filename="/Users/shoma2da/Desktop/test.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <rect
-         ry="145.40758"
-         rx="145.40758"
+         ry="124.12724"
+         rx="124.12724"
          y="-15014.106"
          x="-5175.623"
          height="811.98218"
          width="752.27985"
          id="rect4386"
-         style="fill:url(#linearGradient4874);fill-opacity:1;stroke:#000000;stroke-width:0.96938384;stroke-opacity:1" />
+         style="fill:url(#linearGradient4930);fill-opacity:1;stroke:#000000;stroke-width:0.82751495;stroke-opacity:1" />
       <g
          transform="matrix(0.93546054,0,0,0.86753424,-357.59527,-1939.8652)"
          id="g4430">
