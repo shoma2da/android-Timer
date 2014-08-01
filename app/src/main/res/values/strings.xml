@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">瞬間タイマー</string>
-    <string name="action_settings">Settings</string>
+    <string name="setting">設定</string>
 
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
