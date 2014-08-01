@@ -15,6 +15,7 @@ class RequestActivity : Activity() {
     override fun onCreate(bundle:Bundle?) {
         super.onCreate(bundle)
         setContentView(R.layout.activity_request)
+        setTitle(R.string.request)
 
         //Analytics
         val tracker = (getApplication() as TimerApplication?)?.getTracker()

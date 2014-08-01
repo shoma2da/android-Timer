@@ -14,6 +14,7 @@ class SettingActivity : PreferenceActivity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_setting)
+        setTitle(R.string.setting)
 
         //Analytics
         val tracker = (getApplication() as TimerApplication?)?.getTracker()
