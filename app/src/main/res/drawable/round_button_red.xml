@@ -4,5 +4,5 @@
     android:layout_height="wrap_content"
     android:shape="oval"
     >
-    <solid android:color="#e74c3c"/>
+    <solid android:color="#FF66CC"/>
 </shape>
