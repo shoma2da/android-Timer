@@ -2,5 +2,27 @@
 <resources>
 
     <string name="app_name">Quick Timer</string>
+    <string name="setting">Setting</string>
+
+    <!-- カウントダウン画面 -->
+    <string name="restart">Start</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Cancel</string>
+
+    <!-- 設定画面 -->
+    <string name="version">App Version</string>
+    <string name="notification_launcher_id">notification_launcher</string>
+    <string name="notification_launcher_title">Notification Launcher</string>
+    <string name="notification_launcher_summary">You can open this app from the notification</string>
+    <string name="request">Send your opinion</string>
+    <string name="developer">Developer</string>
+    <string name="google_play">Open Google Play</string>
+
+    <!-- 要望画面 -->
+    <string name="request_hint">Please write here</string>
+    <string name="request_empty">Oops, no contents</string>
+    <string name="request_thanks">thanks!!</string>
+    <string name="request_send">send</string>
+    <string name="request_cancel">cancel</string>
 
 </resources>
