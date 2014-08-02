@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="version"
+        android:title="@string/version" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/notification_launcher_id"
+        android:title="@string/notification_launcher_title"
+        android:summary="@string/notification_launcher_summary" />
+    <Preference
+        android:key="request"
+        android:title="@string/request" />
+    <Preference
+        android:key="developer"
+        android:title="@string/developer" />
+    <Preference
+        android:key="google_play"
+        android:title="@string/google_play" />
+</PreferenceScreen>

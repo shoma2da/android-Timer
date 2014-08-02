@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BakusokuTimer</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">瞬間タイマー</string>
+    <string name="setting">設定</string>
+
+    <!-- カウントダウン画面 -->
+    <string name="restart">Start</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Cancel</string>
+
+    <!-- 設定画面 -->
+    <string name="version">バージョン</string>
+    <string name="notification_launcher_id">notification_launcher</string>
+    <string name="notification_launcher_title">通知ランチャー</string>
+    <string name="notification_launcher_summary">通知をタップしてアプリを素早く起動できます</string>
+    <string name="request">要望・感想・質問を送る</string>
+    <string name="developer">開発者</string>
+    <string name="google_play">アプリの更新を確認</string>
+
+    <!-- 要望画面 -->
+    <string name="request_hint">お気軽にお書きください</string>
+    <string name="request_empty">何も書かれていません</string>
+    <string name="request_thanks">ありがとうございます！</string>
+    <string name="request_send">送信</string>
+    <string name="request_cancel">キャンセル</string>
 
 </resources>
