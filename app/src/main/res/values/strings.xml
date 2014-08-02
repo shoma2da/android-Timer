@@ -18,6 +18,14 @@
     <string name="developer">開発者</string>
     <string name="google_play">アプリの更新を確認</string>
 
+    <!-- レビューお願い -->
+    <string name="please_review_message">使い心地はいかがですか？</string>
+    <string name="please_review_good">良い</string>
+    <string name="please_review_yet">まだわからない</string>
+    <string name="please_review_bad">良くない</string>
+    <string name="please_review_google_play">ありがとうございます！是非ともGoogle Playでの評価もお願いします</string>
+    <string name="please_review_send_your_opinion">良くない点を教えて下さい。最善を尽くします！</string>
+
     <!-- 要望画面 -->
     <string name="request_hint">お気軽にお書きください</string>
     <string name="request_empty">何も書かれていません</string>
