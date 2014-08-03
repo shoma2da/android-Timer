@@ -33,15 +33,15 @@ class PleaseReviewDialog : DialogFragment() {
 
         return AlertDialog.Builder(activity)
                 .setTitle(activity.getString(R.string.app_name))
-                .setMessage("使い心地はいかがですか？")
-                .setPositiveButton("良い", { dialog, which ->
+                .setMessage(R.string.please_review_message)
+                .setPositiveButton(R.string.please_review_good, { dialog, which ->
                     //Google Playに遷移
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.setData(Uri.parse("market://details?id=${activity.getPackageName()}"))
                     activity.startActivity(intent)
 
                     //Toast表示
-                    Toast.makeText(activity, "ありがとうございます！是非ともGoogle Playでの評価もお願いします", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, R.string.please_review_google_play, Toast.LENGTH_LONG).show()
 
                     //レビューお願いはもう表示しない
                     condition?.setNeverShow()
@@ -55,7 +55,7 @@ class PleaseReviewDialog : DialogFragment() {
 
                     dialog.dismiss()
                 })
-                .setNeutralButton("まだわからない", { dialog, which ->
+                .setNeutralButton(R.string.please_review_yet, { dialog, which ->
                     //レビューお願いをリセット
                     condition?.resetCount()
 
@@ -68,12 +68,12 @@ class PleaseReviewDialog : DialogFragment() {
 
                     dialog.dismiss()
                 })
-                .setNegativeButton("良くない", { dialog, which ->
+                .setNegativeButton(R.string.please_review_bad, { dialog, which ->
                     //要望画面へ遷移
                     activity.startActivity(Intent(activity, javaClass<RequestActivity>()))
 
                     //Toast表示
-                    Toast.makeText(activity, "良くない点を教えて下さい。最善を尽くします！", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, R.string.please_review_send_your_opinion, Toast.LENGTH_LONG).show()
 
                     //レビューお願いはもう表示しない
                     condition?.setNeverShow()

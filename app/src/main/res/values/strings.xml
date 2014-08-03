@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">瞬間タイマー</string>
-    <string name="setting">設定</string>
+    <string name="app_name">Quick Timer</string>
+    <string name="setting">Setting</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
 
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Cancel</string>
+    <string name="stop_confirm_message">Do you want to cancel??</string>
+    <string name="finish">Finish</string>
+
+    <!-- 通知 -->
+    <string name="notification_open_app">Open Quick Timer</string>
+    <string name="notification_open_app_setting">You can hide this by the setting</string>
+    <string name="notification_set_timer">Set the timer</string>
 
     <!-- 設定画面 -->
-    <string name="version">バージョン</string>
+    <string name="version">App Version</string>
     <string name="notification_launcher_id">notification_launcher</string>
-    <string name="notification_launcher_title">通知ランチャー</string>
-    <string name="notification_launcher_summary">通知をタップしてアプリを素早く起動できます</string>
-    <string name="request">要望・感想・質問を送る</string>
-    <string name="developer">開発者</string>
-    <string name="google_play">アプリの更新を確認</string>
+    <string name="notification_launcher_title">Notification Launcher</string>
+    <string name="notification_launcher_summary">You can open this app from the notification</string>
+    <string name="request">Send your opinion</string>
+    <string name="developer">Developer</string>
+    <string name="google_play">Open Google Play</string>
+
+    <!-- レビューお願い -->
+    <string name="please_review_message">This app is good?</string>
+    <string name="please_review_good">good</string>
+    <string name="please_review_yet">don\'t know yet</string>
+    <string name="please_review_bad">bat</string>
+    <string name="please_review_google_play">Thank you! Please review in Google Play :)</string>
+    <string name="please_review_send_your_opinion">Please send your opinion. We\'ll do our best!!</string>
 
     <!-- 要望画面 -->
-    <string name="request_hint">お気軽にお書きください</string>
-    <string name="request_empty">何も書かれていません</string>
-    <string name="request_thanks">ありがとうございます！</string>
-    <string name="request_send">送信</string>
-    <string name="request_cancel">キャンセル</string>
+    <string name="request_hint">Please write here</string>
+    <string name="request_empty">Oops, no contents</string>
+    <string name="request_thanks">thanks!!</string>
+    <string name="request_send">send</string>
+    <string name="request_cancel">cancel</string>
 
 </resources>
