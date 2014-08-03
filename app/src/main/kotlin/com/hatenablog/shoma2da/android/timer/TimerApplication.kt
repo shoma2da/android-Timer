@@ -16,6 +16,9 @@ class TimerApplication : Application() {
     }
 
     public fun getTracker() : Tracker? {
+        if (BuildConfig.DEBUG) {
+            return null;
+        }
         if (mTracker == null) {
             mTracker= GoogleAnalytics.getInstance(this)?.newTracker("UA-32548600-14")
         }

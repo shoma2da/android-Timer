@@ -38,8 +38,8 @@ class NotificationLauncherService : Service() {
                 setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
                 setSmallIcon(R.drawable.ic_launcher).
                 setTicker(null).
-                setContentTitle(getResources()?.getString(R.string.app_name) + "を開く").
-                setContentText("アプリの設定で非表示にできます").
+                setContentTitle(getResources()?.getString(R.string.notification_open_app)).
+                setContentText(getResources()?.getString(R.string.notification_open_app_setting)).
                 setWhen(System.currentTimeMillis()).
                 setContentIntent(pendingIntent)
         startForeground(10, notificationBuilder?.build())

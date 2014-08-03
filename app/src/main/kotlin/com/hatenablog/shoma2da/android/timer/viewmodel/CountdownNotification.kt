@@ -31,16 +31,16 @@ class CountdownNotification(val service:Service) {
         mNotificationBuilder = Notification.Builder(service).
                 setLargeIcon(BitmapFactory.decodeResource(service.getResources(), R.drawable.ic_launcher)).
                 setSmallIcon(R.drawable.ic_launcher).
-                setTicker("タイマーをセットしました").
+                setTicker(service.getString(R.string.notification_set_timer)).
                 setContentTitle(service.getResources()?.getString(R.string.app_name)).
-                setContentText("タイマーが終了するまで${time}").
+                setContentText(time.toString()).
                 setWhen(System.currentTimeMillis()).
                 setContentIntent(pendingIntent)
         service.startForeground(NOTIFICATION_ID, mNotificationBuilder?.build())
     }
 
     fun update(time: RemainTime) {
-        mNotificationBuilder?.setContentText("タイマーが終了するまで${time}")
+        mNotificationBuilder?.setContentText(time.toString())
         val manager = service.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify(NOTIFICATION_ID, mNotificationBuilder!!.build())
     }
