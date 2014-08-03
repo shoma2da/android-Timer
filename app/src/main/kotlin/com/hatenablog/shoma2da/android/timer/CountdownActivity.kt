@@ -151,8 +151,8 @@ public class CountdownActivity : Activity() {
         findViewById(R.id.cancelButton)?.setOnClickListener({ view ->
             //ダイアログを表示
             AlertDialog.Builder(this)
-                    .setMessage("タイマーを停止しますか？")
-                    .setPositiveButton("はい", { dialog, which ->
+                    .setMessage(R.string.stop_confirm_message)
+                    .setPositiveButton(R.string.yes, { dialog, which ->
                         //サービスを停止
                         val intent = Intent(this, javaClass<CountdownService>())
                         intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
@@ -171,7 +171,7 @@ public class CountdownActivity : Activity() {
 
                         finish()
                     })
-                    .setNegativeButton("いいえ", { dialog, whici ->
+                    .setNegativeButton(R.string.no, { dialog, whici ->
                         dialog.dismiss()
                     })
                     .create().show()

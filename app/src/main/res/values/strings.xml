@@ -3,11 +3,14 @@
 
     <string name="app_name">瞬間タイマー</string>
     <string name="setting">設定</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
 
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Cancel</string>
+    <string name="stop_confirm_message">タイマーを停止しますか？</string>
 
     <!-- 設定画面 -->
     <string name="version">バージョン</string>
