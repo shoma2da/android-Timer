@@ -3,11 +3,14 @@
 
     <string name="app_name">Quick Timer</string>
     <string name="setting">Setting</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Cancel</string>
+    <string name="stop_confirm_message">Do you want to cancel??</string>
 
     <!-- 設定画面 -->
     <string name="version">App Version</string>
