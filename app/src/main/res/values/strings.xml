@@ -5,12 +5,14 @@
     <string name="setting">設定</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
+    <string name="ok">OK</string>
 
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Cancel</string>
     <string name="stop_confirm_message">タイマーを停止しますか？</string>
+    <string name="finish">タイマー終了しました</string>
 
     <!-- 設定画面 -->
     <string name="version">バージョン</string>
