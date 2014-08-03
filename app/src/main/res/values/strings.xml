@@ -14,6 +14,10 @@
     <string name="stop_confirm_message">タイマーを停止しますか？</string>
     <string name="finish">タイマー終了しました</string>
 
+    <!-- 通知 -->
+    <string name="notification_open_app">瞬間タイマーを開く</string>
+    <string name="notification_open_app_setting">アプリの設定で非表示にできます</string>
+
     <!-- 設定画面 -->
     <string name="version">バージョン</string>
     <string name="notification_launcher_id">notification_launcher</string>
