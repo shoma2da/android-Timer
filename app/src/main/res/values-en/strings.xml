@@ -17,6 +17,7 @@
     <!-- 通知 -->
     <string name="notification_open_app">Open Quick Timer</string>
     <string name="notification_open_app_setting">You can hide this by the setting</string>
+    <string name="notification_set_timer">Set the timer</string>
 
     <!-- 設定画面 -->
     <string name="version">App Version</string>
