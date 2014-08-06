@@ -4,6 +4,7 @@ import android.preference.PreferenceFragment
 import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
+import net.app_c.cloud.sdk.AppCCloud
 
 /**
  * Created by shoma2da on 2014/07/24.
@@ -15,6 +16,7 @@ class SettingFragment : PreferenceFragment() {
         addPreferencesFromResource(R.xml.preference)
 
         val activity = getActivity()
+        val appCloud = AppCCloud(activity).start()
 
         //バージョン情報を設定
         val packageManager = activity?.getPackageManager()
@@ -53,6 +55,12 @@ class SettingFragment : PreferenceFragment() {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setData(Uri.parse("market://details?id=${activity.getPackageName()}"))
             activity.startActivity(intent)
+            true
+        }
+
+        //おすすめアプリの動作設定
+        findPreference("recommend_apps")?.setOnPreferenceClickListener { preference ->
+            appCloud?.Ad?.callWebActivity();
             true
         }
     }

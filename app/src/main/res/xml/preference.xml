@@ -17,4 +17,7 @@
     <Preference
         android:key="google_play"
         android:title="@string/google_play" />
+    <Preference
+        android:key="recommend_apps"
+        android:title="@string/recommend_apps" />
 </PreferenceScreen>
