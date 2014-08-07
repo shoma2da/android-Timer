@@ -4,9 +4,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.graphics.BitmapFactory
-import android.app.Notification
 import android.app.PendingIntent
 import android.preference.PreferenceManager
+import android.support.v4.app.NotificationCompat
 
 /**
  * Created by shoma2da on 2014/07/24.
@@ -34,13 +34,13 @@ class NotificationLauncherService : Service() {
 
         //通知バーを設定
         val pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0)
-        val notificationBuilder = Notification.Builder(this).
-                setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher)).
-                setSmallIcon(R.drawable.ic_launcher).
-                setTicker(null).
-                setContentTitle(getResources()?.getString(R.string.notification_open_app)).
-                setContentText(getResources()?.getString(R.string.notification_open_app_setting)).
-                setWhen(System.currentTimeMillis()).
+        val notificationBuilder = NotificationCompat.Builder(this).
+                setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))?.
+                setSmallIcon(R.drawable.ic_launcher)?.
+                setTicker(null)?.
+                setContentTitle(getResources()?.getString(R.string.notification_open_app))?.
+                setContentText(getResources()?.getString(R.string.notification_open_app_setting))?.
+                setWhen(System.currentTimeMillis())?.
                 setContentIntent(pendingIntent)
         startForeground(10, notificationBuilder?.build())
 
