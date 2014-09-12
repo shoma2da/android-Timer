@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.hatenablog.shoma2da.android.timer"
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 20
         versionCode 5
         versionName "1.0.4"
     }
