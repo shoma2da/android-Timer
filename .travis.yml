@@ -10,10 +10,13 @@ script:
         echo "start Debug build...";
         ./gradlew assembleDebug;
     fi
-  - openssl aes-256-cbc -K $encrypted_d7523b81c6ba_key -iv $encrypted_d7523b81c6ba_iv -in secure/private.key.enc -out secure/private.key -d #restore the secret key
-  - openssl smime -decrypt -in secure/shoma2da_key.secret -binary -inform DEM -inkey secure/private.key -out secure/shoma2da_key #restore the keystore
-  - jarsigner -verbose -keystore secure/shoma2da_key -storepass $KEYSTORE_PASSPHRASE ./app/build/outputs/apk/app-release-unsigned.apk $ALIAS_NAME -keypass $ALIAS_PASS #signing Android apk
-  - jarsigner -verify -verbose -certs ./app/build/outputs/apk/app-release-unsigned.apk #show apk sign info
+after_success:
+  - if [ "${TRAVIS_BRANCH}" = "release" -a "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+        openssl aes-256-cbc -K $encrypted_d7523b81c6ba_key -iv $encrypted_d7523b81c6ba_iv -in secure/private.key.enc -out secure/private.key -d; #restore the secret key
+        openssl smime -decrypt -in secure/shoma2da_key.secret -binary -inform DEM -inkey secure/private.key -out secure/shoma2da_key; #restore the keystore
+        jarsigner -verbose -keystore secure/shoma2da_key -storepass $KEYSTORE_PASSPHRASE ./app/build/outputs/apk/app-release-unsigned.apk $ALIAS_NAME -keypass $ALIAS_PASS; #signing Android apk
+        jarsigner -verify -verbose -certs ./app/build/outputs/apk/app-release-unsigned.apk; #show apk sign info
+    fi
 env:
   global:
     secure: XrxlfzyGW3QdUvpEmvgN26Kl7U08bidhWXI03fh59glmav/OGvNxNzXmnXmiWyrRzzYqO2RRxHbCJcQymumZ/RLIlgqNJGzMfeXZ3qQsEp42MEqtEjVLBLy+cJePRZP8fWUGIQVYH13veYvH9KmydNY1ii6sDvmdbLWJnm2fPds=
