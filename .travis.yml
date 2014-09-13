@@ -4,10 +4,10 @@ android:
     - android-20
 script:
   - if [ "${TRAVIS_BRANCH}" = "release" -a "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-        echo "start Release build...";
+        echo "***** Release build *****";
         ./gradlew assembleRelease;
     else
-        echo "start Debug build...";
+        echo "***** Debug build *****";
         ./gradlew assembleDebug;
     fi
 after_success:
