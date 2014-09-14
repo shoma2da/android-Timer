@@ -44,9 +44,27 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.deploygate:gradle:0.6'
     }
 }
+apply plugin: 'deploygate'
+
 repositories {
     mavenCentral()
     maven { url 'http://download.crashlytics.com/maven' }
+}
+
+deploygate {
+    userName = "shoma2da"
+    token = "$System.env.DEPLOYGATE_TOKEN"
+
+    apks {
+        release {
+            sourceFile = file("./build/outputs/apk/app-release-unsigned.apk")
+        }
+
+        debug {
+            sourceFile = file("./build/outputs/apk/app-debug.apk")
+        }
+    }
 }
