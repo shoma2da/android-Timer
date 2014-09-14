@@ -16,6 +16,9 @@ after_success:
         openssl smime -decrypt -in secure/shoma2da_key.secret -binary -inform DEM -inkey secure/private.key -out secure/shoma2da_key;
         jarsigner -verbose -keystore secure/shoma2da_key -storepass $KEYSTORE_PASSPHRASE ./app/build/outputs/apk/app-release-unsigned.apk $ALIAS_NAME -keypass $ALIAS_PASS;
         jarsigner -verify -verbose -certs ./app/build/outputs/apk/app-release-unsigned.apk;
+        ./gradlew uploadDeployGateRelease;
+    else
+        ./gradlew uploadDeployGateDebug;
     fi
 env:
   global:
