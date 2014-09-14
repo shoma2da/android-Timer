@@ -3,6 +3,7 @@ android:
   components:
     - android-20
 script:
+  - echo "buildNumber=$TRAVIS_BUILD_NUMBER" >> gradle.properties
   - if [ "${TRAVIS_BRANCH}" = "release" -a "${TRAVIS_PULL_REQUEST}" = "false" ]; then
         echo "***** Release build *****";
         ./gradlew assembleRelease;
