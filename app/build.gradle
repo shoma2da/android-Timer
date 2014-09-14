@@ -13,6 +13,14 @@ android {
         versionCode buildNumber.toInteger()
         versionName "1.0.${buildNumber}"
     }
+    signingConfigs {
+        release {
+            storeFile file("../secure/shoma2da_key")
+            storePassword "$System.env.KEYSTORE_PASSPHRASE"
+            keyAlias "$System.env.ALIAS_NAME"
+            keyPassword "$System.env.ALIAS_PASS"
+        }
+    }
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
@@ -20,6 +28,7 @@ android {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
