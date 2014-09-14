@@ -61,12 +61,12 @@ deploygate {
     apks {
         release {
             sourceFile = file("./build/outputs/apk/app-release-unsigned.apk")
-            message = "build number is $TRAVIS_BUILD_NUMBER on $TRAVIS_BRANCH branch."
+            message = "build number is $System.env.TRAVIS_BUILD_NUMBER on $System.env.TRAVIS_BRANCH branch."
         }
 
         debug {
             sourceFile = file("./build/outputs/apk/app-debug.apk")
-            message = "build number is $TRAVIS_BUILD_NUMBER on $TRAVIS_BRANCH branch."
+            message = "build number is $System.env.TRAVIS_BUILD_NUMBER on $System.env.TRAVIS_BRANCH branch."
         }
     }
 }
