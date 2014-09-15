@@ -15,7 +15,6 @@ script:
     fi
 after_success:
   - if [ "${TRAVIS_BRANCH}" = "release" -a "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-        jarsigner -verify -verbose -certs ./app/build/outputs/apk/app-release-unsigned.apk;
         ./gradlew uploadDeployGateRelease;
     else
         ./gradlew uploadDeployGateDebug;

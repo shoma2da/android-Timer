@@ -70,7 +70,7 @@ deploygate {
 
     apks {
         release {
-            sourceFile = file("./build/outputs/apk/app-release-unsigned.apk")
+            sourceFile = file("./build/outputs/apk/app-release.apk")
             message = "build number is $System.env.TRAVIS_BUILD_NUMBER on $System.env.TRAVIS_BRANCH branch."
         }
 
