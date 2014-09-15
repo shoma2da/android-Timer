@@ -1,26 +1,42 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'crashlytics'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "com.hatenablog.shoma2da.android.timer"
         minSdkVersion 14
-        targetSdkVersion 19
-        versionCode 5
-        versionName "1.0.4"
+        targetSdkVersion 20
+        versionCode buildNumber.toInteger()
+        versionName "1.0.${buildNumber}"
+    }
+    signingConfigs {
+        release {
+            storeFile file("../secure/shoma2da_key")
+            storePassword "$System.env.KEYSTORE_PASSPHRASE"
+            keyAlias "$System.env.ALIAS_NAME"
+            keyPassword "$System.env.ALIAS_PASS"
+        }
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
@@ -28,7 +44,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'org.jetbrains.kotlin:kotlin-stdlib:0.7.+'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.android.gms:play-services:5.0.+'
     compile 'com.crashlytics.android:crashlytics:1.+'
 }
 buildscript {
@@ -38,9 +54,29 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.deploygate:gradle:0.6'
     }
 }
+apply plugin: 'deploygate'
+
 repositories {
     mavenCentral()
     maven { url 'http://download.crashlytics.com/maven' }
+}
+
+deploygate {
+    userName = "shoma2da"
+    token = "$System.env.DEPLOYGATE_TOKEN"
+
+    apks {
+        release {
+            sourceFile = file("./build/outputs/apk/app-release.apk")
+            message = "build number is $System.env.TRAVIS_BUILD_NUMBER on $System.env.TRAVIS_BRANCH branch."
+        }
+
+        debug {
+            sourceFile = file("./build/outputs/apk/app-debug.apk")
+            message = "build number is $System.env.TRAVIS_BUILD_NUMBER on $System.env.TRAVIS_BRANCH branch."
+        }
+    }
 }
