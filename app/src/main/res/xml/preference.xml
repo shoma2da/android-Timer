@@ -13,7 +13,7 @@
         android:title="@string/notification_method_title"
         android:entries="@array/notification_methods"
         android:entryValues="@array/notification_methods_values"
-        android:defaultValue="sound"
+        android:defaultValue="vibration"
         />
     <Preference
         android:key="request"
