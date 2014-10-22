@@ -23,6 +23,7 @@ import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
 import android.preference.PreferenceManager
 import android.view.KeyEvent
+import android.media.MediaPlayer
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -190,6 +191,11 @@ public class CountdownActivity : Activity() {
 
         when (intent?.getAction()) {
             CountdownService.ACTION_FINISH_COUNTDOWN -> {
+                //音の開始
+                val player = MediaPlayer.create(this, R.raw.alarm)
+                player?.setLooping(true)
+                player?.start()
+
                 //バイブレーション開始
                 val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 vibrator.vibrate(longArray(1000L, 1000L), 0)
@@ -213,6 +219,7 @@ public class CountdownActivity : Activity() {
                         setCancelable(false).
                         setTitle(R.string.finish).
                         setPositiveButton(R.string.ok, { dialog, which ->
+                            player?.stop()
                             vibrator.cancel()
                             dialog.dismiss()
 
