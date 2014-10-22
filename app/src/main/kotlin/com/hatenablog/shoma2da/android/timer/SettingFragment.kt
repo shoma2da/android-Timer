@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
 import net.app_c.cloud.sdk.AppCCloud
+import android.preference.ListPreference
+import android.preference.Preference
 
 /**
  * Created by shoma2da on 2014/07/24.
@@ -35,6 +37,19 @@ class SettingFragment : PreferenceFragment() {
             }
             true
         }
+
+        //お知らせ方法の設定
+        val noticationMethods = findPreference("notification_method") as ListPreference
+        noticationMethods.setSummary(noticationMethods.getEntry());
+        noticationMethods.setOnPreferenceChangeListener({preference, newValue ->
+            val index = noticationMethods.findIndexOfValue(newValue.toString())
+            val entries = noticationMethods.getEntries()
+            if (entries != null) {
+                val entry = entries[index]
+                noticationMethods.setSummary(entry)
+            }
+            true
+        })
 
         //要望メニューの動作設定
         findPreference("request")?.setOnPreferenceClickListener { preference ->
