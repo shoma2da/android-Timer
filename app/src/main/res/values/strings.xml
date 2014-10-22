@@ -24,6 +24,7 @@
     <string name="notification_launcher_id">notification_launcher</string>
     <string name="notification_launcher_title">Notification Launcher</string>
     <string name="notification_launcher_summary">You can open this app from the notification</string>
+    <string name="notification_method_title">how to notify</string>
     <string name="request">Send your opinion</string>
     <string name="developer">Developer</string>
     <string name="google_play">Open Google Play</string>
