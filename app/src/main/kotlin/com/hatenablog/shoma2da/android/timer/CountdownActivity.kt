@@ -24,6 +24,7 @@ import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseRevie
 import android.preference.PreferenceManager
 import android.view.KeyEvent
 import android.media.MediaPlayer
+import com.hatenablog.shoma2da.android.timer.setting.NotificationMethodSetting
 
 /**
  * Created by shoma2da on 2014/06/30.
@@ -191,14 +192,29 @@ public class CountdownActivity : Activity() {
 
         when (intent?.getAction()) {
             CountdownService.ACTION_FINISH_COUNTDOWN -> {
-                //音の開始
-                val player = MediaPlayer.create(this, R.raw.alarm)
-                player?.setLooping(true)
-                player?.start()
 
-                //バイブレーション開始
+                //開始処理
+                val player = MediaPlayer.create(this, R.raw.alarm)
                 val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(longArray(1000L, 1000L), 0)
+                NotificationMethodSetting.load(this).action(
+                    onSound = {
+                        //音の開始
+                        player?.setLooping(true)
+                        player?.start()
+                    },
+                    onVibration = {
+                        //バイブレーション開始
+                        vibrator.vibrate(longArray(1000L, 1000L), 0)
+                    },
+                    onBoth = {
+                        //音の開始
+                        player?.setLooping(true)
+                        player?.start()
+
+                        //バイブレーション開始
+                        vibrator.vibrate(longArray(1000L, 1000L), 0)
+                    }
+                )
 
                 //Analytics
                 val tracker = (getApplication() as TimerApplication?)?.getTracker()
