@@ -78,6 +78,13 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+        <receiver android:name=".receiver.PackageReplacedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".notification.package_replace.PackageReplacedNotificationService" />
         <!-- AppC Core Setting End -->
 
         <!-- AppC Core Setting Start -->
