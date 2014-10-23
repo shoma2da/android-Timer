@@ -49,10 +49,10 @@ class MainActivity : Activity() {
             onDetect = {
                 //ダイアログの表示
                 AlertDialog.Builder(this)
-                        .setTitle("音とバイブレーションを選択できるようになりました")
-                        .setMessage("画面右上のスパナマークを押すと表示される設定画面から変更が可能です")
+                        .setTitle(getString(R.string.versionup_dialog_title))
+                        .setMessage(getString(R.string.versionup_dialog_message))
                         .setCancelable(false)
-                        .setNegativeButton("OK", { dialog, whichButton ->
+                        .setNegativeButton(R.string.ok, { dialog, whichButton ->
                             dialog.dismiss()
                         }).create().show()
 

@@ -49,5 +49,7 @@
     <string name="versionup_notification_ticker">瞬間タイマーが更新されました</string>
     <string name="versionup_notification_title">新機能が追加されました</string>
     <string name="versionup_notification_message">詳細はタップして確認</string>
+    <string name="versionup_dialog_title">音とバイブレーションを選択できるようになりました</string>
+    <string name="versionup_dialog_message">画面右上のスパナマークを押すと表示される設定画面から変更が可能です</string>
 
 </resources>
