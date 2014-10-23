@@ -11,7 +11,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 20
         versionCode buildNumber.toInteger()
-        versionName "1.0.${buildNumber}"
+        versionName "1.1.${buildNumber}"
     }
     signingConfigs {
         release {
