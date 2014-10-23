@@ -45,4 +45,9 @@
     <string name="request_send">送信</string>
     <string name="request_cancel">キャンセル</string>
 
+    <!-- バージョンアップ文言 -->
+    <string name="versionup_notification_ticker">瞬間タイマーが更新されました</string>
+    <string name="versionup_notification_title">新機能が追加されました</string>
+    <string name="versionup_notification_message">詳細はタップして確認</string>
+
 </resources>
