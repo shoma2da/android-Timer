@@ -84,6 +84,7 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        <service android:name=".notification.package_replace.PackageReplacedNotificationService" />
         <!-- AppC Core Setting End -->
 
         <!-- AppC Core Setting Start -->
