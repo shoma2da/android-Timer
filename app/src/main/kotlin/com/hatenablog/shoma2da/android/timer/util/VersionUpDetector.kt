@@ -22,6 +22,7 @@ class VersionUpDetector(context:Context) {
         //初回起動時はバージョンアップではない
         if (previosValue == null) {
             onNotDetect()
+            mPreference.edit().putString(PREVIOUS_VERSION_KEY, "first_lauch").apply()
             return
         }
 

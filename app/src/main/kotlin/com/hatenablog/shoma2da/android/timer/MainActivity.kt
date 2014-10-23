@@ -10,6 +10,8 @@ import com.crashlytics.android.Crashlytics
 import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewDialog
 import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
 import android.preference.PreferenceManager
+import com.hatenablog.shoma2da.android.timer.util.VersionUpDetector
+import android.app.AlertDialog
 
 /**
  * Created by shoma2da on 2014/06/28.
@@ -40,6 +42,24 @@ class MainActivity : Activity() {
         if (condition != null && condition.isTiming()) {
             PleaseReviewDialog().show(getFragmentManager(), "please_review")
         }
+
+        //バージョンアップダイアログを表示
+        val detector = VersionUpDetector(this)
+        detector.detect(VersionUpDetector.VERSION,
+            onDetect = {
+                //ダイアログの表示
+                AlertDialog.Builder(this)
+                        .setTitle("音とバイブレーションを選択できるようになりました")
+                        .setMessage("画面右上のスパナマークを押すと表示される設定画面から変更が可能です")
+                        .setCancelable(false)
+                        .setNegativeButton("OK", { dialog, whichButton ->
+                            dialog.dismiss()
+                        }).create().show()
+
+                //バージョンアップダイアログはもう出さない
+                detector.save(VersionUpDetector.VERSION)
+            }
+        )
     }
 
     override fun onCreateOptionsMenu(menu:Menu?):Boolean {
