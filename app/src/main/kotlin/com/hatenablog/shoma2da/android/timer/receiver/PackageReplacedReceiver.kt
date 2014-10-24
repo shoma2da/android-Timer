@@ -12,9 +12,9 @@ import com.hatenablog.shoma2da.android.timer.NotificationLauncherService
 
 class PackageReplacedReceiver : BroadcastReceiver() {
 
-    override fun onReceive(context: Context, intent:Intent) {
-        if (intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)
-               && ("package:" + context.getPackageName()).equals(intent.getDataString())) {
+    override fun onReceive(context: Context, i:Intent) {
+        if (i.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)
+               && ("package:" + context.getPackageName()).equals(i.getDataString())) {
             //更新通知の表示
             val intent = Intent(context, javaClass<PackageReplacedNotificationService>())
             context.startService(intent)
