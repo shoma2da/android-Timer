@@ -20,27 +20,34 @@ class PackageReplacedNotificationService: IntentService("PackageReplacedNotifica
 
     override fun onHandleIntent(intent: Intent?) {
         val detector = VersionUpDetector(this)
-
         detector.detect(VersionUpDetector.VERSION,
+            onInitial = {
+                detector.noteUpdate()
+                notifyUpdateNotification()
+            },
             onDetect = {
-                //通知をくみたて
-                val intent = Intent(this, javaClass<MainActivity>())
-                val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-                val notification = Notification.Builder(this).
-                        setAutoCancel(true).
-                        setSmallIcon(R.drawable.ic_launcher).
-                        setContentIntent(pendingIntent).
-                        setContentTitle(getString(R.string.versionup_notification_title)).
-                        setContentText(getString(R.string.versionup_notification_message)).
-                        setTicker(getString(R.string.versionup_notification_ticker)).
-                        setWhen(System.currentTimeMillis()).
-                        build()
-
-                //通知を表示
-                val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                manager.notify(NotificationIds.VERSIONUP_NOTIFICATION_ID, notification)
+                notifyUpdateNotification()
             }
         )
+    }
+
+    fun notifyUpdateNotification() {
+        //通知をくみたて
+        val intent = Intent(this, javaClass<MainActivity>())
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val notification = Notification.Builder(this).
+                setAutoCancel(true).
+                setSmallIcon(R.drawable.ic_launcher).
+                setContentIntent(pendingIntent).
+                setContentTitle(getString(R.string.versionup_notification_title)).
+                setContentText(getString(R.string.versionup_notification_message)).
+                setTicker(getString(R.string.versionup_notification_ticker)).
+                setWhen(System.currentTimeMillis()).
+                build()
+
+        //通知を表示
+        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.notify(NotificationIds.VERSIONUP_NOTIFICATION_ID, notification)
     }
 
 }

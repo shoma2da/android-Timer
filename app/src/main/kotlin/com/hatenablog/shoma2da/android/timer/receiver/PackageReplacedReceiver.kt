@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.hatenablog.shoma2da.android.timer.notification.package_replace.PackageReplacedNotificationService
+import com.hatenablog.shoma2da.android.timer.NotificationLauncherService
 
 /**
  * Created by shoma2da on 2014/10/23.
@@ -11,11 +12,15 @@ import com.hatenablog.shoma2da.android.timer.notification.package_replace.Packag
 
 class PackageReplacedReceiver : BroadcastReceiver() {
 
-    override fun onReceive(context: Context, intent:Intent) {
-        if (intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)
-               && ("package:" + context.getPackageName()).equals(intent.getDataString())) {
+    override fun onReceive(context: Context, i:Intent) {
+        if (i.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)
+               && ("package:" + context.getPackageName()).equals(i.getDataString())) {
+            //更新通知の表示
             val intent = Intent(context, javaClass<PackageReplacedNotificationService>())
             context.startService(intent)
+
+            //通知バーランチャーを再起動
+            context.startService(Intent(context, javaClass<NotificationLauncherService>()))
         }
     }
 

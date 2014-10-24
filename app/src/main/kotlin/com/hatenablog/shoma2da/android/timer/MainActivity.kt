@@ -56,8 +56,8 @@ class MainActivity : Activity() {
                             dialog.dismiss()
                         }).create().show()
 
-                //バージョンアップダイアログはもう出さない
-                detector.save(VersionUpDetector.VERSION)
+                //バージョンアップ判定はこれ以降行わない
+                detector.finishUpdate()
             }
         )
     }

@@ -12,22 +12,23 @@ class VersionUpDetector(context:Context) {
         val VERSION = "sound_and_vibration"
     }
 
-    val FILE_NAME = "previous_version"
-    val PREVIOUS_VERSION_KEY = "key"
+    val FILE_NAME = "version_up_data"
+    val PREVIOUS_VERSION_KEY = "previous_key"
+    val CURRENT_VERSION_KEY = "current_key"
     val mPreference = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 
-    fun detect(currentVersion:String, onDetect:() -> Unit = {}, onNotDetect:() -> Unit = {}) {
+    fun detect(currentVersion:String, onDetect:() -> Unit = {}, onNotDetect:() -> Unit = {}, onInitial:() -> Unit = {}) {
         val previosValue = mPreference.getString(PREVIOUS_VERSION_KEY, null)
 
-        //初回起動時はバージョンアップではない
-        if (previosValue == null) {
-            onNotDetect()
-            mPreference.edit().putString(PREVIOUS_VERSION_KEY, "first_lauch").apply()
+        //まだ何もない
+        val savedCurrentVersion = mPreference.getString(CURRENT_VERSION_KEY, null)
+        if (savedCurrentVersion == null) {
+            onInitial()
             return
         }
 
-        //前回のバージョンと同じならバージョンアップではない
-        if (previosValue.equals(currentVersion)) {
+        //バージョンが一緒なら更新ではない
+        if (currentVersion.equals(previosValue)) {
             onNotDetect()
             return
         }
@@ -35,8 +36,13 @@ class VersionUpDetector(context:Context) {
         onDetect()
     }
 
-    fun save(currentVersion:String) {
-        mPreference.edit().putString(PREVIOUS_VERSION_KEY, currentVersion).apply()
+    fun finishUpdate() {
+        //現在のバージョンを過去のものとして保存→更新判定はこれ移行されない
+        mPreference.edit().putString(PREVIOUS_VERSION_KEY, mPreference.getString(CURRENT_VERSION_KEY, "")).apply()
+    }
+
+    fun noteUpdate(currentVersion:String = VERSION) {
+        mPreference.edit().putString(CURRENT_VERSION_KEY, currentVersion).apply()
     }
 
 }
