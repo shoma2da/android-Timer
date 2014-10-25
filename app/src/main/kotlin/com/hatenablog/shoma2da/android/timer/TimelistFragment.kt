@@ -77,21 +77,26 @@ public class TimelistFragment : Fragment() {
 
         //サービスの稼働状況を問い合わせ
         val intent = Intent(activity, javaClass<CountdownService>())
-        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.CONFIRM_STATUS as Serializable)
+        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.CONFIRM_STATUS.name())
         activity.startService(intent)
 
         //サービスの稼働状況を受け取れるようにしておく
         mReceiver = object:BroadcastReceiver() {
             override fun onReceive(context: Context, paramIntent: Intent) {
-                val status = paramIntent.getSerializableExtra(CountdownService.PARAM_NAME_STATUS) as CountdownService.Status
+                val statusString = paramIntent.getStringExtra(CountdownService.PARAM_NAME_STATUS)
+                if (statusString == null) {
+                    return@onReceive
+                }
+
+                val status = CountdownService.Status.valueOf(statusString)
                 when (status) {
                     CountdownService.Status.START -> {
                         //既にタイマー設定されているならカウントダウン画面に遷移する
                         val time = paramIntent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
-                        val intent = Intent(context, javaClass<CountdownActivity>())
-                        intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
-                        intent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
-                        context.startActivity(intent)
+                        val countdownIntent = Intent(context, javaClass<CountdownActivity>())
+                        countdownIntent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
+                        countdownIntent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
+                        context.startActivity(countdownIntent)
 
                         mActivity?.finish()
                     }
