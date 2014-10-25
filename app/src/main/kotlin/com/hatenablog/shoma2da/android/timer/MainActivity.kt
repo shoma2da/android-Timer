@@ -12,6 +12,7 @@ import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseRevie
 import android.preference.PreferenceManager
 import com.hatenablog.shoma2da.android.timer.util.VersionUpDetector
 import android.app.AlertDialog
+import com.parse.ParseAnalytics
 
 /**
  * Created by shoma2da on 2014/06/28.
@@ -23,9 +24,10 @@ class MainActivity : Activity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_main)
 
-        //Crashlytics
+        //Crashlytics & Parse Analytics
         if (BuildConfig.DEBUG == false) {
             Crashlytics.start(this);
+            ParseAnalytics.trackAppOpened(getIntent());
         }
 
         //Analytics
