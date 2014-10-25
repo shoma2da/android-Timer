@@ -24,7 +24,7 @@ class RequestActivity : Activity() {
 
         //送信ボタン
         findViewById(R.id.sendButton)?.setOnClickListener { view ->
-            val content = (findViewById(R.id.requestText) as EditText)?.getText().toString()
+            val content = (findViewById(R.id.requestText) as EditText)?.getText()?.toString()
 
             if (content != null && content?.isEmpty() == false) { //中身あり
                 //データ送信

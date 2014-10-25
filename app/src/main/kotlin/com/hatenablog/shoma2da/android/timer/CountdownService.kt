@@ -40,21 +40,15 @@ class CountdownService : Service() {
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent:Intent, flags:Int, startId:Int):Int {
-        if (intent == null) {
-            return@onStartCommand super.onStartCommand(intent, flags, startId)
-        }
-
         val actionParameter = intent.getStringExtra(PARAM_NAME_ACTION);
         if (actionParameter == null) {
             return super.onStartCommand(intent, flags, startId)
         }
 
         val action = Action.valueOf(actionParameter)
-        if (action == null || action is Action == false) {
+        if (action is Action == false) {
             throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME, Cowntdown.Action}を渡す必要があります")
         }
-
-        Log.d("timer", "action is " + action)
 
         when (action) {
             Action.START -> {
