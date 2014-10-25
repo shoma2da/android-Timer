@@ -75,10 +75,10 @@ class CountdownService : Service() {
             }
             Action.CONFIRM_STATUS -> {
                 //情報をアプリ内全体に送信する
-                val intent = Intent(ACTION_BROADCAST_STATUS)
-                intent.putExtra(PARAM_NAME_STATUS, mCurrentStatus as Serializable)
-                intent.putExtra(PARAM_NAME_TIME, mCurrentTime as Serializable)
-                sendBroadcast(intent)
+                val broadcastIntent = Intent(ACTION_BROADCAST_STATUS)
+                broadcastIntent.putExtra(PARAM_NAME_STATUS, mCurrentStatus as Serializable)
+                broadcastIntent.putExtra(PARAM_NAME_TIME, mCurrentTime as Serializable)
+                sendBroadcast(broadcastIntent)
             }
         }
 

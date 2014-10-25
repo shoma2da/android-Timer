@@ -115,9 +115,9 @@ public class CountdownActivity : Activity() {
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val time = intent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
-                mTimeText?.setText(time.toString())
-                mTimeText?.setTag(time)
+                val receivedTime = intent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
+                mTimeText?.setText(receivedTime.toString())
+                mTimeText?.setTag(receivedTime)
             }
         }
         val filter = IntentFilter()

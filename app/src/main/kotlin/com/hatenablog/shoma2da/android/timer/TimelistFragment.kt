@@ -88,10 +88,10 @@ public class TimelistFragment : Fragment() {
                     CountdownService.Status.START -> {
                         //既にタイマー設定されているならカウントダウン画面に遷移する
                         val time = paramIntent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
-                        val intent = Intent(context, javaClass<CountdownActivity>())
-                        intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
-                        intent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
-                        context.startActivity(intent)
+                        val countdownIntent = Intent(context, javaClass<CountdownActivity>())
+                        countdownIntent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
+                        countdownIntent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
+                        context.startActivity(countdownIntent)
 
                         mActivity?.finish()
                     }
