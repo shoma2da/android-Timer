@@ -1,0 +1,25 @@
+language: android
+android:
+  components:
+    - android-20
+script:
+  - echo "buildNumber=$TRAVIS_BUILD_NUMBER" >> gradle.properties
+  - if [ "${TRAVIS_BRANCH}" = "release" -a "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+        echo "***** Release build *****";
+        openssl aes-256-cbc -K $encrypted_d7523b81c6ba_key -iv $encrypted_d7523b81c6ba_iv -in secure/private.key.enc -out secure/private.key -d;
+        openssl smime -decrypt -in secure/shoma2da_key.secret -binary -inform DEM -inkey secure/private.key -out secure/shoma2da_key;
+        ./gradlew assembleRelease;
+    else
+        echo "***** Debug build *****";
+        ./gradlew assembleDebug;
+    fi
+after_success:
+  - if [ "${TRAVIS_BRANCH}" = "release" -a "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+        ./gradlew uploadDeployGateRelease;
+    else
+        ./gradlew uploadDeployGateDebug;
+    fi
+env:
+  global:
+    - secure: XrxlfzyGW3QdUvpEmvgN26Kl7U08bidhWXI03fh59glmav/OGvNxNzXmnXmiWyrRzzYqO2RRxHbCJcQymumZ/RLIlgqNJGzMfeXZ3qQsEp42MEqtEjVLBLy+cJePRZP8fWUGIQVYH13veYvH9KmydNY1ii6sDvmdbLWJnm2fPds=
+    - secure: F3MV63L9CR3n1Z7tgbHpsiJHGaiCoQzN/6a11ZHS5q93eV4n1rWeABQ3J+1uZ0/wAN/fjHKAxkavlj22dZ524fQVXd4i/cL79hXoKLV6wageenPeaCHmorGVYIQkS8/nHh0N596VRk+mII5Ts76Z0afR7lP0rqAyajvSbZ3UlS8=

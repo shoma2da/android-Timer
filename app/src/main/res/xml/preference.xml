@@ -8,6 +8,13 @@
         android:key="@string/notification_launcher_id"
         android:title="@string/notification_launcher_title"
         android:summary="@string/notification_launcher_summary" />
+    <ListPreference
+        android:key="notification_method"
+        android:title="@string/notification_method_title"
+        android:entries="@array/notification_methods"
+        android:entryValues="@array/notification_methods_values"
+        android:defaultValue="vibration"
+        />
     <Preference
         android:key="request"
         android:title="@string/request" />

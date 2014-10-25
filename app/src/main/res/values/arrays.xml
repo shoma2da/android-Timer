@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notification_methods">
+        <item>Sound</item>
+        <item>Vibration</item>
+        <item>Both</item>
+    </string-array>
+    <string-array name="notification_methods_values">
+        <item>sound</item>
+        <item>vibration</item>
+        <item>both</item>
+    </string-array>
+</resources>

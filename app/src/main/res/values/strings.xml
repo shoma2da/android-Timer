@@ -24,6 +24,7 @@
     <string name="notification_launcher_id">notification_launcher</string>
     <string name="notification_launcher_title">Notification Launcher</string>
     <string name="notification_launcher_summary">You can open this app from the notification</string>
+    <string name="notification_method_title">how to notify</string>
     <string name="request">Send your opinion</string>
     <string name="developer">Developer</string>
     <string name="google_play">Open Google Play</string>
@@ -43,5 +44,12 @@
     <string name="request_thanks">thanks!!</string>
     <string name="request_send">send</string>
     <string name="request_cancel">cancel</string>
+
+    <!-- バージョンアップ文言 -->
+    <string name="versionup_notification_ticker">Quick Timer has been updated</string>
+    <string name="versionup_notification_title">New features have been added.</string>
+    <string name="versionup_notification_message">Please make sure to tap here</string>
+    <string name="versionup_dialog_title">You can now choose the vibration and/or sound</string>
+    <string name="versionup_dialog_message">It is possible to change from the configuration screen that appears when you press the spanner mark at the top right of the screen.</string>
 
 </resources>

@@ -24,6 +24,7 @@
     <string name="notification_launcher_id">notification_launcher</string>
     <string name="notification_launcher_title">通知ランチャー</string>
     <string name="notification_launcher_summary">通知をタップしてアプリを素早く起動できます</string>
+    <string name="notification_method_title">タイマー終了時のお知らせ</string>
     <string name="request">要望・感想・質問を送る</string>
     <string name="developer">開発者</string>
     <string name="google_play">アプリの更新を確認</string>
@@ -43,5 +44,12 @@
     <string name="request_thanks">ありがとうございます！</string>
     <string name="request_send">送信</string>
     <string name="request_cancel">キャンセル</string>
+
+    <!-- バージョンアップ文言 -->
+    <string name="versionup_notification_ticker">瞬間タイマーが更新されました</string>
+    <string name="versionup_notification_title">新機能が追加されました</string>
+    <string name="versionup_notification_message">詳細はタップして確認</string>
+    <string name="versionup_dialog_title">音とバイブレーションを選択できるようになりました</string>
+    <string name="versionup_dialog_message">画面右上のスパナマークを押すと表示される設定画面から変更が可能です</string>
 
 </resources>
