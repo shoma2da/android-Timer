@@ -9,6 +9,7 @@ import java.io.Serializable
 import com.hatenablog.shoma2da.android.timer.model.RemainTimeCounter
 import android.content.Context
 import android.os.PowerManager
+import android.util.Log
 
 /**
  * Created by shoma2da on 2014/07/15.
@@ -43,10 +44,17 @@ class CountdownService : Service() {
             return@onStartCommand super.onStartCommand(intent, flags, startId)
         }
 
-        val action = intent.getSerializableExtra(PARAM_NAME_ACTION) as Action?
-        if (action == null || action is Action == false) {
-            throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME:Cowntdown.Action}を渡す必要があります")
+        val actionParameter = intent.getStringExtra(PARAM_NAME_ACTION);
+        if (actionParameter == null) {
+            return super.onStartCommand(intent, flags, startId)
         }
+
+        val action = Action.valueOf(actionParameter)
+        if (action == null || action is Action == false) {
+            throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME, Cowntdown.Action}を渡す必要があります")
+        }
+
+        Log.d("timer", "action is " + action)
 
         when (action) {
             Action.START -> {

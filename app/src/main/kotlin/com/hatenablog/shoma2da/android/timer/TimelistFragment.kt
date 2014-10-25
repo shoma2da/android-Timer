@@ -77,7 +77,7 @@ public class TimelistFragment : Fragment() {
 
         //サービスの稼働状況を問い合わせ
         val intent = Intent(activity, javaClass<CountdownService>())
-        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.CONFIRM_STATUS as Serializable)
+        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.CONFIRM_STATUS.name())
         activity.startService(intent)
 
         //サービスの稼働状況を受け取れるようにしておく
