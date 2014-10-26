@@ -9,6 +9,7 @@ import java.io.Serializable
 import com.hatenablog.shoma2da.android.timer.model.RemainTimeCounter
 import android.content.Context
 import android.os.PowerManager
+import android.util.Log
 
 /**
  * Created by shoma2da on 2014/07/15.
@@ -39,13 +40,14 @@ class CountdownService : Service() {
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent:Intent, flags:Int, startId:Int):Int {
-        if (intent == null) {
-            return@onStartCommand super.onStartCommand(intent, flags, startId)
+        val actionParameter = intent.getStringExtra(PARAM_NAME_ACTION);
+        if (actionParameter == null) {
+            return super.onStartCommand(intent, flags, startId)
         }
 
-        val action = intent.getSerializableExtra(PARAM_NAME_ACTION) as Action?
-        if (action == null || action is Action == false) {
-            throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME:Cowntdown.Action}を渡す必要があります")
+        val action = Action.valueOf(actionParameter)
+        if (action is Action == false) {
+            throw RuntimeException("CowntdownServiceには{ACTION_PARAM_NAME, Cowntdown.Action}を渡す必要があります")
         }
 
         when (action) {
@@ -67,10 +69,10 @@ class CountdownService : Service() {
             }
             Action.CONFIRM_STATUS -> {
                 //情報をアプリ内全体に送信する
-                val intent = Intent(ACTION_BROADCAST_STATUS)
-                intent.putExtra(PARAM_NAME_STATUS, mCurrentStatus as Serializable)
-                intent.putExtra(PARAM_NAME_TIME, mCurrentTime as Serializable)
-                sendBroadcast(intent)
+                val broadcastIntent = Intent(ACTION_BROADCAST_STATUS)
+                broadcastIntent.putExtra(PARAM_NAME_STATUS, mCurrentStatus.name())
+                broadcastIntent.putExtra(PARAM_NAME_TIME, mCurrentTime)
+                sendBroadcast(broadcastIntent)
             }
         }
 

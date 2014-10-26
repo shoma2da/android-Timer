@@ -49,7 +49,7 @@ public class CountdownActivity : Activity() {
                 pauseText -> {
                     //サービスを停止
                     val intent = Intent(context, javaClass<CountdownService>())
-                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
+                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP.name())
                     context.startService(intent)
 
                     //Analytics
@@ -64,8 +64,8 @@ public class CountdownActivity : Activity() {
                 restartText -> {
                     //サービスを再開
                     val intent = Intent(context, javaClass<CountdownService>())
-                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
-                    intent.putExtra(CountdownService.PARAM_NAME_TIME, timeText.getTag() as Serializable)
+                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START.name())
+                    intent.putExtra(CountdownService.PARAM_NAME_TIME, timeText.getTag() as RemainTime)
                     context.startService(intent)
 
                     button.setText(pauseText)
@@ -115,9 +115,9 @@ public class CountdownActivity : Activity() {
         //Receiverの設定
         mReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val time = intent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
-                mTimeText?.setText(time.toString())
-                mTimeText?.setTag(time)
+                val receivedTime = intent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
+                mTimeText?.setText(receivedTime.toString())
+                mTimeText?.setTag(receivedTime)
             }
         }
         val filter = IntentFilter()
@@ -133,7 +133,7 @@ public class CountdownActivity : Activity() {
         //サービスを起動する
         val intent = Intent(this, javaClass<CountdownService>())
         intent.putExtra(CountdownService.PARAM_NAME_TIME, time)
-        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START as Serializable)
+        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START.name())
         startService(intent)
 
         //Analytics
@@ -157,7 +157,7 @@ public class CountdownActivity : Activity() {
                     .setPositiveButton(R.string.yes, { dialog, which ->
                         //サービスを停止
                         val intent = Intent(this, javaClass<CountdownService>())
-                        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP as Serializable)
+                        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP.name())
                         startService(intent)
 
                         //リストページに戻る

@@ -57,9 +57,6 @@
             android:name="appc_media_key"
             android:value="2036eaae9b036af9b7fd8fbe11d1cb8f3a4de983" />
 
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
         <activity
             android:name="net.app_c.cloud.sdk.AppCAdActivity"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|uiMode|touchscreen"
