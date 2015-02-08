@@ -21,9 +21,6 @@ import android.preference.PreferenceManager
 class PackageReplacedNotificationService: IntentService("PackageReplacedNotificationService") {
 
     override fun onHandleIntent(intent: Intent?) {
-        //TODO すぐに消す
-        PleaseReviewCondition(PreferenceManager.getDefaultSharedPreferences(this)).resetCount()
-
         val detector = VersionUpDetector(this)
         detector.detect(VersionUpDetector.VERSION,
             onInitial = {
