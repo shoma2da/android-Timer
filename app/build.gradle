@@ -26,7 +26,7 @@ android {
             applicationIdSuffix ".debug"
         }
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -42,8 +42,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.7.+'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.10.+'
     compile 'com.google.android.gms:play-services:5.0.+'
     compile 'com.crashlytics.android:crashlytics:1.+'
 }

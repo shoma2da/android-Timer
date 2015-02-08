@@ -12,6 +12,8 @@ import android.app.PendingIntent
 import android.graphics.BitmapFactory
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.notification.NotificationIds
+import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
+import android.preference.PreferenceManager
 
 /**
  * Created by shoma2da on 2014/10/23.
@@ -19,6 +21,9 @@ import com.hatenablog.shoma2da.android.timer.notification.NotificationIds
 class PackageReplacedNotificationService: IntentService("PackageReplacedNotificationService") {
 
     override fun onHandleIntent(intent: Intent?) {
+        //TODO すぐに消す
+        PleaseReviewCondition(PreferenceManager.getDefaultSharedPreferences(this)).resetCount()
+
         val detector = VersionUpDetector(this)
         detector.detect(VersionUpDetector.VERSION,
             onInitial = {

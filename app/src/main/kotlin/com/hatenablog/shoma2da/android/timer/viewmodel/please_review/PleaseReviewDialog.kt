@@ -31,6 +31,8 @@ class PleaseReviewDialog : DialogFragment() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(activity)
         val condition = PleaseReviewCondition.create(preferences)
 
+        setCancelable(false)
+
         return AlertDialog.Builder(activity)
                 .setTitle(activity.getString(R.string.app_name))
                 .setMessage(R.string.please_review_message)
@@ -51,19 +53,6 @@ class PleaseReviewDialog : DialogFragment() {
                             .setCategory("please_review")
                             ?.setAction("tap")
                             ?.setLabel("good")
-                            ?.build())
-
-                    dialog.dismiss()
-                })
-                .setNeutralButton(R.string.please_review_yet, { dialog, which ->
-                    //レビューお願いをリセット
-                    condition?.resetCount()
-
-                    //Analytics
-                    tracker?.send(HitBuilders.EventBuilder()
-                            .setCategory("please_review")
-                            ?.setAction("tap")
-                            ?.setLabel("not_now")
                             ?.build())
 
                     dialog.dismiss()
