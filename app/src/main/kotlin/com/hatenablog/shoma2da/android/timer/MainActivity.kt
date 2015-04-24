@@ -27,7 +27,7 @@ class MainActivity : Activity() {
         //Crashlytics & Parse Analytics
         if (BuildConfig.DEBUG == false) {
             Crashlytics.start(this);
-            ParseAnalytics.trackAppOpened(getIntent());
+            ParseAnalytics.trackAppOpenedInBackground(getIntent());
         }
 
         //Analytics
