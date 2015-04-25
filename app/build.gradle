@@ -45,6 +45,7 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib:0.10.+'
     compile 'com.google.android.gms:play-services:5.0.+'
     compile 'com.crashlytics.android:crashlytics:1.+'
+    compile 'com.parse.bolts:bolts-android:1.+'
 }
 buildscript {
     ext.kotlin_version = '0.8.11'
