@@ -1,10 +1,8 @@
 package com.hatenablog.shoma2da.android.timer
 
 import android.app.Application
-import com.parse.Parse
-import com.google.android.gms.analytics.Tracker
 import com.google.android.gms.analytics.GoogleAnalytics
-import com.parse.ParseInstallation
+import com.google.android.gms.analytics.Tracker
 
 class TimerApplication : Application() {
 
@@ -13,8 +11,8 @@ class TimerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Parse.initialize(this, "JD6OCOsnYojTL0yQLqoYYBINmf7s9ugK6uHZgfBa", "GZvBpMmBaMG7ejDatcTUcBCsq9kxDOir4LYZAIIX")
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+//        Parse.initialize(this, "JD6OCOsnYojTL0yQLqoYYBINmf7s9ugK6uHZgfBa", "GZvBpMmBaMG7ejDatcTUcBCsq9kxDOir4LYZAIIX")
+//        ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 
     public fun getTracker() : Tracker? {

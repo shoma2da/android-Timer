@@ -16,7 +16,7 @@ import android.util.Log
  */
 class CountdownService : Service() {
 
-    class object {
+    companion object {
         val PARAM_NAME_ACTION = "action_param"
         val PARAM_NAME_TIME = "time_param"
         val PARAM_NAME_STATUS = "status_param"
@@ -31,10 +31,10 @@ class CountdownService : Service() {
     private var mCurrentTime = RemainTime(0, 0)
 
     enum class Action {
-        START; STOP; CONFIRM_STATUS;
+        START, STOP, CONFIRM_STATUS
     }
     enum class Status {
-        START; STOP; UNKNOWN;
+        START, STOP, UNKNOWN
     }
 
     override fun onBind(intent: Intent): IBinder? = null
@@ -53,7 +53,7 @@ class CountdownService : Service() {
         when (action) {
             Action.START -> {
                 //通知バーランチャーを一時的に消す
-                stopService(Intent(this, javaClass<NotificationLauncherService>()))
+                stopService(Intent(this, NotificationLauncherService::class.java))
 
                 mCurrentStatus = Status.START
                 val time = intent.getSerializableExtra(PARAM_NAME_TIME) as RemainTime
@@ -61,7 +61,7 @@ class CountdownService : Service() {
             }
             Action.STOP -> {
                 //通知バーランチャーを表示する
-                startService(Intent(this, javaClass<NotificationLauncherService>()))
+                startService(Intent(this, NotificationLauncherService::class.java))
 
                 mCurrentStatus = Status.STOP
                 mNotification.cancel()
@@ -70,7 +70,7 @@ class CountdownService : Service() {
             Action.CONFIRM_STATUS -> {
                 //情報をアプリ内全体に送信する
                 val broadcastIntent = Intent(ACTION_BROADCAST_STATUS)
-                broadcastIntent.putExtra(PARAM_NAME_STATUS, mCurrentStatus.name())
+                broadcastIntent.putExtra(PARAM_NAME_STATUS, mCurrentStatus.name)
                 broadcastIntent.putExtra(PARAM_NAME_TIME, mCurrentTime)
                 sendBroadcast(broadcastIntent)
             }
@@ -101,7 +101,7 @@ class CountdownService : Service() {
                 },
                 onFinish = {
                     //Activityを起動する
-                    val intent = Intent(this, javaClass<CountdownActivity>())
+                    val intent = Intent(this, CountdownActivity::class.java)
                     intent.setAction(ACTION_FINISH_COUNTDOWN);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)

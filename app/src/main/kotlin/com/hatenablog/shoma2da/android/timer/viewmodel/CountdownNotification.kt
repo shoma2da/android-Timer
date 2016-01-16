@@ -17,14 +17,14 @@ import android.app.NotificationManager
 
 class CountdownNotification(val service:Service) {
 
-    class object {
+    companion object {
         private val NOTIFICATION_ID = 1
     }
 
     private var mNotificationBuilder:NotificationCompat.Builder? = null
 
     fun notify(time: RemainTime) {
-        val intent = Intent(service, javaClass<CountdownActivity>())
+        val intent = Intent(service, CountdownActivity::class.java)
         intent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
         intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
         val pendingIntent = PendingIntent.getActivity(service, 0, intent, 0)

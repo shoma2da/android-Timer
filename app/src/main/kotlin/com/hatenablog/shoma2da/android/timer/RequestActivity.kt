@@ -4,8 +4,9 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
-import com.parse.ParseObject
+//import com.parse.ParseObject
 import com.google.android.gms.analytics.HitBuilders
+import kotlin.text.isEmpty
 
 /**
  * Created by shoma2da on 2014/07/27.
@@ -28,9 +29,9 @@ class RequestActivity : Activity() {
 
             if (content.isEmpty() == false) { //中身あり
                 //データ送信
-                val request = ParseObject("Request");
-                request.put("content", content);
-                request.saveInBackground();
+//                val request = ParseObject("Request");
+//                request.put("content", content);
+//                request.saveInBackground();
 
                 //トーストメッセージ
                 val thanks = this@RequestActivity.getString(R.string.request_thanks)

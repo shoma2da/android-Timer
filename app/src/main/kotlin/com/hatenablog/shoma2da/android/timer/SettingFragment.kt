@@ -29,10 +29,10 @@ class SettingFragment : PreferenceFragment() {
         if (activity == null) {
             return@onCreate
         }
-        findPreference("notification_launcher")?.setOnPreferenceChangeListener { (preference, checkedValue) ->
+        findPreference("notification_launcher")?.setOnPreferenceChangeListener { preference, checkedValue ->
             when(checkedValue) {
-                true -> activity.startService(Intent(activity, javaClass<NotificationLauncherService>()))
-                false -> activity.stopService(Intent(activity, javaClass<NotificationLauncherService>()))
+                true -> activity.startService(Intent(activity, NotificationLauncherService::class.java))
+                false -> activity.stopService(Intent(activity, NotificationLauncherService::class.java))
                 else -> {} //nothing
             }
             true
@@ -53,7 +53,7 @@ class SettingFragment : PreferenceFragment() {
 
         //要望メニューの動作設定
         findPreference("request")?.setOnPreferenceClickListener { preference ->
-            activity.startActivity(Intent(activity, javaClass<RequestActivity>()))
+            activity.startActivity(Intent(activity, RequestActivity::class.java))
             true
         }
 

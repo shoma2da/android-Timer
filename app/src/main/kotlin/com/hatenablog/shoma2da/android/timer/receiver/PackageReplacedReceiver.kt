@@ -16,11 +16,11 @@ class PackageReplacedReceiver : BroadcastReceiver() {
         if (i.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)
                && ("package:" + context.getPackageName()).equals(i.getDataString())) {
             //更新通知の表示
-            val intent = Intent(context, javaClass<PackageReplacedNotificationService>())
+            val intent = Intent(context, PackageReplacedNotificationService::class.java)
             context.startService(intent)
 
             //通知バーランチャーを再起動
-            context.startService(Intent(context, javaClass<NotificationLauncherService>()))
+            context.startService(Intent(context, NotificationLauncherService::class.java))
         }
     }
 

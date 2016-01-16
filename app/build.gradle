@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'crashlytics'
+apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.hatenablog.shoma2da.android.timer"
         minSdkVersion 14
-        targetSdkVersion 20
+        targetSdkVersion 23
         versionCode buildNumber.toInteger()
         versionName "1.1.${buildNumber}"
     }
@@ -42,13 +42,16 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.10.+'
-    compile 'com.google.android.gms:play-services:5.0.+'
-    compile 'com.crashlytics.android:crashlytics:1.+'
-    compile 'com.parse.bolts:bolts-android:1.+'
+    compile 'com.google.android.gms:play-services-ads:8.1.0'
+    compile 'com.google.android.gms:play-services-analytics:8.1.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+//    compile 'com.parse.bolts:bolts-android:1.+'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 buildscript {
-    ext.kotlin_version = '0.8.11'
+    ext.kotlin_version = '1.0.0-beta-4584'
     repositories {
         mavenCentral()
     }
@@ -61,7 +64,7 @@ apply plugin: 'deploygate'
 
 repositories {
     mavenCentral()
-    maven { url 'http://download.crashlytics.com/maven' }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 deploygate {

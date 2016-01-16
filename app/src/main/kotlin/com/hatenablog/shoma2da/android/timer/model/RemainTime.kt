@@ -8,7 +8,7 @@ import java.io.Serializable
 
 class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
 
-    class object {
+    companion object {
         private val serialVersionUID = 0L
     }
 

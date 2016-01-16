@@ -7,7 +7,7 @@ import android.content.SharedPreferences
  */
 class PleaseReviewCondition(val preferences:SharedPreferences) {
 
-    class object {
+    companion object {
         val COUNT_KEY = "count"
         val NEVER_SHOW_KEY = "never_show"
 

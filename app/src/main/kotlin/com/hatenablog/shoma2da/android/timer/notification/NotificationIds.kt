@@ -5,7 +5,7 @@ package com.hatenablog.shoma2da.android.timer.notification
  */
 class NotificationIds {
 
-    class object {
+    companion object {
 
         val VERSIONUP_NOTIFICATION_ID = 100
 

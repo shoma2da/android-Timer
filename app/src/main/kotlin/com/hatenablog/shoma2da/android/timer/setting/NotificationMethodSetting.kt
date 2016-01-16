@@ -9,7 +9,7 @@ import android.preference.PreferenceManager
 
 class NotificationMethodSetting(val context:Context) {
 
-    class object {
+    companion object {
         fun load(context:Context): NotificationMethodSetting {
             return NotificationMethodSetting(context)
         }

@@ -7,7 +7,7 @@ import android.content.Context
  */
 class VersionUpDetector(context:Context) {
 
-    class object {
+    companion object {
         //TODO ここを変更していって運用すること！
         val VERSION = "sound_and_vibration"
     }

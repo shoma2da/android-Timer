@@ -1,18 +1,18 @@
 package com.hatenablog.shoma2da.android.timer
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
-import android.content.Intent
-import com.google.android.gms.analytics.HitBuilders
 import com.crashlytics.android.Crashlytics
-import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewDialog
-import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
-import android.preference.PreferenceManager
+import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.util.VersionUpDetector
-import android.app.AlertDialog
-import com.parse.ParseAnalytics
+import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
+import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewDialog
+import io.fabric.sdk.android.Fabric
 
 /**
  * Created by shoma2da on 2014/06/28.
@@ -26,8 +26,8 @@ class MainActivity : Activity() {
 
         //Crashlytics & Parse Analytics
         if (BuildConfig.DEBUG == false) {
-            Crashlytics.start(this);
-            ParseAnalytics.trackAppOpenedInBackground(getIntent());
+            Fabric.with(this, Crashlytics());
+//            ParseAnalytics.trackAppOpenedInBackground(getIntent());
         }
 
         //Analytics
@@ -36,7 +36,7 @@ class MainActivity : Activity() {
         tracker?.send(HitBuilders.ScreenViewBuilder().build());
 
         //ランチャー起動
-        startService(Intent(this, javaClass<NotificationLauncherService>()))
+        startService(Intent(this, NotificationLauncherService::class.java))
 
         //レビューお願いを表示
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -72,7 +72,7 @@ class MainActivity : Activity() {
 
     override fun onOptionsItemSelected(item:MenuItem?):Boolean {
         if (R.id.setting_menu == item?.getItemId()) {
-            startActivity(Intent(this, javaClass<SettingActivity>()))
+            startActivity(Intent(this, SettingActivity::class.java))
             return true;
         }
         return super.onOptionsItemSelected(item)

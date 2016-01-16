@@ -52,7 +52,7 @@ public class TimelistFragment : Fragment() {
             if (text != null) {
                 val time = remainTimes.get(position)
 
-                val clazz:Class<CountdownActivity> = javaClass<CountdownActivity>()
+                val clazz:Class<CountdownActivity> = CountdownActivity::class.java
                 val intent = Intent(context, clazz)
                 intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
                 view.getContext()?.startActivity(intent)
@@ -76,8 +76,8 @@ public class TimelistFragment : Fragment() {
         }
 
         //サービスの稼働状況を問い合わせ
-        val intent = Intent(activity, javaClass<CountdownService>())
-        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.CONFIRM_STATUS.name())
+        val intent = Intent(activity, CountdownService::class.java)
+        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.CONFIRM_STATUS.name)
         activity.startService(intent)
 
         //サービスの稼働状況を受け取れるようにしておく
@@ -93,7 +93,7 @@ public class TimelistFragment : Fragment() {
                     CountdownService.Status.START -> {
                         //既にタイマー設定されているならカウントダウン画面に遷移する
                         val time = paramIntent.getSerializableExtra(CountdownService.PARAM_NAME_TIME) as RemainTime
-                        val countdownIntent = Intent(context, javaClass<CountdownActivity>())
+                        val countdownIntent = Intent(context, CountdownActivity::class.java)
                         countdownIntent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
                         countdownIntent.putExtra(CountdownActivity.START_COUNTDOWN_PARAM_NAME, false)
                         context.startActivity(countdownIntent)

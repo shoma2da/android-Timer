@@ -9,7 +9,7 @@ import android.view.View
  */
 class AdViewWrapper(val adView:AdView) {
 
-    class object {
+    companion object {
         val NO_AD = false
     }
 

@@ -12,7 +12,7 @@ import android.util.Log
 class BootCompletedReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent:Intent) {
-        context.startService(Intent(context, javaClass<NotificationLauncherService>()))
+        context.startService(Intent(context, NotificationLauncherService::class.java))
     }
 
 }

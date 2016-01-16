@@ -35,7 +35,7 @@ class PackageReplacedNotificationService: IntentService("PackageReplacedNotifica
 
     fun notifyUpdateNotification() {
         //通知をくみたて
-        val intent = Intent(this, javaClass<MainActivity>())
+        val intent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
         val notification = Notification.Builder(this).
                 setAutoCancel(true).

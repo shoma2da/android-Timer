@@ -36,7 +36,7 @@ public class CountdownActivity : Activity() {
         override fun onClick(view : View) {
             val context = view.getContext()
             if (context == null) {
-                return @onClick
+                return
             }
 
             val tracker = (context.getApplicationContext() as TimerApplication?)?.getTracker()
@@ -48,8 +48,8 @@ public class CountdownActivity : Activity() {
             when(button.getText()) {
                 pauseText -> {
                     //サービスを停止
-                    val intent = Intent(context, javaClass<CountdownService>())
-                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP.name())
+                    val intent = Intent(context, CountdownService::class.java)
+                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP.name)
                     context.startService(intent)
 
                     //Analytics
@@ -63,8 +63,8 @@ public class CountdownActivity : Activity() {
                 }
                 restartText -> {
                     //サービスを再開
-                    val intent = Intent(context, javaClass<CountdownService>())
-                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START.name())
+                    val intent = Intent(context, CountdownService::class.java)
+                    intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START.name)
                     intent.putExtra(CountdownService.PARAM_NAME_TIME, timeText.getTag() as RemainTime)
                     context.startService(intent)
 
@@ -81,7 +81,7 @@ public class CountdownActivity : Activity() {
         }
     }
 
-    class object {
+    companion object {
         val TIME_PARAM_NAME = "time_param"
         val START_COUNTDOWN_PARAM_NAME = "countdown_param"
     }
@@ -127,13 +127,13 @@ public class CountdownActivity : Activity() {
         //パラメータでカウントダウンを始めるか判断する
         val startCountdown = getIntent()?.getBooleanExtra(START_COUNTDOWN_PARAM_NAME, true)
         if (startCountdown == false) {
-            return @onCreate
+            return
         }
 
         //サービスを起動する
-        val intent = Intent(this, javaClass<CountdownService>())
+        val intent = Intent(this, CountdownService::class.java)
         intent.putExtra(CountdownService.PARAM_NAME_TIME, time)
-        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START.name())
+        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.START.name)
         startService(intent)
 
         //Analytics
@@ -156,12 +156,12 @@ public class CountdownActivity : Activity() {
                     .setMessage(R.string.stop_confirm_message)
                     .setPositiveButton(R.string.yes, { dialog, which ->
                         //サービスを停止
-                        val intent = Intent(this, javaClass<CountdownService>())
-                        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP.name())
+                        val intent = Intent(this, CountdownService::class.java)
+                        intent.putExtra(CountdownService.PARAM_NAME_ACTION, CountdownService.Action.STOP.name)
                         startService(intent)
 
                         //リストページに戻る
-                        startActivity(Intent(this, javaClass<MainActivity>()))
+                        startActivity(Intent(this, MainActivity::class.java))
 
                         //Analytics
                         val tracker = (getApplication() as TimerApplication?)?.getTracker()
@@ -204,7 +204,7 @@ public class CountdownActivity : Activity() {
                     },
                     onVibration = {
                         //バイブレーション開始
-                        vibrator.vibrate(longArray(1000L, 1000L), 0)
+                        vibrator.vibrate(longArrayOf(1000L, 1000L), 0)
                     },
                     onBoth = {
                         //音の開始
@@ -212,7 +212,7 @@ public class CountdownActivity : Activity() {
                         player?.start()
 
                         //バイブレーション開始
-                        vibrator.vibrate(longArray(1000L, 1000L), 0)
+                        vibrator.vibrate(longArrayOf(1000L, 1000L), 0)
                     }
                 )
 
@@ -240,7 +240,7 @@ public class CountdownActivity : Activity() {
                             dialog.dismiss()
 
                             //リストページに戻る
-                            startActivity(Intent(this, javaClass<MainActivity>()))
+                            startActivity(Intent(this, MainActivity::class.java))
 
                             finish()
                         }).
