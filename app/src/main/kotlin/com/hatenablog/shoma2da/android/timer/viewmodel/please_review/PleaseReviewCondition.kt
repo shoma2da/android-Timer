@@ -2,9 +2,6 @@ package com.hatenablog.shoma2da.android.timer.viewmodel.please_review
 
 import android.content.SharedPreferences
 
-/**
- * Created by shoma2da on 2014/07/29.
- */
 class PleaseReviewCondition(val preferences:SharedPreferences) {
 
     companion object {
@@ -38,10 +35,6 @@ class PleaseReviewCondition(val preferences:SharedPreferences) {
 
         val currentCount = preferences.getInt(COUNT_KEY, 0)
         preferences.edit().putInt(COUNT_KEY, currentCount + 1).apply()
-    }
-
-    fun resetCount() {
-        preferences.edit().remove(COUNT_KEY).apply()
     }
 
 }

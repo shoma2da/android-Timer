@@ -8,9 +8,6 @@ import android.widget.Toast
 import com.google.android.gms.analytics.HitBuilders
 import kotlin.text.isEmpty
 
-/**
- * Created by shoma2da on 2014/07/27.
- */
 class RequestActivity : Activity() {
 
     override fun onCreate(bundle:Bundle?) {
@@ -19,13 +16,13 @@ class RequestActivity : Activity() {
         setTitle(R.string.request)
 
         //Analytics
-        val tracker = (getApplication() as TimerApplication?)?.getTracker()
+        val tracker = (application as TimerApplication?)?.getTracker()
         tracker?.setScreenName("RequestActivity")
         tracker?.send(HitBuilders.ScreenViewBuilder().build());
 
         //送信ボタン
         findViewById(R.id.sendButton)?.setOnClickListener { view ->
-            val content = (findViewById(R.id.requestText) as EditText?)?.getText().toString()
+            val content = (findViewById(R.id.requestText) as EditText?)?.text.toString()
 
             if (content.isEmpty() == false) { //中身あり
                 //データ送信

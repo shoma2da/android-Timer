@@ -1,19 +1,14 @@
 package com.hatenablog.shoma2da.android.timer
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import com.hatenablog.shoma2da.android.timer.model.RemainTime
-import com.hatenablog.shoma2da.android.timer.viewmodel.CountdownNotification
-import java.io.Serializable
-import com.hatenablog.shoma2da.android.timer.model.RemainTimeCounter
-import android.content.Context
 import android.os.PowerManager
-import android.util.Log
+import com.hatenablog.shoma2da.android.timer.model.RemainTime
+import com.hatenablog.shoma2da.android.timer.model.RemainTimeCounter
+import com.hatenablog.shoma2da.android.timer.viewmodel.CountdownNotification
 
-/**
- * Created by shoma2da on 2014/07/15.
- */
 class CountdownService : Service() {
 
     companion object {
@@ -40,10 +35,7 @@ class CountdownService : Service() {
     override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent:Intent, flags:Int, startId:Int):Int {
-        val actionParameter = intent.getStringExtra(PARAM_NAME_ACTION);
-        if (actionParameter == null) {
-            return super.onStartCommand(intent, flags, startId)
-        }
+        val actionParameter = intent.getStringExtra(PARAM_NAME_ACTION) ?: return super.onStartCommand(intent, flags, startId);
 
         val action = Action.valueOf(actionParameter)
         if (action is Action == false) {

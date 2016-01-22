@@ -11,10 +11,6 @@ import android.content.Context
 import android.support.v4.app.NotificationCompat
 import android.app.NotificationManager
 
-/**
- * Created by shoma2da on 2014/07/19.
- */
-
 class CountdownNotification(val service:Service) {
 
     companion object {
@@ -29,10 +25,10 @@ class CountdownNotification(val service:Service) {
         intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
         val pendingIntent = PendingIntent.getActivity(service, 0, intent, 0)
         mNotificationBuilder = NotificationCompat.Builder(service).
-                setLargeIcon(BitmapFactory.decodeResource(service.getResources(), R.drawable.ic_launcher))?.
+                setLargeIcon(BitmapFactory.decodeResource(service.resources, R.drawable.ic_launcher))?.
                 setSmallIcon(R.drawable.ic_launcher)?.
                 setTicker(service.getString(R.string.notification_set_timer))?.
-                setContentTitle(service.getResources()?.getString(R.string.app_name))?.
+                setContentTitle(service.resources?.getString(R.string.app_name))?.
                 setContentText(time.toString())?.
                 setWhen(System.currentTimeMillis())?.
                 setContentIntent(pendingIntent)

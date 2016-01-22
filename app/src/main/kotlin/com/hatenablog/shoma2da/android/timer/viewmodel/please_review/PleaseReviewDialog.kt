@@ -13,16 +13,13 @@ import android.preference.PreferenceManager
 import com.hatenablog.shoma2da.android.timer.TimerApplication
 import com.google.android.gms.analytics.HitBuilders
 
-/**
- * Created by shoma2da on 2014/07/29.
- */
 class PleaseReviewDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState:Bundle?):Dialog {
-        val activity = getActivity()!!
+        val activity = activity!!
 
         //Analytics準備
-        val tracker = (activity.getApplication() as TimerApplication?)?.getTracker()
+        val tracker = (activity.application as TimerApplication?)?.getTracker()
         tracker?.send(HitBuilders.EventBuilder()
                 .setCategory("please_review")
                 ?.setAction("show")
@@ -31,7 +28,7 @@ class PleaseReviewDialog : DialogFragment() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(activity)
         val condition = PleaseReviewCondition.create(preferences)
 
-        setCancelable(false)
+        isCancelable = false
 
         return AlertDialog.Builder(activity)
                 .setTitle(activity.getString(R.string.app_name))
@@ -39,7 +36,7 @@ class PleaseReviewDialog : DialogFragment() {
                 .setPositiveButton(R.string.please_review_good, { dialog, which ->
                     //Google Playに遷移
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.setData(Uri.parse("market://details?id=${activity.getPackageName()}"))
+                    intent.setData(Uri.parse("market://details?id=${activity.packageName}"))
                     activity.startActivity(intent)
 
                     //Toast表示

@@ -14,10 +14,6 @@ import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseRevie
 import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewDialog
 import io.fabric.sdk.android.Fabric
 
-/**
- * Created by shoma2da on 2014/06/28.
- */
-
 class MainActivity : Activity() {
 
     override fun onCreate(savedInstance : Bundle?) {
@@ -31,7 +27,7 @@ class MainActivity : Activity() {
         }
 
         //Analytics
-        val tracker = (getApplication() as TimerApplication?)?.getTracker()
+        val tracker = (application as TimerApplication?)?.getTracker()
         tracker?.setScreenName("MainActivity")
         tracker?.send(HitBuilders.ScreenViewBuilder().build());
 
@@ -42,7 +38,7 @@ class MainActivity : Activity() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val condition = PleaseReviewCondition.create(preferences)
         if (condition != null && condition.isTiming()) {
-            PleaseReviewDialog().show(getFragmentManager(), "please_review")
+            PleaseReviewDialog().show(fragmentManager, "please_review")
         }
 
         //バージョンアップダイアログを表示
@@ -65,13 +61,13 @@ class MainActivity : Activity() {
     }
 
     override fun onCreateOptionsMenu(menu:Menu?):Boolean {
-        val inflater = getMenuInflater();
+        val inflater = menuInflater;
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item:MenuItem?):Boolean {
-        if (R.id.setting_menu == item?.getItemId()) {
+        if (R.id.setting_menu == item?.itemId) {
             startActivity(Intent(this, SettingActivity::class.java))
             return true;
         }

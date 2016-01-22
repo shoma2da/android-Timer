@@ -1,24 +1,17 @@
 package com.hatenablog.shoma2da.android.timer.notification.package_replace
 
 import android.app.IntentService
-import android.content.Intent
-import android.util.Log
-import com.hatenablog.shoma2da.android.timer.util.VersionUpDetector
-import android.content.Context
-import android.app.NotificationManager
 import android.app.Notification
-import com.hatenablog.shoma2da.android.timer.MainActivity
+import android.app.NotificationManager
 import android.app.PendingIntent
-import android.graphics.BitmapFactory
+import android.content.Context
+import android.content.Intent
+import com.hatenablog.shoma2da.android.timer.MainActivity
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.notification.NotificationIds
-import com.hatenablog.shoma2da.android.timer.viewmodel.please_review.PleaseReviewCondition
-import android.preference.PreferenceManager
+import com.hatenablog.shoma2da.android.timer.util.VersionUpDetector
 
-/**
- * Created by shoma2da on 2014/10/23.
- */
-class PackageReplacedNotificationService: IntentService("PackageReplacedNotificationService") {
+class PackageReplacedNotificationService: IntentService(PackageReplacedNotificationService::class.java.simpleName) {
 
     override fun onHandleIntent(intent: Intent?) {
         val detector = VersionUpDetector(this)

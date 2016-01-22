@@ -1,10 +1,7 @@
 package com.hatenablog.shoma2da.android.timer.model
 
+import com.hatenablog.shoma2da.android.timer.extensions.format
 import java.io.Serializable
-
-/**
- * Created by shoma2da on 2014/06/30.
- */
 
 class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
 
@@ -27,9 +24,9 @@ class RemainTime(val minutes:Int, val seconds:Int) : Serializable {
     override fun toString() : String {
         val hours = minutes / 60
         val minutes = minutes % 60
-        when (hours) {
-            0 ->    return                                           "${java.lang.String.format("%02d", minutes)}:${java.lang.String.format("%02d", seconds)}"
-            else -> return "${java.lang.String.format("%02d", hours)}:${java.lang.String.format("%02d", minutes)}:${java.lang.String.format("%02d", seconds)}"
+        return when (hours) {
+            0 ->                       "${minutes.format(2)}:${seconds.format(2)}"
+            else -> "${hours.format(2)}:${minutes.format(2)}:${seconds.format(2)}"
         }
 
 

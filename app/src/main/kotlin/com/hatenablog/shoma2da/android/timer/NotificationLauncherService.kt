@@ -8,10 +8,6 @@ import android.app.PendingIntent
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 
-/**
- * Created by shoma2da on 2014/07/24.
- */
-
 class NotificationLauncherService : Service() {
     override fun onBind(p0: Intent): IBinder? = null
 
@@ -25,8 +21,8 @@ class NotificationLauncherService : Service() {
         }
 
         //通知バータップ時のIntentを準備
-        val packageManager = getPackageManager()
-        val launchIntent = packageManager?.getLaunchIntentForPackage(getPackageName())
+        val packageManager = packageManager
+        val launchIntent = packageManager?.getLaunchIntentForPackage(packageName)
         launchIntent?.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
         if (launchIntent == null) {
             return@onStartCommand super.onStartCommand(intent, flags, startId)
@@ -35,11 +31,11 @@ class NotificationLauncherService : Service() {
         //通知バーを設定
         val pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0)
         val notificationBuilder = NotificationCompat.Builder(this).
-                setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))?.
+                setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_launcher))?.
                 setSmallIcon(R.drawable.ic_launcher)?.
                 setTicker(null)?.
-                setContentTitle(getResources()?.getString(R.string.notification_open_app))?.
-                setContentText(getResources()?.getString(R.string.notification_open_app_setting))?.
+                setContentTitle(resources?.getString(R.string.notification_open_app))?.
+                setContentText(resources?.getString(R.string.notification_open_app_setting))?.
                 setWhen(System.currentTimeMillis())?.
                 setContentIntent(pendingIntent)
         startForeground(10, notificationBuilder?.build())

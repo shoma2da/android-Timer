@@ -2,9 +2,6 @@ package com.hatenablog.shoma2da.android.timer.model
 
 import kotlin.concurrent.timer
 
-/**
- * Created by shoma2da on 2014/07/22.
- */
 class RemainTimeCounter(val time:RemainTime) {
 
     private var mCurrentTime = time

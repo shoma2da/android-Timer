@@ -1,26 +1,21 @@
 package com.hatenablog.shoma2da.android.timer
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.os.Bundle
-import android.view.View
-import android.app.Fragment
-import android.widget.ListView
-import android.widget.ArrayAdapter
 import android.app.Activity
-import android.widget.TextView
-import android.content.Intent
-import com.hatenablog.shoma2da.android.timer.model.RemainTime
-import java.io.Serializable
+import android.app.Fragment
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
-import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.TextView
 import com.google.android.gms.ads.AdView
-
-/**
- * Created by shoma2da on 2014/06/29.
- */
+import com.hatenablog.shoma2da.android.timer.admob.AdViewWrapper
+import com.hatenablog.shoma2da.android.timer.model.RemainTime
 
 public class TimelistFragment : Fragment() {
 
@@ -29,14 +24,14 @@ public class TimelistFragment : Fragment() {
 
     public override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_timelist, null)
-        val context: Activity? = getActivity()
+        val context: Activity? = activity
 
         if (context == null || view == null) {
             return view
         }
 
         //とりあえず固定でデータ挿入
-        var remainTimes = Array<RemainTime>(90, { RemainTime(it + 1, 0) }) //残り時間オブジェクトを無理やり用意
+        var remainTimes = Array(90, { RemainTime(it + 1, 0) }) //残り時間オブジェクトを無理やり用意
         val adapter = ArrayAdapter<String>(context, R.layout.column_timelist)
         for (integer in 1..90) {
             val remainTime = RemainTime(integer, 0)
@@ -45,17 +40,17 @@ public class TimelistFragment : Fragment() {
 
         //リストの初期設定
         val list = view.findViewById(R.id.list) as ListView
-        list.setAdapter(adapter)
+        list.adapter = adapter
         list.setOnItemClickListener({parent, view, position, id ->
-            val text = (view as TextView).getText()
+            val text = (view as TextView).text
 
             if (text != null) {
-                val time = remainTimes.get(position)
+                val time = remainTimes[position]
 
                 val clazz:Class<CountdownActivity> = CountdownActivity::class.java
                 val intent = Intent(context, clazz)
                 intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
-                view.getContext()?.startActivity(intent)
+                view.context?.startActivity(intent)
 
                 mActivity?.finish()
             }
@@ -83,10 +78,7 @@ public class TimelistFragment : Fragment() {
         //サービスの稼働状況を受け取れるようにしておく
         mReceiver = object:BroadcastReceiver() {
             override fun onReceive(context: Context, paramIntent: Intent) {
-                val statusString = paramIntent.getStringExtra(CountdownService.PARAM_NAME_STATUS)
-                if (statusString == null) {
-                    return@onReceive
-                }
+                val statusString = paramIntent.getStringExtra(CountdownService.PARAM_NAME_STATUS) ?: return
 
                 val status = CountdownService.Status.valueOf(statusString)
                 when (status) {
