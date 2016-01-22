@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.RequestActivity
-import com.hatenablog.shoma2da.android.timer.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 
 class PleaseReviewDialog : DialogFragment() {

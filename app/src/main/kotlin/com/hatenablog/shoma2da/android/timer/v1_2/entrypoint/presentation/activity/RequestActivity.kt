@@ -8,7 +8,7 @@ import android.widget.Toast
 //import com.parse.ParseObject
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import kotlin.text.isEmpty
 
 class RequestActivity : Activity() {

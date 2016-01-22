@@ -11,7 +11,7 @@ import com.crashlytics.android.Crashlytics
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.BuildConfig
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.dialog.PleaseReviewDialog

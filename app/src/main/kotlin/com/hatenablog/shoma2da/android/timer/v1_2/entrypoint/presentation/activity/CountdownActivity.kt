@@ -22,7 +22,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.RemainTime
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load

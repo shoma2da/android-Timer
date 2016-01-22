@@ -1,12 +1,13 @@
-package com.hatenablog.shoma2da.android.timer
+package com.hatenablog.shoma2da.android.timer.v1_2
 
 import android.app.Application
 import com.google.android.gms.analytics.GoogleAnalytics
 import com.google.android.gms.analytics.Tracker
+import com.hatenablog.shoma2da.android.timer.BuildConfig
 
 class TimerApplication : Application() {
 
-    var mTracker:Tracker? = null
+    var mTracker: Tracker? = null
 
     override fun onCreate() {
         super.onCreate()
