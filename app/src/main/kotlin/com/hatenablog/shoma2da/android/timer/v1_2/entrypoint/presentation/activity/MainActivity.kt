@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.ReviewRequest
@@ -35,9 +36,15 @@ class MainActivity : Activity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?):Boolean {
-        if (R.id.setting_menu == item?.itemId) {
-            startActivity(Intent(this, SettingActivity::class.java))
-            return true;
+        when (item?.itemId) {
+            R.id.menu_settings -> {
+                startActivity(Intent(this, SettingActivity::class.java))
+                return true;
+            }
+            R.id.menu_feedback -> {
+                Meyasubaco.showCommentActivity(this)
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item)
     }
