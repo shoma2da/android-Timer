@@ -13,7 +13,7 @@ class TimerApplication : Application() {
 //        Parse.initialize(this, "JD6OCOsnYojTL0yQLqoYYBINmf7s9ugK6uHZgfBa", "GZvBpMmBaMG7ejDatcTUcBCsq9kxDOir4LYZAIIX")
 //        ParseInstallation.getCurrentInstallation().saveInBackground();
 
-        AppInitializer.initialize();
+        AppInitializer.initialize(this);
     }
 
     fun getLogger():Logger {

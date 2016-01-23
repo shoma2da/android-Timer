@@ -51,7 +51,7 @@ class PleaseReviewDialog : DialogFragment() {
                 })
                 .setNegativeButton(R.string.please_review_bad, { dialog, which ->
                     //要望画面へ遷移
-                    activity.startActivity(Intent(activity, javaClass<RequestActivity>()))
+                    activity.startActivity(Intent(activity, RequestActivity::class.java))
 
                     //Toast表示
                     Toast.makeText(activity, R.string.please_review_send_your_opinion, Toast.LENGTH_LONG).show()

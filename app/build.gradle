@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.hatenablog.shoma2da.android.timer"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 109
         versionName "1.2.0"
@@ -49,6 +49,7 @@ dependencies {
     }
 //    compile 'com.parse.bolts:bolts-android:1.+'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.jakewharton.timber:timber:4.1.0'
 }
 buildscript {
     ext.kotlin_version = '1.0.0-beta-4584'

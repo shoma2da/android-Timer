@@ -33,7 +33,6 @@ public class CountdownActivity : Activity() {
         override fun onClick(view : View) {
             val context = view.context ?: return
 
-//            val tracker = (context.applicationContext as TimerApplication?)?.getTracker()
             val logger = context.getLogger()
 
             val pauseText = context.getString(R.string.pause)

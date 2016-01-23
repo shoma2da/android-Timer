@@ -1,14 +1,11 @@
 package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity
 
+//import com.parse.ParseObject
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-//import com.parse.ParseObject
-import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import kotlin.text.isEmpty
 
