@@ -58,14 +58,6 @@ class SettingFragment : PreferenceFragment() {
             true
         }
 
-        //開発者メニューの動作設定
-        findPreference("developer")?.setOnPreferenceClickListener { preference ->
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse("https://twitter.com/intent/user?screen_name=shoma2da"))
-            activity.startActivity(intent)
-            true
-        }
-
         //Google Playの動作設定
         findPreference("google_play")?.setOnPreferenceClickListener { preference ->
             val intent = Intent(Intent.ACTION_VIEW)
