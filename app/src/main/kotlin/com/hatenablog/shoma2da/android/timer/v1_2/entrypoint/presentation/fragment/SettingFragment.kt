@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
+import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
-import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.RequestActivity
 import net.app_c.cloud.sdk.AppCCloud
 
 class SettingFragment : PreferenceFragment() {
@@ -54,7 +54,7 @@ class SettingFragment : PreferenceFragment() {
 
         //要望メニューの動作設定
         findPreference("request")?.setOnPreferenceClickListener { preference ->
-            activity.startActivity(Intent(activity, RequestActivity::class.java))
+            Meyasubaco.showCommentActivity(activity);
             true
         }
 
