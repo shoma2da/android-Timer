@@ -2,6 +2,7 @@ package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activ
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -12,12 +13,11 @@ import android.os.Bundle
 import android.os.Vibrator
 import android.preference.PreferenceManager
 import android.util.Log
-import android.view.KeyEvent
-import android.view.View
+import android.view.*
 import android.view.View.OnClickListener
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
@@ -94,7 +94,8 @@ public class CountdownActivity : Activity() {
         }
 
         //パラメータを受け取る
-        val time = intent?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
+        //val time = intent?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
+        val time = RemainTime(0, 1)
 
         //表示の初期設定
         setupViews(time)
@@ -207,17 +208,30 @@ public class CountdownActivity : Activity() {
                         WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
                 mTimeText?.text = RemainTime(0, 0).toString()
-                AlertDialog.Builder(this).setPositiveButton(R.string.ok, { dialog, which ->
-                    player?.stop()
-                    vibrator.cancel()
-                    dialog.dismiss()
 
-                    //リストページに戻る
-                    startActivity(Intent(this, MainActivity::class.java))
+                //ダイアログ準備
+                val dialog = Dialog(this)
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCancelable(false)
+                val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater;
+                val dialogLayout = inflater.inflate(R.layout.dialog_finish_timer_dialog, null);
+                dialogLayout.findViewById(R.id.button_ok).setOnClickListener {
+                    stopNotification(player, vibrator)
+                }
+                dialog.setContentView(dialogLayout)
 
-                    finish()
-                }).
-                        create().show()
+                //広告読み込み
+                val adView = dialogLayout.findViewById(R.id.adView) as AdView;
+                adView.load()
+                adView.adListener = object:AdListener() {
+                    override fun onAdOpened() {
+                        super.onAdOpened()
+                        stopNotification(player, vibrator)
+                    }
+                }
+
+                //ダイアログ表示
+                dialog.show()
 
                 //レビューお願い用のイベントカウント
                 val preferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -226,6 +240,16 @@ public class CountdownActivity : Activity() {
             }
             else -> {} //nothing
         }
+    }
+
+    private fun stopNotification(player:MediaPlayer, vibrator:Vibrator) {
+        player?.stop()
+        vibrator.cancel()
+
+        //リストページに戻る
+        startActivity(Intent(this, MainActivity::class.java))
+
+        finish()
     }
 
     override fun onConfigurationChanged(configuration: Configuration) {
