@@ -3,9 +3,7 @@ package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activ
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 

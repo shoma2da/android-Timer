@@ -9,9 +9,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.Toast
 import co.meyasuba.android.sdk.Meyasubaco
-import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 
@@ -35,7 +33,7 @@ class PleaseReviewDialog : DialogFragment() {
                 .setPositiveButton(R.string.please_review_good, { dialog, which ->
                     //Google Playに遷移
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.setData(Uri.parse("market://details?id=${activity.getPackageName()}"))
+                    intent.setData(Uri.parse("market://details?id=${activity.packageName}"))
                     activity.startActivity(intent)
 
                     //Toast表示

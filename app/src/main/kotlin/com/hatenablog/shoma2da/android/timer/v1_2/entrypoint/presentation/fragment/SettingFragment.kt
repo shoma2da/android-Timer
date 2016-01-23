@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.preference.ListPreference
-import android.preference.Preference
 import android.preference.PreferenceFragment
 import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
@@ -41,7 +40,7 @@ class SettingFragment : PreferenceFragment() {
 
         //お知らせ方法の設定
         val noticationMethods = findPreference("notification_method") as ListPreference
-        noticationMethods.summary = noticationMethods.getEntry();
+        noticationMethods.summary = noticationMethods.entry;
         noticationMethods.setOnPreferenceChangeListener({preference, newValue ->
             val index = noticationMethods.findIndexOfValue(newValue.toString())
             val entries = noticationMethods.entries

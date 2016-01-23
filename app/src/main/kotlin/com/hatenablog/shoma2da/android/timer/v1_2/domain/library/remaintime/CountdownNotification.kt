@@ -1,15 +1,14 @@
 package com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime
 
-import android.graphics.BitmapFactory
-import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.RemainTime
-import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.CountdownActivity
-import android.content.Intent
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.support.v4.app.NotificationCompat
-import android.app.NotificationManager
+import com.hatenablog.shoma2da.android.timer.R
+import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.CountdownActivity
 
 class CountdownNotification(val service: Service) {
 

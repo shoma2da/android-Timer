@@ -242,7 +242,7 @@ public class CountdownActivity : Activity() {
     }
 
     private fun stopNotification(player:MediaPlayer, vibrator:Vibrator) {
-        player?.stop()
+        player.stop()
         vibrator.cancel()
 
         //リストページに戻る
