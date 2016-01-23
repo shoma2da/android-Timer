@@ -15,6 +15,7 @@ import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.dialog.PleaseReviewDialog
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import io.fabric.sdk.android.Fabric
 
 class MainActivity : Activity() {
@@ -30,9 +31,8 @@ class MainActivity : Activity() {
         }
 
         //Analytics
-        val tracker = (application as TimerApplication?)?.getTracker()
-        tracker?.setScreenName("MainActivity")
-        tracker?.send(HitBuilders.ScreenViewBuilder().build());
+        val logger = getLogger()
+        logger.sendScreenLog("MainActivity")
 
         //ランチャー起動
         startService(Intent(this, NotificationLauncherService::class.java))

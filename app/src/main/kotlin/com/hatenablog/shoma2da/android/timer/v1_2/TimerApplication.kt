@@ -1,29 +1,30 @@
 package com.hatenablog.shoma2da.android.timer.v1_2
 
 import android.app.Application
-import com.google.android.gms.analytics.GoogleAnalytics
-import com.google.android.gms.analytics.Tracker
-import com.hatenablog.shoma2da.android.timer.BuildConfig
+import com.hatenablog.shoma2da.android.timer.v1_2.log.Logger
 
 class TimerApplication : Application() {
 
-    var mTracker: Tracker? = null
+    var mLogger:Logger? = null
 
     override fun onCreate() {
         super.onCreate()
 
 //        Parse.initialize(this, "JD6OCOsnYojTL0yQLqoYYBINmf7s9ugK6uHZgfBa", "GZvBpMmBaMG7ejDatcTUcBCsq9kxDOir4LYZAIIX")
 //        ParseInstallation.getCurrentInstallation().saveInBackground();
+
+        AppInitializer.initialize();
     }
 
-    public fun getTracker() : Tracker? {
-        if (BuildConfig.DEBUG) {
-            return null;
+    fun getLogger():Logger {
+        if (mLogger == null) {
+            mLogger = Injection.logger(this)
         }
-        if (mTracker == null) {
-            mTracker= GoogleAnalytics.getInstance(this)?.newTracker("UA-32548600-14")
+        val logger = mLogger
+        if (logger != null) {
+            return logger
         }
-        return mTracker
+        throw RuntimeException("logger is null")
     }
 
 }

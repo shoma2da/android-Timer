@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import kotlin.text.isEmpty
 
 class RequestActivity : Activity() {
@@ -19,9 +20,8 @@ class RequestActivity : Activity() {
         setTitle(R.string.request)
 
         //Analytics
-        val tracker = (application as TimerApplication?)?.getTracker()
-        tracker?.setScreenName("RequestActivity")
-        tracker?.send(HitBuilders.ScreenViewBuilder().build());
+        val logger = application.getLogger()
+        logger.sendScreenLog("RequestActivity")
 
         //送信ボタン
         findViewById(R.id.sendButton).setOnClickListener { view ->

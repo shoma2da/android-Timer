@@ -40,7 +40,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".v1_2.entrypoint.presentation.activity.MainActivity" />
         </activity>
-        <activity android:name=".RequestActivity" />
+        <activity android:name=".v1_2.entrypoint.presentation.activity.RequestActivity" />
 
         <service android:name=".v1_2.domain.countdown.CountdownService" />
         <service android:name=".v1_2.domain.notificationlauncher.NotificationLauncherService" />

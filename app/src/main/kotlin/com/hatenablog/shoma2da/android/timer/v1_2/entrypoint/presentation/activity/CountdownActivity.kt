@@ -19,14 +19,13 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.analytics.HitBuilders
-import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.R
-import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.RemainTime
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationMethodSetting
-import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 
 public class CountdownActivity : Activity() {
 
@@ -34,7 +33,8 @@ public class CountdownActivity : Activity() {
         override fun onClick(view : View) {
             val context = view.context ?: return
 
-            val tracker = (context.applicationContext as TimerApplication?)?.getTracker()
+//            val tracker = (context.applicationContext as TimerApplication?)?.getTracker()
+            val logger = context.getLogger()
 
             val pauseText = context.getString(R.string.pause)
             val restartText = context.getString(R.string.restart)
@@ -48,10 +48,7 @@ public class CountdownActivity : Activity() {
                     context.startService(intent)
 
                     //Analytics
-                    tracker?.send(HitBuilders.EventBuilder()
-                            .setCategory("timer")
-                            ?.setAction("pause")
-                            ?.build())
+                    logger.sendEvent("timer", "pause")
 
                     button.text = restartText
                     button.setBackgroundResource(R.drawable.round_button_green)
@@ -67,10 +64,7 @@ public class CountdownActivity : Activity() {
                     button.setBackgroundResource(R.drawable.round_button_yellow)
 
                     //Analytics
-                    tracker?.send(HitBuilders.EventBuilder()
-                            .setCategory("timer")
-                            ?.setAction("restart")
-                            ?.build())
+                    logger.sendEvent("timer", "restart")
                 }
             }
         }
@@ -89,9 +83,8 @@ public class CountdownActivity : Activity() {
         setContentView(R.layout.activity_countdown)
 
         //Analytics
-        val tracker = (application as TimerApplication?)?.getTracker()
-        tracker?.setScreenName("CountdounActivity")
-        tracker?.send(HitBuilders.ScreenViewBuilder().build());
+        val logger = application.getLogger()
+        logger.sendScreenLog("CountdounActivity")
 
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = intent?.action
@@ -132,11 +125,7 @@ public class CountdownActivity : Activity() {
         startService(intent)
 
         //Analytics
-        tracker?.send(HitBuilders.EventBuilder()
-                .setCategory("timer")
-                ?.setAction("start")
-                ?.setLabel(time.toString())
-                ?.build())
+        logger.sendEvent("timer", "start", time.toString())
     }
 
     private fun setupViews(time: RemainTime) {
@@ -159,12 +148,8 @@ public class CountdownActivity : Activity() {
                         startActivity(Intent(this, MainActivity::class.java))
 
                         //Analytics
-                        val tracker = (application as TimerApplication?)?.getTracker()
-                        tracker?.send(HitBuilders.EventBuilder()
-                                .setCategory("timer")
-                                ?.setAction("cancel")
-                                ?.setLabel(time.toString())
-                                ?.build())
+                        val logger = application.getLogger()
+                        logger.sendEvent("timer", "cancel", time.toString())
 
                         finish()
                     })
@@ -212,11 +197,8 @@ public class CountdownActivity : Activity() {
                 )
 
                 //Analytics
-                val tracker = (application as TimerApplication?)?.getTracker()
-                tracker?.send(HitBuilders.EventBuilder()
-                        .setCategory("timer")
-                        ?.setAction("finish")
-                        ?.build())
+                val logger = application.getLogger()
+                logger.sendEvent("timer", "finish")
 
                 //画面を点灯する
                 val window = window

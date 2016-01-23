@@ -6,6 +6,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.analytics.HitBuilders
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 
 class SettingActivity : PreferenceActivity() {
@@ -16,9 +17,8 @@ class SettingActivity : PreferenceActivity() {
         setTitle(R.string.setting)
 
         //Analytics
-        val tracker = (application as TimerApplication?)?.getTracker()
-        tracker?.setScreenName("SettingActivity")
-        tracker?.send(HitBuilders.ScreenViewBuilder().build());
+        val logger = application.getLogger()
+        logger.sendScreenLog("SettingActivity")
 
         //広告設定
         (findViewById(R.id.adView) as AdView).load()

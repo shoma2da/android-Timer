@@ -13,6 +13,7 @@ import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.RequestActivity
 import com.hatenablog.shoma2da.android.timer.v1_2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 
 class PleaseReviewDialog : DialogFragment() {
 
@@ -20,11 +21,8 @@ class PleaseReviewDialog : DialogFragment() {
         val activity = activity!!
 
         //Analytics準備
-        val tracker = (activity.application as TimerApplication?)?.getTracker()
-        tracker?.send(HitBuilders.EventBuilder()
-                .setCategory("please_review")
-                ?.setAction("show")
-                ?.build())
+        val logger = activity.getLogger()
+        logger.sendEvent("please_review", "show")
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(activity)
         val condition = PleaseReviewCondition.create(preferences)
@@ -47,11 +45,7 @@ class PleaseReviewDialog : DialogFragment() {
                     condition?.setNeverShow()
 
                     //Analytics
-                    tracker?.send(HitBuilders.EventBuilder()
-                            .setCategory("please_review")
-                            ?.setAction("tap")
-                            ?.setLabel("good")
-                            ?.build())
+                    logger.sendEvent("please_review", "tap", "good")
 
                     dialog.dismiss()
                 })
@@ -66,11 +60,7 @@ class PleaseReviewDialog : DialogFragment() {
                     condition?.setNeverShow()
 
                     //Analytics
-                    tracker?.send(HitBuilders.EventBuilder()
-                            .setCategory("please_review")
-                            ?.setAction("tap")
-                            ?.setLabel("bad")
-                            ?.build())
+                    logger.sendEvent("please_review", "tap", "bad")
 
                     dialog.dismiss()
                 })
