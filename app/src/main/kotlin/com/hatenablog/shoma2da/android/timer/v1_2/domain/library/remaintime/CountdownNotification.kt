@@ -26,7 +26,7 @@ class CountdownNotification(val service: Service) {
         val pendingIntent = PendingIntent.getActivity(service, 0, intent, 0)
         mNotificationBuilder = NotificationCompat.Builder(service).
                 setLargeIcon(BitmapFactory.decodeResource(service.resources, R.drawable.ic_launcher))?.
-                setSmallIcon(R.drawable.ic_launcher)?.
+                setSmallIcon(R.drawable.ic_launcher_notification)?.
                 setTicker(service.getString(R.string.notification_set_timer))?.
                 setContentTitle(service.resources?.getString(R.string.app_name))?.
                 setContentText(time.toString())?.

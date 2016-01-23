@@ -33,7 +33,7 @@ class NotificationLauncherService : Service() {
         val pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0)
         val notificationBuilder = NotificationCompat.Builder(this).
                 setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_launcher))?.
-                setSmallIcon(R.drawable.ic_launcher)?.
+                setSmallIcon(R.drawable.ic_launcher_notification)?.
                 setTicker(null)?.
                 setContentTitle(resources?.getString(R.string.notification_open_app))?.
                 setContentText(resources?.getString(R.string.notification_open_app_setting))?.
