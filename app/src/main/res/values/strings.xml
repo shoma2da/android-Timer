@@ -27,6 +27,7 @@
     <string name="notification_launcher_summary">You can open this app from the notification</string>
     <string name="notification_method_title">how to notify</string>
     <string name="request">Send your opinion</string>
+    <string name="question">Frequently asked questions</string>
     <string name="google_play">Open Google Play</string>
     <string name="recommend_apps">Recommend Applications</string>
 

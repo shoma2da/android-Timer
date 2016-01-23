@@ -58,6 +58,12 @@ class SettingFragment : PreferenceFragment() {
             true
         }
 
+        //よくある質問メニューの動作設定
+        findPreference("question")?.setOnPreferenceClickListener { preference ->
+            Meyasubaco.showHelpListActivity(activity)
+            true
+        }
+
         //Google Playの動作設定
         findPreference("google_play")?.setOnPreferenceClickListener { preference ->
             val intent = Intent(Intent.ACTION_VIEW)
