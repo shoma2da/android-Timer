@@ -12,7 +12,7 @@ class Injection {
         fun logger(context:Context): Logger {
             val tracker:Tracker? = GoogleAnalytics.getInstance(context)?.newTracker("UA-32548600-14")
             if (tracker != null) {
-                ReleaseLogger(tracker)
+                return ReleaseLogger(tracker)
             }
             throw RuntimeException()
         }
