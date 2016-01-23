@@ -94,8 +94,7 @@ public class CountdownActivity : Activity() {
         }
 
         //パラメータを受け取る
-        //val time = intent?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
-        val time = RemainTime(0, 1)
+        val time = intent?.getSerializableExtra(TIME_PARAM_NAME) as RemainTime
 
         //表示の初期設定
         setupViews(time)
