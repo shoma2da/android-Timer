@@ -40,7 +40,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".v1_2.entrypoint.presentation.activity.MainActivity" />
         </activity>
-        <activity android:name=".v1_2.entrypoint.presentation.activity.RequestActivity" />
 
         <service android:name=".v1_2.domain.countdown.CountdownService" />
         <service android:name=".v1_2.domain.notificationlauncher.NotificationLauncherService" />
@@ -81,13 +80,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-        <receiver android:name=".receiver.PackageReplacedReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        <service android:name=".package_replace.PackageReplacedNotificationService" />
         <!-- AppC Core Setting End -->
 
         <!-- AppC Core Setting Start -->
@@ -126,11 +118,7 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <!--
-                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
-                -->
-                <category android:name="com.parse.starter" />
+                <category android:name="com.hatenablog.shoma2da.android.timer" />
             </intent-filter>
         </receiver>
         <!-- /Parse -->
