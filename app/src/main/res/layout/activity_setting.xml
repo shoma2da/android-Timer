@@ -12,7 +12,7 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:name="com.hatenablog.shoma2da.android.timer.SettingFragment"
+        android:name="com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.fragment.SettingFragment"
         />
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
