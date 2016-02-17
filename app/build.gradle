@@ -52,6 +52,9 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.jakewharton.timber:timber:4.1.0'
     compile 'co.meyasuba.android.sdk:meyasubaco-sdk:0.+'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.+'
 }
 buildscript {
     ext.kotlin_version = '1.0.0-beta-4584'
