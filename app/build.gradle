@@ -54,7 +54,7 @@ dependencies {
     compile 'co.meyasuba.android.sdk:meyasubaco-sdk:0.+'
 }
 buildscript {
-    ext.kotlin_version = '1.0.0-beta-4584'
+    ext.kotlin_version = '1.0.0'
     repositories {
         mavenCentral()
     }
