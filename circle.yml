@@ -1,0 +1,16 @@
+machine:
+  environment:
+    GRADLE_OPTS: -Xmx512m -XX:MaxPermSize=512m
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter tools
+    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+    - echo y | android update sdk --no-ui --all --filter extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository
+
+test:
+  override:
+    - ./gradlew testDebugUnitTest
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/test-results/debug/*/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
