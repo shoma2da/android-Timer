@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
@@ -44,25 +45,29 @@ class TimeListFragment : Fragment() {
         //リストの初期設定
         val list = view.findViewById(R.id.list) as ListView
         list.adapter = adapter
-        list.setOnItemClickListener({parent, view, position, id ->
+        list.setOnItemClickListener(createListItemClickListener(context, remainTimes))
+
+        //広告設定
+        (view.findViewById(R.id.adView) as AdView).load()
+
+        return view
+    }
+
+    private fun createListItemClickListener(context: Activity?, remainTimes: Array<RemainTime>): (AdapterView<*>, View, Int, Long) -> Unit {
+        return { parent, view, position, id ->
             val text = (view as TextView).text
 
             if (text != null) {
                 val time = remainTimes[position]
 
-                val clazz:Class<CountdownActivity> = CountdownActivity::class.java
+                val clazz: Class<CountdownActivity> = CountdownActivity::class.java
                 val intent = Intent(context, clazz)
                 intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
                 view.context?.startActivity(intent)
 
                 mActivity?.finish()
             }
-        })
-
-        //広告設定
-        (view.findViewById(R.id.adView) as AdView).load()
-
-        return view
+        }
     }
 
     override fun onAttach(activity: Activity?) {
