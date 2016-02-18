@@ -25,9 +25,23 @@ import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.Rema
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 
 public class CountdownActivity : Activity() {
+
+    companion object {
+        val TIME_PARAM_NAME = "time_param"
+
+        val START_COUNTDOWN_PARAM_NAME = "countdown_param"
+
+        fun start(context: Activity?, time: RemainTime, view: View) {
+            val clazz: Class<CountdownActivity> = CountdownActivity::class.java
+            val intent = Intent(context, clazz)
+            intent.putExtra(TIME_PARAM_NAME, time)
+            view.context?.startActivity(intent)
+        }
+    }
 
     class OnPauseButtonClickListener(val timeText: TextView) : OnClickListener {
         override fun onClick(view : View) {
@@ -67,11 +81,6 @@ public class CountdownActivity : Activity() {
                 }
             }
         }
-    }
-
-    companion object {
-        val TIME_PARAM_NAME = "time_param"
-        val START_COUNTDOWN_PARAM_NAME = "countdown_param"
     }
 
     private var mTimeText: TextView? = null
@@ -177,21 +186,19 @@ public class CountdownActivity : Activity() {
                 val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 NotificationMethodSetting.load(this).action(
                     onSound = {
-                        //音の開始
-                        player?.isLooping = true
-                        player?.start()
+                        startSound(player)
+
+                        //端末音量がゼロの場合は場合はバイブレーションを出す
+                        if (isSilentMode()) {
+                            startVibration(vibrator)
+                        }
                     },
                     onVibration = {
-                        //バイブレーション開始
-                        vibrator.vibrate(longArrayOf(1000L, 1000L), 0)
+                        startVibration(vibrator)
                     },
                     onBoth = {
-                        //音の開始
-                        player?.isLooping = true
-                        player?.start()
-
-                        //バイブレーション開始
-                        vibrator.vibrate(longArrayOf(1000L, 1000L), 0)
+                        startSound(player)
+                        startVibration(vibrator)
                     }
                 )
 
@@ -239,6 +246,15 @@ public class CountdownActivity : Activity() {
             }
             else -> {} //nothing
         }
+    }
+
+    private fun startVibration(vibrator: Vibrator) {
+        vibrator.vibrate(longArrayOf(1000L, 1000L), 0)
+    }
+
+    private fun startSound(player: MediaPlayer) {
+        player?.isLooping = true
+        player?.start()
     }
 
     private fun stopNotification(player:MediaPlayer, vibrator:Vibrator) {
