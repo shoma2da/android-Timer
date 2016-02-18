@@ -20,12 +20,12 @@ import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.Rema
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.CountdownActivity
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 
-public class TimelistFragment : Fragment() {
+class TimeListFragment : Fragment() {
 
     private var mReceiver: BroadcastReceiver? = null
     private var mActivity: Activity? = null
 
-    public override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_timelist, null)
         val context: Activity? = activity
 
@@ -65,7 +65,7 @@ public class TimelistFragment : Fragment() {
         return view
     }
 
-    public override fun onAttach(activity: Activity?) {
+    override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
 
         mActivity = activity
@@ -102,7 +102,7 @@ public class TimelistFragment : Fragment() {
         activity.registerReceiver(mReceiver, IntentFilter(CountdownService.ACTION_BROADCAST_STATUS))
     }
 
-    public override fun onDetach() {
+    override fun onDetach() {
         super.onDetach()
 
         if (mActivity != null && mReceiver != null) {
