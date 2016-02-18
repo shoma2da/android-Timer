@@ -13,13 +13,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.TextView
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.RemainTime
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.CountdownActivity
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.showSimpleAlertDialog
 
 class TimeListFragment : Fragment() {
 
@@ -57,9 +58,14 @@ class TimeListFragment : Fragment() {
     private fun createListItemClickListener(context: Activity?, remainTimes: Array<RemainTime>):
                                                 (AdapterView<*>, View, Int, Long) -> Unit {
         return { parent, view, position, id ->
-            val time = remainTimes[position]
-            CountdownActivity.start(context, time, view)
-            mActivity?.finish()
+            val result = mActivity?.isSilentMode()
+            if (result != null && result) {
+                mActivity?.showSimpleAlertDialog("音量がゼロです。設定を変更してから再度タイマーを設定しください。", "OK")
+            } else {
+                val time = remainTimes[position]
+                CountdownActivity.start(context, time, view)
+                mActivity?.finish()
+            }
         }
     }
 
