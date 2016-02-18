@@ -29,38 +29,12 @@
             android:layout_width="10dip"
             android:layout_height="0dip" />
 
-        <LinearLayout
-            android:orientation="horizontal"
+
+        <include
+            layout="@layout/layout_control_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/timeText"
-            android:layout_centerHorizontal="true"
-            >
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="150dip"
-                android:layout_height="150dip"
-                android:textColor="@android:color/black"
-                android:text="@string/stop"
-                android:textSize="25sp"
-                android:background="@drawable/round_button_red"
-                android:fontFamily="sans-serif"
-                />
-            <View
-                android:layout_width="10dip"
-                android:layout_height="0dip" />
-            <Button
-                android:id="@+id/pauseButton"
-                android:layout_width="150dip"
-                android:layout_height="150dip"
-                android:textColor="@android:color/black"
-                android:text="@string/pause"
-                android:textSize="25sp"
-                android:background="@drawable/round_button_yellow"
-                android:fontFamily="sans-serif"
-                />
-        </LinearLayout>
-
+            />
     </LinearLayout>
 
     <include

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -18,37 +17,13 @@
         android:fontFamily="sans-serif-light"
         />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <include
+        layout="@layout/layout_control_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/timeText"
         android:layout_centerHorizontal="true"
-        >
-        <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="150dip"
-            android:layout_height="150dip"
-            android:textColor="@android:color/black"
-            android:text="@string/stop"
-            android:textSize="25sp"
-            android:background="@drawable/round_button_red"
-            android:fontFamily="sans-serif"
-            />
-        <View
-            android:layout_width="10dip"
-            android:layout_height="0dip" />
-        <Button
-            android:id="@+id/pauseButton"
-            android:layout_width="150dip"
-            android:layout_height="150dip"
-            android:textColor="@android:color/black"
-            android:text="@string/pause"
-            android:textSize="25sp"
-            android:background="@drawable/round_button_yellow"
-            android:fontFamily="sans-serif"
-            />
-    </LinearLayout>
+        />
 
     <include
         layout="@layout/layout_adview_banner"
