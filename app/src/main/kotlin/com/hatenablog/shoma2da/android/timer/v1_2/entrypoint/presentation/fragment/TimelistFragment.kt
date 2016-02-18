@@ -17,6 +17,7 @@ import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.RemainTime
+import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.CountdownActivity
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
@@ -58,15 +59,25 @@ class TimeListFragment : Fragment() {
     private fun createListItemClickListener(context: Activity?, remainTimes: Array<RemainTime>):
                                                 (AdapterView<*>, View, Int, Long) -> Unit {
         return { parent, view, position, id ->
-            val result = mActivity?.isSilentMode()
-            if (result != null && result) {
-                mActivity?.showSimpleAlertDialog("音量がゼロです。設定を変更してから再度タイマーを設定しください。", "OK")
-            } else {
-                val time = remainTimes[position]
-                CountdownActivity.start(context, time, view)
-                mActivity?.finish()
-            }
+            NotificationMethodSetting.load(mActivity!!).action(
+                onSound = {
+                    val result = mActivity?.isSilentMode()
+                    if (result != null && result) {
+                        mActivity?.showSimpleAlertDialog("音量がゼロです。設定を変更してから再度タイマーを設定しください。", "OK")
+                    } else {
+                        startCountdownActivity(context, position, remainTimes, view)
+                    }
+                },
+                onBoth = { startCountdownActivity(context, position, remainTimes, view) },
+                onVibration = { startCountdownActivity(context, position, remainTimes, view) }
+            )
         }
+    }
+
+    private fun startCountdownActivity(context: Activity?, position: Int, remainTimes: Array<RemainTime>, view: View) {
+        val time = remainTimes[position]
+        CountdownActivity.start(context, time, view)
+        mActivity?.finish()
     }
 
     override fun onAttach(activity: Activity?) {
