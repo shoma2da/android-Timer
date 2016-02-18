@@ -45,7 +45,8 @@ class TimeListFragment : Fragment() {
         //リストの初期設定
         val list = view.findViewById(R.id.list) as ListView
         list.adapter = adapter
-        list.setOnItemClickListener(createListItemClickListener(context, remainTimes))
+        val listener = createListItemClickListener(context, remainTimes)
+        list.setOnItemClickListener(listener)
 
         //広告設定
         (view.findViewById(R.id.adView) as AdView).load()
