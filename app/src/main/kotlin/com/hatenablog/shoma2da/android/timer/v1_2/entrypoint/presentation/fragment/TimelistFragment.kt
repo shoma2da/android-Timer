@@ -10,22 +10,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.TextView
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.library.remaintime.RemainTime
+import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity.CountdownActivity
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
+import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.showSimpleAlertDialog
 
-public class TimelistFragment : Fragment() {
+class TimeListFragment : Fragment() {
 
     private var mReceiver: BroadcastReceiver? = null
     private var mActivity: Activity? = null
 
-    public override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_timelist, null)
         val context: Activity? = activity
 
@@ -44,20 +47,8 @@ public class TimelistFragment : Fragment() {
         //リストの初期設定
         val list = view.findViewById(R.id.list) as ListView
         list.adapter = adapter
-        list.setOnItemClickListener({parent, view, position, id ->
-            val text = (view as TextView).text
-
-            if (text != null) {
-                val time = remainTimes[position]
-
-                val clazz:Class<CountdownActivity> = CountdownActivity::class.java
-                val intent = Intent(context, clazz)
-                intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
-                view.context?.startActivity(intent)
-
-                mActivity?.finish()
-            }
-        })
+        val listener = createListItemClickListener(context, remainTimes)
+        list.setOnItemClickListener(listener)
 
         //広告設定
         (view.findViewById(R.id.adView) as AdView).load()
@@ -65,7 +56,31 @@ public class TimelistFragment : Fragment() {
         return view
     }
 
-    public override fun onAttach(activity: Activity?) {
+    private fun createListItemClickListener(context: Activity?, remainTimes: Array<RemainTime>):
+                                                (AdapterView<*>, View, Int, Long) -> Unit {
+        return { parent, view, position, id ->
+            NotificationMethodSetting.load(mActivity!!).action(
+                onSound = {
+                    val result = mActivity?.isSilentMode()
+                    if (result != null && result) {
+                        mActivity?.showSimpleAlertDialog("音量がゼロです。設定を変更してから再度タイマーを設定しください。", "OK")
+                    } else {
+                        startCountdownActivity(context, position, remainTimes, view)
+                    }
+                },
+                onBoth = { startCountdownActivity(context, position, remainTimes, view) },
+                onVibration = { startCountdownActivity(context, position, remainTimes, view) }
+            )
+        }
+    }
+
+    private fun startCountdownActivity(context: Activity?, position: Int, remainTimes: Array<RemainTime>, view: View) {
+        val time = remainTimes[position]
+        CountdownActivity.start(context, time, view)
+        mActivity?.finish()
+    }
+
+    override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
 
         mActivity = activity
@@ -102,7 +117,7 @@ public class TimelistFragment : Fragment() {
         activity.registerReceiver(mReceiver, IntentFilter(CountdownService.ACTION_BROADCAST_STATUS))
     }
 
-    public override fun onDetach() {
+    override fun onDetach() {
         super.onDetach()
 
         if (mActivity != null && mReceiver != null) {

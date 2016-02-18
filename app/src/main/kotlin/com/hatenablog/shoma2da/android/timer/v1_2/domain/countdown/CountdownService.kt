@@ -36,7 +36,11 @@ class CountdownService : Service() {
 
     override fun onBind(intent: Intent): IBinder? = null
 
-    override fun onStartCommand(intent: Intent, flags:Int, startId:Int):Int {
+    override fun onStartCommand(intent: Intent?, flags:Int, startId:Int):Int {
+        if (intent == null) {
+            return super.onStartCommand(intent, flags, startId)
+        }
+
         val actionParameter = intent.getStringExtra(PARAM_NAME_ACTION) ?: return super.onStartCommand(intent, flags, startId);
 
         val action = Action.valueOf(actionParameter)

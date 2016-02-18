@@ -14,10 +14,5 @@
         android:layout_width="match_parent"
         android:name="com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.fragment.SettingFragment"
         />
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adUnitId="ca-app-pub-8704720300499162/1774962216"
-        ads:adSize="BANNER"/>
+    <include layout="@layout/layout_adview_banner" />
 </LinearLayout>
