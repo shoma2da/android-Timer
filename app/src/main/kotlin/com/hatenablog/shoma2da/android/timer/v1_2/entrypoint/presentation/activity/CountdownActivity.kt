@@ -29,6 +29,19 @@ import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 
 public class CountdownActivity : Activity() {
 
+    companion object {
+        val TIME_PARAM_NAME = "time_param"
+
+        val START_COUNTDOWN_PARAM_NAME = "countdown_param"
+
+        fun start(context: Activity?, time: RemainTime, view: View) {
+            val clazz: Class<CountdownActivity> = CountdownActivity::class.java
+            val intent = Intent(context, clazz)
+            intent.putExtra(TIME_PARAM_NAME, time)
+            view.context?.startActivity(intent)
+        }
+    }
+
     class OnPauseButtonClickListener(val timeText: TextView) : OnClickListener {
         override fun onClick(view : View) {
             val context = view.context ?: return
@@ -67,11 +80,6 @@ public class CountdownActivity : Activity() {
                 }
             }
         }
-    }
-
-    companion object {
-        val TIME_PARAM_NAME = "time_param"
-        val START_COUNTDOWN_PARAM_NAME = "countdown_param"
     }
 
     private var mTimeText: TextView? = null

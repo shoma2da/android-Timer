@@ -53,20 +53,12 @@ class TimeListFragment : Fragment() {
         return view
     }
 
-    private fun createListItemClickListener(context: Activity?, remainTimes: Array<RemainTime>): (AdapterView<*>, View, Int, Long) -> Unit {
+    private fun createListItemClickListener(context: Activity?, remainTimes: Array<RemainTime>):
+                                                (AdapterView<*>, View, Int, Long) -> Unit {
         return { parent, view, position, id ->
-            val text = (view as TextView).text
-
-            if (text != null) {
-                val time = remainTimes[position]
-
-                val clazz: Class<CountdownActivity> = CountdownActivity::class.java
-                val intent = Intent(context, clazz)
-                intent.putExtra(CountdownActivity.TIME_PARAM_NAME, time)
-                view.context?.startActivity(intent)
-
-                mActivity?.finish()
-            }
+            val time = remainTimes[position]
+            CountdownActivity.start(context, time, view)
+            mActivity?.finish()
         }
     }
 
