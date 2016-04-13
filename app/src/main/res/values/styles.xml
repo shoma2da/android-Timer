@@ -3,5 +3,10 @@
     <style name="TimerTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
+        <item name="android:preferenceStyle">@style/Theme.AppCompat.Light</item>
     </style>
+
+    <style name="Meyasubaco.Theme.Base" parent="TimerTheme" />
 </resources>
