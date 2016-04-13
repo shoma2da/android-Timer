@@ -12,6 +12,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Vibrator
 import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.view.View.OnClickListener
@@ -28,7 +29,7 @@ import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
 
-public class CountdownActivity : Activity() {
+public class CountdownActivity : AppCompatActivity() {
 
     companion object {
         val TIME_PARAM_NAME = "time_param"
