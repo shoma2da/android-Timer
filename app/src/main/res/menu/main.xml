@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".v1_2.entrypoint.presentation.activity.MainActivity">
+    tools:context=".v2.entrypoint.presentation.activity.MainActivity">
     <item android:id="@+id/menu_feedback"
           android:icon="@drawable/ic_feedback_white_24px"
           android:title="@string/feedback"
