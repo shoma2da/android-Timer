@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".v1_2.entrypoint.presentation.activity.MainActivity">
     <item android:id="@+id/menu_feedback"
-          android:icon="@drawable/ic_feedback_black"
+          android:icon="@drawable/ic_feedback_white_24px"
           android:title="@string/feedback"
           app:showAsAction="always" />
     <item android:id="@+id/menu_settings"
-          android:icon="@drawable/ic_settings_black"
+          android:icon="@drawable/ic_settings_white_24px"
           android:title="@string/setting"
           app:showAsAction="always" />
 </menu>
