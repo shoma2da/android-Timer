@@ -23,11 +23,15 @@ import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.v2.domain.library.remaintime.RemainTime
-import com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v2.domain.please_review.PleaseReviewCondition
+import com.hatenablog.shoma2da.android.timer.v2.domain.setting.NotificationLengthSetting
+import com.hatenablog.shoma2da.android.timer.v2.domain.setting.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.load
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
+import kotlin.concurrent.timer
 
 public class CountdownActivity : AppCompatActivity() {
 
@@ -202,6 +206,21 @@ public class CountdownActivity : AppCompatActivity() {
                         startVibration(vibrator)
                     }
                 )
+
+                NotificationLengthSetting.load(this).action { isLimitLess, length ->
+                    if (isLimitLess) {
+                        return@action
+                    }
+
+                    thread {
+                        Thread.sleep(length * 1000L)
+
+                        if (player.isPlaying) {
+                            player.stop()
+                        }
+                        vibrator.cancel()
+                    }
+                }
 
                 //Analytics
                 val logger = application.getLogger()

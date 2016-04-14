@@ -1,4 +1,4 @@
-package com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher
+package com.hatenablog.shoma2da.android.timer.v2.domain.setting
 
 import android.content.Context
 import android.preference.PreferenceManager

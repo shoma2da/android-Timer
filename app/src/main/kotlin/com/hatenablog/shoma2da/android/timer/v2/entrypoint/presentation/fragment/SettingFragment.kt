@@ -48,6 +48,19 @@ class SettingFragment : android.support.v14.preference.PreferenceFragment() {
             true
         })
 
+        //お知らせの長さの設定
+        val notificationLength = findPreference("notification_length") as ListPreference
+        notificationLength.summary = notificationLength.entry;
+        notificationLength.setOnPreferenceChangeListener({preference, newValue ->
+            val index = notificationLength.findIndexOfValue(newValue.toString())
+            val entries = notificationLength.entries
+            if (entries != null) {
+                val entry = entries[index]
+                notificationLength.summary = entry
+            }
+            true
+        })
+
         //要望メニューの動作設定
         findPreference("request")?.setOnPreferenceClickListener { preference ->
             Meyasubaco.showCommentActivity(activity);

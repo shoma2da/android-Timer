@@ -17,7 +17,7 @@ import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.countdown.CountdownService
 import com.hatenablog.shoma2da.android.timer.v2.domain.library.remaintime.RemainTime
-import com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher.NotificationMethodSetting
+import com.hatenablog.shoma2da.android.timer.v2.domain.setting.NotificationMethodSetting
 import com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.activity.CountdownActivity
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.load
