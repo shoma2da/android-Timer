@@ -6,6 +6,7 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
+        <item name="preferenceTheme">@style/Theme.AppCompat.Light</item>
     </style>
 
     <style name="Meyasubaco.Theme.Base" parent="TimerTheme" />

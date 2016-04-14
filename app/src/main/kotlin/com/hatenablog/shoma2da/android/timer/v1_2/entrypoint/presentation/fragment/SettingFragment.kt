@@ -3,8 +3,8 @@ package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.fragm
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.preference.ListPreference
-import android.preference.PreferenceFragment
+import android.support.v14.preference.PreferenceFragment
+import android.support.v7.preference.ListPreference
 import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
@@ -12,8 +12,7 @@ import net.app_c.cloud.sdk.AppCCloud
 
 class SettingFragment : PreferenceFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreatePreferences(p0: Bundle?, p1: String?) {
         addPreferencesFromResource(R.xml.preference)
 
         val activity = activity
@@ -26,7 +25,7 @@ class SettingFragment : PreferenceFragment() {
 
         //通知バーランチャーの動作設定
         if (activity == null) {
-            return@onCreate
+            return@onCreatePreferences
         }
         findPreference("notification_launcher")?.setOnPreferenceChangeListener { preference, checkedValue ->
             when (checkedValue) {
