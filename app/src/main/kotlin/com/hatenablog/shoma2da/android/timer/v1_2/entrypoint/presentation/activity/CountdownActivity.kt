@@ -1,7 +1,6 @@
 package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -12,6 +11,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Vibrator
 import android.preference.PreferenceManager
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
