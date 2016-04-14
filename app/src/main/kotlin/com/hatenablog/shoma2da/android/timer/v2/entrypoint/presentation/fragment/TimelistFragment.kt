@@ -37,9 +37,9 @@ class TimeListFragment : Fragment() {
         }
 
         //とりあえず固定でデータ挿入
-        var remainTimes = Array(90, { RemainTime(it + 1, 0) }) //残り時間オブジェクトを無理やり用意
+        var remainTimes = Array(120, { RemainTime(it + 1, 0) }) //残り時間オブジェクトを無理やり用意
         val adapter = ArrayAdapter<String>(context, R.layout.column_timelist)
-        for (integer in 1..90) {
+        for (integer in 1..120) {
             val remainTime = RemainTime(integer, 0)
             adapter.add(remainTime.toString())
         }
