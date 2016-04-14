@@ -7,6 +7,7 @@
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
     <string name="ok">OK</string>
+    <string name="share">シェア</string>
 
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>

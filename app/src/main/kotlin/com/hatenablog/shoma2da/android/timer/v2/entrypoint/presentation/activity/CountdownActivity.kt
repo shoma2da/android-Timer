@@ -2,10 +2,7 @@ package com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.activit
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -29,6 +26,7 @@ import com.hatenablog.shoma2da.android.timer.v2.domain.setting.NotificationMetho
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.load
+import com.hatenablog.shoma2da.android.timer.v2.util.extensions.tweet
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 import kotlin.concurrent.timer
@@ -243,6 +241,21 @@ public class CountdownActivity : AppCompatActivity() {
                 val dialogLayout = inflater.inflate(R.layout.dialog_finish_timer_dialog, null);
                 dialogLayout.findViewById(R.id.button_ok).setOnClickListener {
                     stopNotification(player, vibrator)
+                }
+                val pref = PreferenceManager.getDefaultSharedPreferences(this);
+                if (pref.getBoolean("already_click_share_button", false)) {
+                    dialogLayout.findViewById(R.id.button_share).visibility = View.GONE
+                }
+                dialogLayout.findViewById(R.id.button_share).setOnClickListener {
+                    pref.edit().putBoolean("already_click_share_button", true).apply();
+
+                    application.tweet("タイマーはこれぐらいの簡単さがちょうど良いかも! %23瞬間タイマー", "https://play.google.com/store/apps/details?id=com.hatenablog.shoma2da.android.timer&hl=ja&utm_source=app_share&utm_medium=app&utm_campaign=app_share")
+                    logger.sendEvent("timer", "share")
+
+                    if (player.isPlaying) {
+                        player.stop()
+                    }
+                    vibrator.cancel()
                 }
                 dialog.setContentView(dialogLayout)
 
