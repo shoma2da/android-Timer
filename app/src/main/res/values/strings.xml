@@ -29,7 +29,6 @@
     <string name="request">Send your opinion</string>
     <string name="question">Frequently asked questions</string>
     <string name="google_play">Open Google Play</string>
-    <string name="recommend_apps">Recommend Applications</string>
 
     <!-- レビューお願い -->
     <string name="please_review_message">This app is good?</string>

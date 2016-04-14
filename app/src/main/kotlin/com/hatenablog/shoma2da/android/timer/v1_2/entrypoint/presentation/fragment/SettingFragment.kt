@@ -8,7 +8,6 @@ import android.support.v7.preference.ListPreference
 import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
-import net.app_c.cloud.sdk.AppCCloud
 
 class SettingFragment : PreferenceFragment() {
 
@@ -16,7 +15,6 @@ class SettingFragment : PreferenceFragment() {
         addPreferencesFromResource(R.xml.preference)
 
         val activity = activity
-        val appCloud = AppCCloud(activity).start()
 
         //バージョン情報を設定
         val packageManager = activity?.packageManager
@@ -67,12 +65,6 @@ class SettingFragment : PreferenceFragment() {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setData(Uri.parse("market://details?id=${activity.packageName}"))
             activity.startActivity(intent)
-            true
-        }
-
-        //おすすめアプリの動作設定
-        findPreference("recommend_apps")?.setOnPreferenceClickListener { preference ->
-            appCloud?.Ad?.callWebActivity();
             true
         }
     }
