@@ -1,12 +1,12 @@
 package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activity
 
 import android.os.Bundle
-import android.preference.PreferenceActivity
+import android.support.v7.app.AppCompatActivity
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.fragment.SettingFragment
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 
-class SettingActivity : PreferenceActivity() {
+class SettingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)

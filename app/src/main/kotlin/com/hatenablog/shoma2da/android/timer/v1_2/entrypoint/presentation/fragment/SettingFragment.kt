@@ -9,7 +9,7 @@ import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 
-class SettingFragment : PreferenceFragment() {
+class SettingFragment : android.support.v14.preference.PreferenceFragment() {
 
     override fun onCreatePreferences(p0: Bundle?, p1: String?) {
         addPreferencesFromResource(R.xml.preference)
