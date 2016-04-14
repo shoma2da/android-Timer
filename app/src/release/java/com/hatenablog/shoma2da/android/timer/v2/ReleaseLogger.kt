@@ -1,10 +1,10 @@
-package com.hatenablog.shoma2da.android.timer.v1_2
+package com.hatenablog.shoma2da.android.timer.v2
 
 import com.google.android.gms.analytics.HitBuilders
 import com.google.android.gms.analytics.Tracker
-import com.hatenablog.shoma2da.android.timer.v1_2.log.Logger
+import com.hatenablog.shoma2da.android.timer.v2.log.Logger
 
-class ReleaseLogger(val tracker:Tracker) : Logger(tracker) {
+class ReleaseLogger(val tracker: Tracker) : Logger(tracker) {
 
     override fun sendScreenLog(screenName:String) {
         tracker.setScreenName(screenName)
