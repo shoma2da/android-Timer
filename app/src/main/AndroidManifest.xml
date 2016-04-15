@@ -19,32 +19,32 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".v1_2.TimerApplication"
-        android:theme="@android:style/Theme.Holo.Light" >
+        android:name=".v2.TimerApplication"
+        android:theme="@style/TimerTheme" >
         <activity
-            android:name=".v1_2.entrypoint.presentation.activity.MainActivity"
+            android:name=".v2.entrypoint.presentation.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".v1_2.entrypoint.presentation.activity.CountdownActivity"
+        <activity android:name=".v2.entrypoint.presentation.activity.CountdownActivity"
             android:launchMode="singleTask"
             android:configChanges="orientation|screenSize"
             />
-        <activity android:name=".v1_2.entrypoint.presentation.activity.SettingActivity"
-            android:parentActivityName=".v1_2.entrypoint.presentation.activity.MainActivity"
+        <activity android:name=".v2.entrypoint.presentation.activity.SettingActivity"
+            android:parentActivityName=".v2.entrypoint.presentation.activity.MainActivity"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".v1_2.entrypoint.presentation.activity.MainActivity" />
+                android:value=".v2.entrypoint.presentation.activity.MainActivity" />
         </activity>
 
-        <service android:name=".v1_2.domain.countdown.CountdownService" />
-        <service android:name=".v1_2.domain.notificationlauncher.NotificationLauncherService" />
+        <service android:name=".v2.domain.countdown.CountdownService" />
+        <service android:name=".v2.domain.notificationlauncher.NotificationLauncherService" />
 
-        <receiver android:name=".v1_2.entrypoint.receiver.BootCompletedReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+        <receiver android:name=".v2.entrypoint.receiver.BootCompletedReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.PACKAGE_CHANGED"/>
