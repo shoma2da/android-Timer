@@ -15,6 +15,13 @@
         android:entryValues="@array/notification_methods_values"
         android:defaultValue="vibration"
         />
+    <ListPreference
+        android:key="notification_length"
+        android:title="@string/notification_length"
+        android:entries="@array/notification_length"
+        android:entryValues="@array/notification_length_values"
+        android:defaultValue="-1"
+        />
     <Preference
         android:key="request"
         android:title="@string/request" />
@@ -24,7 +31,4 @@
     <Preference
         android:key="google_play"
         android:title="@string/google_play" />
-    <Preference
-        android:key="recommend_apps"
-        android:title="@string/recommend_apps" />
 </PreferenceScreen>

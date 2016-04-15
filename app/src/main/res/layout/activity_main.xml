@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".v1_2.entrypoint.presentation.activity.MainActivity">
+    tools:context=".v2.entrypoint.presentation.activity.MainActivity">
 
     <fragment
         android:id="@+id/timelist"
-        android:name="com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.fragment.TimeListFragment"
+        android:name="com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.fragment.TimeListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

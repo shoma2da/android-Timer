@@ -12,11 +12,25 @@
         android:layout_height="wrap_content"
         ads:adUnitId="ca-app-pub-8704720300499162/2230602210"
         ads:adSize="MEDIUM_RECTANGLE"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/button_share"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/share"
+        />
     <Button
         android:id="@+id/button_ok"
-        android:layout_width="match_parent"
+        android:layout_width="0dip"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/ok"
         />
+    </LinearLayout>
 </LinearLayout>
