@@ -9,5 +9,8 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
-    <style name="Meyasubaco.Theme.Base" parent="TimerTheme" />
+    <style name="Meyasubaco.Theme.Base" parent="TimerTheme">
+        <item name="android:editTextColor">@android:color/black</item>
+    </style>
+
 </resources>
