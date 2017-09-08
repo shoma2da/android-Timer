@@ -17,6 +17,7 @@ import android.view.*
 import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.TextView
+import co.meyasuba.android.sdk.Meyasubaco
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
@@ -26,6 +27,7 @@ import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.No
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.load
+import org.json.JSONObject
 
 public class CountdownActivity : Activity() {
 
@@ -48,6 +50,7 @@ public class CountdownActivity : Activity() {
 
                     //Analytics
                     logger.sendEvent("timer", "pause")
+                    Meyasubaco.getInstance(context).sendEvent("timer_pause", JSONObject())
 
                     button.text = restartText
                     button.setBackgroundResource(R.drawable.round_button_green)
@@ -125,6 +128,7 @@ public class CountdownActivity : Activity() {
 
         //Analytics
         logger.sendEvent("timer", "start", time.toString())
+        Meyasubaco.getInstance(this).sendEvent("timer_start", JSONObject())
     }
 
     private fun setupViews(time: RemainTime) {
@@ -149,6 +153,7 @@ public class CountdownActivity : Activity() {
                         //Analytics
                         val logger = application.getLogger()
                         logger.sendEvent("timer", "cancel", time.toString())
+                        Meyasubaco.getInstance(this).sendEvent("timer_cancel", JSONObject())
 
                         finish()
                     })
@@ -198,6 +203,7 @@ public class CountdownActivity : Activity() {
                 //Analytics
                 val logger = application.getLogger()
                 logger.sendEvent("timer", "finish")
+                Meyasubaco.getInstance(this).sendEvent("timer_finish", JSONObject())
 
                 //画面を点灯する
                 val window = window

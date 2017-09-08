@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.ReviewRequest
@@ -15,6 +16,8 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_main)
+
+        Meyasubaco.getInstance(this).initialize("66da0d8fb3108d066ee7069dc05db63f")
 
         //Analytics
         val logger = getLogger()
