@@ -2,15 +2,12 @@ package com.hatenablog.shoma2da.android.timer.v1_2.entrypoint.presentation.activ
 
 import android.app.Activity
 import android.content.Intent
-import android.media.AudioManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.ReviewRequest
-import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getAudioManager
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
 
 class MainActivity : Activity() {
@@ -41,10 +38,6 @@ class MainActivity : Activity() {
         when (item?.itemId) {
             R.id.menu_settings -> {
                 startActivity(Intent(this, SettingActivity::class.java))
-                return true;
-            }
-            R.id.menu_feedback -> {
-                Meyasubaco.showCommentActivity(this)
                 return true;
             }
         }

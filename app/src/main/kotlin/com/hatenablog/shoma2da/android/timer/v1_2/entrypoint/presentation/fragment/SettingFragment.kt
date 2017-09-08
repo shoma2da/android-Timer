@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.PreferenceFragment
-import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.notificationlauncher.NotificationLauncherService
 import net.app_c.cloud.sdk.AppCCloud
@@ -50,18 +49,6 @@ class SettingFragment : PreferenceFragment() {
             }
             true
         })
-
-        //要望メニューの動作設定
-        findPreference("request")?.setOnPreferenceClickListener { preference ->
-            Meyasubaco.showCommentActivity(activity);
-            true
-        }
-
-        //よくある質問メニューの動作設定
-        findPreference("question")?.setOnPreferenceClickListener { preference ->
-            Meyasubaco.showHelpListActivity(activity)
-            true
-        }
 
         //Google Playの動作設定
         findPreference("google_play")?.setOnPreferenceClickListener { preference ->

@@ -16,12 +16,6 @@
         android:defaultValue="vibration"
         />
     <Preference
-        android:key="request"
-        android:title="@string/request" />
-    <Preference
-        android:key="question"
-        android:title="@string/question" />
-    <Preference
         android:key="google_play"
         android:title="@string/google_play" />
     <Preference

@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.Toast
-import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v1_2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v1_2.util.extensions.getLogger
@@ -48,9 +47,6 @@ class PleaseReviewDialog : DialogFragment() {
                     dialog.dismiss()
                 })
                 .setNegativeButton(R.string.please_review_bad, { dialog, which ->
-                    //要望画面へ遷移
-                    Meyasubaco.showCommentActivity(activity);
-
                     //Toast表示
                     Toast.makeText(activity, R.string.please_review_send_your_opinion, Toast.LENGTH_LONG).show()
 
