@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_main)
 
+        Meyasubaco.getInstance(this).initialize("66da0d8fb3108d066ee7069dc05db63f")
+
         //Analytics
         val logger = getLogger()
         logger.sendScreenLog("MainActivity")
@@ -39,10 +41,6 @@ class MainActivity : AppCompatActivity() {
         when (item?.itemId) {
             R.id.menu_settings -> {
                 startActivity(Intent(this, SettingActivity::class.java))
-                return true;
-            }
-            R.id.menu_feedback -> {
-                Meyasubaco.showCommentActivity(this)
                 return true;
             }
         }

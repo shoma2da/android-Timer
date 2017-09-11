@@ -9,6 +9,12 @@
     <string name="ok">OK</string>
     <string name="share">シェア</string>
 
+    <!-- nps -->
+    <string name="nps">いつも瞬間タイマーをご利用いただきありがとうございます。下記アンケートにご協力ください。\n\n<b><i>あなたは瞬間タイマーを同僚や友人に薦めたいと思いますか？</i></b></string>
+    <string name="nps_zero">0=全くそう思わない</string>
+    <string name="nps_ten">10=非常にそう思う</string>
+    <string name="nps_comment">（任意）<b><i>そのように思う理由、もしくはアプリについてのご意見をご記入ください。</i></b></string>
+
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>

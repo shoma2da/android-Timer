@@ -3,9 +3,7 @@ package com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.fragmen
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v14.preference.PreferenceFragment
-import android.support.v7.preference.ListPreference
-import co.meyasuba.android.sdk.Meyasubaco
+import android.preference.ListPreference
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher.NotificationLauncherService
 
@@ -60,18 +58,6 @@ class SettingFragment : android.support.v14.preference.PreferenceFragment() {
             }
             true
         })
-
-        //要望メニューの動作設定
-        findPreference("request")?.setOnPreferenceClickListener { preference ->
-            Meyasubaco.showCommentActivity(activity);
-            true
-        }
-
-        //よくある質問メニューの動作設定
-        findPreference("question")?.setOnPreferenceClickListener { preference ->
-            Meyasubaco.showHelpListActivity(activity)
-            true
-        }
 
         //Google Playの動作設定
         findPreference("google_play")?.setOnPreferenceClickListener { preference ->

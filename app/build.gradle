@@ -4,14 +4,14 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.hatenablog.shoma2da.android.timer"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 114
-        versionName "2.0.2"
+        versionCode 115
+        versionName "2.0.3"
     }
     signingConfigs {
         release {
@@ -33,6 +33,7 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/java'
     }
     lintOptions {
         abortOnError false
@@ -50,18 +51,14 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
+
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.parse:parse-android:1.+'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.jakewharton.timber:timber:4.1.0'
-    compile 'co.meyasuba.android.sdk:meyasubaco-sdk:0.8.0'
-
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.+'
 }
 buildscript {
-    ext.kotlin_version = '1.0.0'
+    ext.kotlin_version = '1.1.4-3'
     repositories {
         mavenCentral()
     }
