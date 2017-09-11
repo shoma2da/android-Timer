@@ -15,7 +15,7 @@
 # Java class files
 *.class
 
-# Local configuration file (sdk path, etc)
+# Local configuration file (co.meyasuba.android.sdk path, etc)
 local.properties
 
 # Intellij project files

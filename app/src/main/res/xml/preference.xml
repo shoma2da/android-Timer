@@ -23,12 +23,6 @@
         android:defaultValue="-1"
         />
     <Preference
-        android:key="request"
-        android:title="@string/request" />
-    <Preference
-        android:key="question"
-        android:title="@string/question" />
-    <Preference
         android:key="google_play"
         android:title="@string/google_play" />
 </PreferenceScreen>

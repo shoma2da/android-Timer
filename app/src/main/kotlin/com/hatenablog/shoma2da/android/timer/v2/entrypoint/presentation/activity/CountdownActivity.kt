@@ -1,20 +1,24 @@
 package com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.activity
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Vibrator
 import android.preference.PreferenceManager
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.TextView
+import co.meyasuba.android.sdk.Meyasubaco
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdView
 import com.hatenablog.shoma2da.android.timer.R
@@ -27,9 +31,8 @@ import com.hatenablog.shoma2da.android.timer.v2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.load
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.tweet
-import java.util.concurrent.TimeUnit
+import org.json.JSONObject
 import kotlin.concurrent.thread
-import kotlin.concurrent.timer
 
 public class CountdownActivity : AppCompatActivity() {
 
@@ -65,6 +68,7 @@ public class CountdownActivity : AppCompatActivity() {
 
                     //Analytics
                     logger.sendEvent("timer", "pause")
+                    Meyasubaco.getInstance(context).sendEvent("timer_pause", JSONObject())
 
                     button.text = restartText
                     button.setBackgroundResource(R.drawable.round_button_green)
@@ -81,6 +85,7 @@ public class CountdownActivity : AppCompatActivity() {
 
                     //Analytics
                     logger.sendEvent("timer", "restart")
+                    Meyasubaco.getInstance(context).sendEvent("restart", JSONObject())
                 }
             }
         }
@@ -137,6 +142,9 @@ public class CountdownActivity : AppCompatActivity() {
 
         //Analytics
         logger.sendEvent("timer", "start", time.toString())
+        Meyasubaco.getInstance(this).sendEvent("timer_start", JSONObject().apply {
+            put("time", time.toString())
+        })
     }
 
     private fun setupViews(time: RemainTime) {
@@ -161,6 +169,9 @@ public class CountdownActivity : AppCompatActivity() {
                         //Analytics
                         val logger = application.getLogger()
                         logger.sendEvent("timer", "cancel", time.toString())
+                        Meyasubaco.getInstance(this).sendEvent("timer_cancel", JSONObject().apply {
+                            put("time", time.toString())
+                        })
 
                         finish()
                     })
@@ -223,6 +234,7 @@ public class CountdownActivity : AppCompatActivity() {
                 //Analytics
                 val logger = application.getLogger()
                 logger.sendEvent("timer", "finish")
+                Meyasubaco.getInstance(this).sendEvent("timer_finish", JSONObject())
 
                 //画面を点灯する
                 val window = window
