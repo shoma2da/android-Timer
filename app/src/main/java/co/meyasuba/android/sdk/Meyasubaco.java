@@ -45,4 +45,18 @@ public class Meyasubaco {
             e.printStackTrace();
         }
     }
+
+    public void sendNps(int value, String comment, int launch) {
+        SharedPreferences pref = mContext.getSharedPreferences("meyasubaco", Context.MODE_PRIVATE);
+        String apiKey = pref.getString("apiKey", null);
+        try {
+            JSONObject parameter = new JSONObject();
+            parameter.put("value", value);
+            parameter.put("comment", comment);
+            parameter.put("launch", launch);
+            mApiClient.sendEvent(mContext, "nps", parameter, apiKey);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package co.meyasuba.android.sdk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -33,7 +34,7 @@ class ApiClient {
         this.sendEvent(context, type, new JSONObject(), apiKey);
     }
 
-    void sendEvent(Context context, String type, JSONObject parameter, String apiKey) {
+    void sendEvent(final Context context, String type, JSONObject parameter, String apiKey) {
         final JSONObject json = new JSONObject();
         try {
             json.put("api_key", apiKey);
@@ -70,11 +71,22 @@ class ApiClient {
                     int statusCode = con.getResponseCode();
                     MeyasubacoLog.d("response : " + statusCode);
                     Scanner scanner = new Scanner(con.getInputStream());
+                    StringBuilder builder = new StringBuilder();
                     while (scanner.hasNextLine()) {
-                        MeyasubacoLog.d(scanner.nextLine());
+                        builder.append(scanner.nextLine());
                     }
+                    JSONObject result = new JSONObject(builder.toString());
 
                     con.disconnect();
+
+                    boolean runNps = result.getBoolean("run_nps");
+                    int launch = result.getInt("launch");
+
+                    if (runNps) {
+                        Intent intent = new Intent(context, DialogActivity.class);
+                        intent.putExtra("launch", launch);
+                        context.startActivity(intent);
+                    }
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }

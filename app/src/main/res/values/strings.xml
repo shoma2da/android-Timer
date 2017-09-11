@@ -8,6 +8,12 @@
     <string name="no">No</string>
     <string name="ok">OK</string>
 
+    <!-- nps -->
+    <string name="nps">Thank you for using Quick Timer. Please cooperate with the following questionnaire.\n\n<b><i>How likely is it that you would recommend Quick Timer to a friend or colleague?</i></b></string>
+    <string name="nps_zero">0=Not at all likely</string>
+    <string name="nps_ten">10=Extrimely likely</string>
+    <string name="nps_comment">(Optional)<b><i> Please tell the reasons, or opinion about the application.</i></b></string>
+
     <!-- カウントダウン画面 -->
     <string name="restart">Start</string>
     <string name="pause">Pause</string>
@@ -42,7 +48,7 @@
     <!-- 要望画面 -->
     <string name="request_hint">Please write here</string>
     <string name="request_empty">Oops, no contents</string>
-    <string name="request_thanks">thanks!!</string>
+    <string name="request_thanks">Thanks!!</string>
     <string name="request_send">send</string>
     <string name="request_cancel">cancel</string>
 

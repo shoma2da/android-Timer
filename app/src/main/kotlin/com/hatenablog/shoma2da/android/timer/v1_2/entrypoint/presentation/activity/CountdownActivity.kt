@@ -67,6 +67,7 @@ public class CountdownActivity : Activity() {
 
                     //Analytics
                     logger.sendEvent("timer", "restart")
+                    Meyasubaco.getInstance(context).sendEvent("restart", JSONObject())
                 }
             }
         }
@@ -128,7 +129,9 @@ public class CountdownActivity : Activity() {
 
         //Analytics
         logger.sendEvent("timer", "start", time.toString())
-        Meyasubaco.getInstance(this).sendEvent("timer_start", JSONObject())
+        Meyasubaco.getInstance(this).sendEvent("timer_start", JSONObject().apply {
+            put("time", time.toString())
+        })
     }
 
     private fun setupViews(time: RemainTime) {
@@ -153,7 +156,9 @@ public class CountdownActivity : Activity() {
                         //Analytics
                         val logger = application.getLogger()
                         logger.sendEvent("timer", "cancel", time.toString())
-                        Meyasubaco.getInstance(this).sendEvent("timer_cancel", JSONObject())
+                        Meyasubaco.getInstance(this).sendEvent("timer_cancel", JSONObject().apply {
+                            put("time", time.toString())
+                        })
 
                         finish()
                     })
