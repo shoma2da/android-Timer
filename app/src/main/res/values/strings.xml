@@ -7,6 +7,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">OK</string>
+    <string name="share">Share</string>
 
     <!-- nps -->
     <string name="nps">Thank you for using Quick Timer. Please cooperate with the following questionnaire.\n\n<b><i>How likely is it that you would recommend Quick Timer to a friend or colleague?</i></b></string>
@@ -31,11 +32,11 @@
     <string name="notification_launcher_id">notification_launcher</string>
     <string name="notification_launcher_title">Notification Launcher</string>
     <string name="notification_launcher_summary">You can open this app from the notification</string>
-    <string name="notification_method_title">how to notify</string>
+    <string name="notification_method_title">How to notify</string>
+    <string name="notification_length">Notify length</string>
     <string name="request">Send your opinion</string>
     <string name="question">Frequently asked questions</string>
     <string name="google_play">Open Google Play</string>
-    <string name="recommend_apps">Recommend Applications</string>
 
     <!-- レビューお願い -->
     <string name="please_review_message">This app is good?</string>
