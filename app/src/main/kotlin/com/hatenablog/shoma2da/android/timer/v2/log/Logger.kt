@@ -1,9 +1,8 @@
 package com.hatenablog.shoma2da.android.timer.v2.log
 
-import com.google.android.gms.analytics.Tracker
 import timber.log.Timber
 
-open class Logger(tracker:Tracker? = null) {
+open class Logger {
 
     open fun sendScreenLog(screenName:String) {
         Timber.i("ScreenLog : %s", screenName)
