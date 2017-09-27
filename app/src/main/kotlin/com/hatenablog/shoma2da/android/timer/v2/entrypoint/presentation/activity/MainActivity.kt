@@ -9,7 +9,6 @@ import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher.NotificationLauncherService
 import com.hatenablog.shoma2da.android.timer.v2.domain.please_review.ReviewRequest
-import com.hatenablog.shoma2da.android.timer.v2.util.extensions.getLogger
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,11 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_main)
 
-        Meyasubaco.getInstance(this).initialize("66da0d8fb3108d066ee7069dc05db63f")
-
-        //Analytics
-        val logger = getLogger()
-        logger.sendScreenLog("MainActivity")
+        val instance = Meyasubaco.getInstance()
+        instance.initialize(this, "66da0d8fb3108d066ee7069dc05db63f")
+        instance.showQuestionnaireIfNeed(this)
 
         //ランチャー起動
         startService(Intent(this, NotificationLauncherService::class.java))

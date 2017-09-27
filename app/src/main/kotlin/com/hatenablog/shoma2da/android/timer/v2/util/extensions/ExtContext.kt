@@ -8,10 +8,6 @@ import android.net.Uri
 import com.hatenablog.shoma2da.android.timer.v2.TimerApplication
 import com.hatenablog.shoma2da.android.timer.v2.log.Logger
 
-fun Context.getLogger(): Logger {
-    return (applicationContext as TimerApplication).getLogger()
-}
-
 fun Context.getAudioManager():AudioManager {
     return getSystemService(Context.AUDIO_SERVICE) as AudioManager;
 }
