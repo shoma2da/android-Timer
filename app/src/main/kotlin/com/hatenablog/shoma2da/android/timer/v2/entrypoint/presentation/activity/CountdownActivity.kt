@@ -27,7 +27,6 @@ import com.hatenablog.shoma2da.android.timer.v2.domain.library.remaintime.Remain
 import com.hatenablog.shoma2da.android.timer.v2.domain.please_review.PleaseReviewCondition
 import com.hatenablog.shoma2da.android.timer.v2.domain.setting.NotificationLengthSetting
 import com.hatenablog.shoma2da.android.timer.v2.domain.setting.NotificationMethodSetting
-import com.hatenablog.shoma2da.android.timer.v2.util.extensions.getLogger
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.isSilentMode
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.load
 import com.hatenablog.shoma2da.android.timer.v2.util.extensions.tweet
@@ -53,8 +52,6 @@ public class CountdownActivity : AppCompatActivity() {
         override fun onClick(view : View) {
             val context = view.context ?: return
 
-            val logger = context.getLogger()
-
             val pauseText = context.getString(R.string.pause)
             val restartText = context.getString(R.string.restart)
 
@@ -67,8 +64,7 @@ public class CountdownActivity : AppCompatActivity() {
                     context.startService(intent)
 
                     //Analytics
-                    logger.sendEvent("timer", "pause")
-                    Meyasubaco.getInstance(context).sendEvent("timer_pause", JSONObject())
+                    Meyasubaco.getInstance().sendEvent(context, "timer_pause")
 
                     button.text = restartText
                     button.setBackgroundResource(R.drawable.round_button_green)
@@ -84,8 +80,7 @@ public class CountdownActivity : AppCompatActivity() {
                     button.setBackgroundResource(R.drawable.round_button_yellow)
 
                     //Analytics
-                    logger.sendEvent("timer", "restart")
-                    Meyasubaco.getInstance(context).sendEvent("restart", JSONObject())
+                    Meyasubaco.getInstance().sendEvent(context, "restart")
                 }
             }
         }
@@ -97,10 +92,6 @@ public class CountdownActivity : AppCompatActivity() {
     override fun onCreate(savedInstance : Bundle?) {
         super.onCreate(savedInstance)
         setContentView(R.layout.activity_countdown)
-
-        //Analytics
-        val logger = application.getLogger()
-        logger.sendScreenLog("CountdounActivity")
 
         //カウントダウン処理だったら初期設定を全て飛ばす
         val action = intent?.action
@@ -141,10 +132,7 @@ public class CountdownActivity : AppCompatActivity() {
         startService(intent)
 
         //Analytics
-        logger.sendEvent("timer", "start", time.toString())
-        Meyasubaco.getInstance(this).sendEvent("timer_start", JSONObject().apply {
-            put("time", time.toString())
-        })
+        Meyasubaco.getInstance().sendEvent(this, "timer_start", hashMapOf("time" to time.toString()))
     }
 
     private fun setupViews(time: RemainTime) {
@@ -167,11 +155,7 @@ public class CountdownActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java))
 
                         //Analytics
-                        val logger = application.getLogger()
-                        logger.sendEvent("timer", "cancel", time.toString())
-                        Meyasubaco.getInstance(this).sendEvent("timer_cancel", JSONObject().apply {
-                            put("time", time.toString())
-                        })
+                        Meyasubaco.getInstance().sendEvent(this, "timer_cancel", hashMapOf("time" to time.toString()))
 
                         finish()
                     })
@@ -232,9 +216,7 @@ public class CountdownActivity : AppCompatActivity() {
                 }
 
                 //Analytics
-                val logger = application.getLogger()
-                logger.sendEvent("timer", "finish")
-                Meyasubaco.getInstance(this).sendEvent("timer_finish", JSONObject())
+                Meyasubaco.getInstance().sendEvent(this, "timer_finish")
 
                 //画面を点灯する
                 val window = window
@@ -262,7 +244,6 @@ public class CountdownActivity : AppCompatActivity() {
                     pref.edit().putBoolean("already_click_share_button", true).apply();
 
                     application.tweet("タイマーはこれぐらいの簡単さがちょうど良いかも! %23瞬間タイマー", "https://play.google.com/store/apps/details?id=com.hatenablog.shoma2da.android.timer&hl=ja&utm_source=app_share&utm_medium=app&utm_campaign=app_share")
-                    logger.sendEvent("timer", "share")
 
                     if (player.isPlaying) {
                         player.stop()

@@ -10,16 +10,11 @@ import android.preference.PreferenceManager
 import android.widget.Toast
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.please_review.PleaseReviewCondition
-import com.hatenablog.shoma2da.android.timer.v2.util.extensions.getLogger
 
 class PleaseReviewDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val activity = activity!!
-
-        //Analytics準備
-        val logger = activity.getLogger()
-        logger.sendEvent("please_review", "show")
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(activity)
         val condition = PleaseReviewCondition.create(preferences)
@@ -41,9 +36,6 @@ class PleaseReviewDialog : DialogFragment() {
                     //レビューお願いはもう表示しない
                     condition?.setNeverShow()
 
-                    //Analytics
-                    logger.sendEvent("please_review", "tap", "good")
-
                     dialog.dismiss()
                 })
                 .setNegativeButton(R.string.please_review_bad, { dialog, which ->
@@ -52,9 +44,6 @@ class PleaseReviewDialog : DialogFragment() {
 
                     //レビューお願いはもう表示しない
                     condition?.setNeverShow()
-
-                    //Analytics
-                    logger.sendEvent("please_review", "tap", "bad")
 
                     dialog.dismiss()
                 })
