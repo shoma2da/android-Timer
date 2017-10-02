@@ -3,7 +3,7 @@ package com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.fragmen
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.preference.ListPreference
+import android.support.v7.preference.ListPreference
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher.NotificationLauncherService
 
