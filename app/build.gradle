@@ -10,8 +10,8 @@ android {
         applicationId "com.hatenablog.shoma2da.android.timer"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 118
-        versionName "2.0.6"
+        versionCode 119
+        versionName "2.0.7"
     }
     signingConfigs {
         release {
@@ -52,7 +52,7 @@ dependencies {
         transitive = true;
     }
 
-    compile('co.meyasuba.android.sdk:sdk:0.10.0') {
+    compile('co.meyasuba.android.sdk:sdk:0.10.1') {
         exclude group: 'com.android.support'
     }
     compile 'com.parse.bolts:bolts-android:1.+'
