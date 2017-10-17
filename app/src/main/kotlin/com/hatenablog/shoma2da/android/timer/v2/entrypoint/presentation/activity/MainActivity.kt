@@ -1,10 +1,13 @@
 package com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import co.meyasuba.android.sdk.Meyasubaco
 import com.hatenablog.shoma2da.android.timer.R
 import com.hatenablog.shoma2da.android.timer.v2.domain.notificationlauncher.NotificationLauncherService
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val instance = Meyasubaco.getInstance()
         instance.initialize(this, "66da0d8fb3108d066ee7069dc05db63f")
         instance.showQuestionnaireIfNeed(this)
+        instance.showInterviewRequest(this, findViewById(R.id.rootView), Color.rgb(254, 254, 254))
 
         //ランチャー起動
         startService(Intent(this, NotificationLauncherService::class.java))
