@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val instance = Meyasubaco.getInstance()
         instance.initialize(this, "66da0d8fb3108d066ee7069dc05db63f")
         instance.showQuestionnaireIfNeed(this)
-        instance.showInterviewRequest(this, findViewById(R.id.rootView), Color.rgb(254, 254, 254))
+        instance.showInterviewRequestIfNeed(this, findViewById(R.id.rootView), Color.rgb(254, 254, 254))
 
         //ランチャー起動
         startService(Intent(this, NotificationLauncherService::class.java))
