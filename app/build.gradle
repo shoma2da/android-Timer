@@ -10,8 +10,8 @@ android {
         applicationId "com.hatenablog.shoma2da.android.timer"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 121
-        versionName "2.0.9"
+        versionCode 122
+        versionName "2.0.10"
     }
     signingConfigs {
         release {
