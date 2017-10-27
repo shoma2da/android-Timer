@@ -3,10 +3,7 @@ package com.hatenablog.shoma2da.android.timer.v2.entrypoint.presentation.activit
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -287,10 +284,41 @@ public class CountdownActivity : AppCompatActivity() {
         player.stop()
         vibrator.cancel()
 
-        //リストページに戻る
-        startActivity(Intent(this, MainActivity::class.java))
+        val meyasubaco = Meyasubaco.getInstance()
 
-        finish()
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val cancelInterviewId = prefs.getString("cancel_interview_id", null)
+        if (meyasubaco.isNeedShowInterviewRequest && meyasubaco.currentInterviewId != cancelInterviewId) {
+            AlertDialog.Builder(this)
+                    .setTitle("インタビューのお願い")
+                    .setMessage("テキストチャットによるインタビューへのご協力者を募集しています。3000円分の謝礼付き。ご協力よろしくお願いいたします。")
+                    .setCancelable(false)
+                    .setNegativeButton("閉じる", { dialog, _ ->
+                        dialog.dismiss()
+
+                        prefs.edit().putString("cancel_interview_id", meyasubaco.currentInterviewId).apply()
+
+                        //リストページに戻る
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    })
+                    .setPositiveButton("詳細を見る", { dialog, _ ->
+                        //リストページに戻る
+                        startActivity(Intent(this, MainActivity::class.java))
+
+                        //インタビュー依頼を表示する
+                        meyasubaco.sendEvent(this, "show_interview_request_dialog")
+                        meyasubaco.openInterviewRequestPage(this)
+                        dialog.dismiss()
+
+                        finish()
+                    }).show()
+        } else {
+            //リストページに戻る
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
     }
 
     override fun onConfigurationChanged(configuration: Configuration) {
